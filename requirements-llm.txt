@@ -1,0 +1,5 @@
+# Install the adapter for the provider you set in models.yaml / LLM_PROVIDER.
+langchain-anthropic>=1.7
+langchain-openai>=1.6
+# langchain-google-genai
+# langchain-ollama

@@ -1,0 +1,1257 @@
+[
+ {
+  "claim_id": "CLM-3002",
+  "seq": 1,
+  "ts": "2026-10-06T23:08:08.011+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> intake: unprocessed documents on the claim",
+  "next": "intake",
+  "goal": "extract new documents, classify and link the claim",
+  "rationale": "unprocessed documents on the claim",
+  "forced": true,
+  "allowed": [
+   "intake"
+  ],
+  "plan": [
+   "intake",
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 2,
+  "ts": "2026-10-06T23:08:08.016+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "list_claim_documents()",
+  "tool": "list_claim_documents",
+  "effect": "read",
+  "args": {
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-001",
+  "latency_ms": 0.3,
+  "result_preview": "[{\"doc_id\": \"CLM-3002-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"uploaded_on\": \"2026-10-06T23:08:05+00:00\", \"processed\": false, \"kind\": null}, {\"doc_id\": \"CLM-3002-D02\", \"filename\": \"invoice.pdf\", \"round\": 0, \"u..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 3,
+  "ts": "2026-10-06T23:08:08.018+00:00",
+  "agent": "intake",
+  "type": "plan",
+  "summary": "extract 3 new document(s)",
+  "steps": [
+   "claim_form.pdf",
+   "invoice.pdf",
+   "job_card.pdf"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 4,
+  "ts": "2026-10-06T23:08:08.026+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "read_document(doc_id=CLM-3002-D01)",
+  "tool": "read_document",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-3002-D01",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-002",
+  "latency_ms": 6.2,
+  "result_preview": "{\"doc_id\": \"CLM-3002-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"sha\": \"25ccd0a9bb98d852\", \"text\": \"Warranty Claim Form\\nDOCUMENT: claim_form\\nClaim Type: warranty\\nClaimant ID: D-027\\nClaimant Name: Deccan Equip..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 5,
+  "ts": "2026-10-06T23:08:08.034+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "read_document(doc_id=CLM-3002-D02)",
+  "tool": "read_document",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-3002-D02",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-003",
+  "latency_ms": 3.1,
+  "result_preview": "{\"doc_id\": \"CLM-3002-D02\", \"filename\": \"invoice.pdf\", \"round\": 0, \"sha\": \"45a25a762801584e\", \"text\": \"Dealer Invoice D027-INV-5590\\nDOCUMENT: invoice\\nInvoice No: D027-INV-5590\\nDate: 2026-09-26\\nDealer: D-027\\nTotal:..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 6,
+  "ts": "2026-10-06T23:08:08.045+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "read_document(doc_id=CLM-3002-D03)",
+  "tool": "read_document",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-3002-D03",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-004",
+  "latency_ms": 3.8,
+  "result_preview": "{\"doc_id\": \"CLM-3002-D03\", \"filename\": \"job_card.pdf\", \"round\": 0, \"sha\": \"90a700024b318a16\", \"text\": \"Dealer Job Card\\nDOCUMENT: job_card\\nJob Card No: JC-27-509-0926\\nSerial: LD-509\\nDate: 2026-09-26\\nJob Code: COOL..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 7,
+  "ts": "2026-10-06T23:08:08.053+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "classify_claim()",
+  "tool": "classify_claim",
+  "effect": "read",
+  "args": {
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-005",
+  "latency_ms": 0.3,
+  "result_preview": "{\"type\": \"warranty\", \"confidence\": 0.97, \"declared\": \"warranty\", \"signal_votes\": {\"warranty\": 3, \"parts_replacement\": 0, \"transit_damage\": 0, \"dealer_reimbursement\": 0, \"employee_reimbursement\": 0}}"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 8,
+  "ts": "2026-10-06T23:08:08.058+00:00",
+  "agent": "intake",
+  "type": "reasoning",
+  "summary": "classified as warranty (0.97)",
+  "evidence_id": "EV-005",
+  "rationale": "declared type corroborated by document signals {'warranty': 3, 'parts_replacement': 0, 'transit_damage': 0, 'dealer_reimbursement': 0, 'employee_reimbursement': 0}"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 9,
+  "ts": "2026-10-06T23:08:08.062+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "lookup_party(party_id=D-027)",
+  "tool": "lookup_party",
+  "effect": "read",
+  "args": {
+   "party_id": "D-027"
+  },
+  "result_ref": "EV-006",
+  "latency_ms": 0.1,
+  "result_preview": "{\"party_type\": \"dealer\", \"dealer_id\": \"D-027\", \"name\": \"Deccan Equipment Services\", \"region\": \"West\", \"tier\": \"A\", \"authorised_services\": [\"repair\", \"scheduled_service\", \"field_service\"], \"email\": \"claims@d-027.dealer..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 10,
+  "ts": "2026-10-06T23:08:08.064+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "lookup_equipment(serial=LD-509)",
+  "tool": "lookup_equipment",
+  "effect": "read",
+  "args": {
+   "serial": "LD-509"
+  },
+  "result_ref": "EV-007",
+  "latency_ms": 0.1,
+  "result_preview": "{\"serial\": \"LD-509\", \"model\": \"LD-90 Wheel Loader\", \"category\": \"loader\", \"sale_date\": \"2025-11-15\", \"owner\": \"C-341\", \"dealer_id\": \"D-027\"}"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 11,
+  "ts": "2026-10-06T23:08:08.066+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "search_claims(invoice_no=D027-INV-5590)",
+  "tool": "search_claims",
+  "effect": "read",
+  "args": {
+   "invoice_no": "D027-INV-5590",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-008",
+  "latency_ms": 0.3,
+  "result_preview": "[]"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 12,
+  "ts": "2026-10-06T23:08:08.070+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "RECEIVED -> CLASSIFIED (warranty)",
+  "from_status": "RECEIVED",
+  "to_status": "CLASSIFIED"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 13,
+  "ts": "2026-10-06T23:08:08.074+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> completeness: documents changed since the last completeness check",
+  "next": "completeness",
+  "goal": "check required documents and fields",
+  "rationale": "documents changed since the last completeness check",
+  "forced": true,
+  "allowed": [
+   "completeness"
+  ],
+  "plan": [
+   "completeness",
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 14,
+  "ts": "2026-10-06T23:08:08.079+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "CLASSIFIED -> UNDER_REVIEW (completeness reviewing)",
+  "from_status": "CLASSIFIED",
+  "to_status": "UNDER_REVIEW"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 15,
+  "ts": "2026-10-06T23:08:08.083+00:00",
+  "agent": "completeness",
+  "type": "tool_call",
+  "summary": "required_docs()",
+  "tool": "required_docs",
+  "effect": "read",
+  "args": {
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-009",
+  "latency_ms": 0.3,
+  "result_preview": "{\"claim_type\": \"warranty\", \"required\": [{\"kind\": \"claim_form\", \"label\": \"completed claim form\", \"rule\": \"base\"}, {\"kind\": \"invoice\", \"label\": \"invoice\", \"rule\": \"base\"}, {\"kind\": \"job_card\", \"label\": \"dealer job card\"..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 16,
+  "ts": "2026-10-06T23:08:08.085+00:00",
+  "agent": "completeness",
+  "type": "tool_call",
+  "summary": "check_doc_quality(doc_id=CLM-3002-D01)",
+  "tool": "check_doc_quality",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-3002-D01",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-010",
+  "latency_ms": 0.1,
+  "result_preview": "{\"doc_id\": \"CLM-3002-D01\", \"kind\": \"claim_form\", \"missing_fields\": [], \"ok\": true, \"line_items\": 0}"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 17,
+  "ts": "2026-10-06T23:08:08.086+00:00",
+  "agent": "completeness",
+  "type": "tool_call",
+  "summary": "check_doc_quality(doc_id=CLM-3002-D02)",
+  "tool": "check_doc_quality",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-3002-D02",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-011",
+  "latency_ms": 0.2,
+  "result_preview": "{\"doc_id\": \"CLM-3002-D02\", \"kind\": \"invoice\", \"missing_fields\": [], \"ok\": true, \"line_items\": 2}"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 18,
+  "ts": "2026-10-06T23:08:08.088+00:00",
+  "agent": "completeness",
+  "type": "tool_call",
+  "summary": "check_doc_quality(doc_id=CLM-3002-D03)",
+  "tool": "check_doc_quality",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-3002-D03",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-012",
+  "latency_ms": 0.2,
+  "result_preview": "{\"doc_id\": \"CLM-3002-D03\", \"kind\": \"job_card\", \"missing_fields\": [], \"ok\": true, \"line_items\": 0}"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 19,
+  "ts": "2026-10-06T23:08:08.090+00:00",
+  "agent": "completeness",
+  "type": "reasoning",
+  "summary": "all required documents present",
+  "evidence_id": "EV-009"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 20,
+  "ts": "2026-10-06T23:08:08.096+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> policy: eligibility not yet evaluated on current facts",
+  "next": "policy",
+  "goal": "evaluate eligibility rules and find applicable clauses",
+  "rationale": "eligibility not yet evaluated on current facts",
+  "forced": false,
+  "allowed": [
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "escalate"
+  ],
+  "plan": [
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 21,
+  "ts": "2026-10-06T23:08:08.102+00:00",
+  "agent": "policy",
+  "type": "tool_call",
+  "summary": "rules_evaluate()",
+  "tool": "rules_evaluate",
+  "effect": "read",
+  "args": {
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-013",
+  "latency_ms": 1.1,
+  "result_preview": "{\"eligible\": true, \"with_exception\": false, \"results\": [{\"rule_id\": \"WAR-2.1\", \"clause\": \"Warranty policy \\u00a72.1 Coverage period\", \"passed\": true, \"detail\": \"failure 2026-09-25 vs coverage 2025-11-15..2027-11-15\", ..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 22,
+  "ts": "2026-10-06T23:08:08.105+00:00",
+  "agent": "policy",
+  "type": "rule_fired",
+  "summary": "WAR-2.1 PASS - failure 2026-09-25 vs coverage 2025-11-15..2027-11-15",
+  "rule_id": "WAR-2.1",
+  "clause": "Warranty policy \u00a72.1 Coverage period",
+  "passed": true,
+  "waivable": false,
+  "evidence_id": "EV-013"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 23,
+  "ts": "2026-10-06T23:08:08.107+00:00",
+  "agent": "policy",
+  "type": "rule_fired",
+  "summary": "WAR-2.2 PASS - 1650 h vs cap 3000 h",
+  "rule_id": "WAR-2.2",
+  "clause": "Warranty policy \u00a72.2 Operating-hours cap",
+  "passed": true,
+  "waivable": false,
+  "evidence_id": "EV-013"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 24,
+  "ts": "2026-10-06T23:08:08.109+00:00",
+  "agent": "policy",
+  "type": "rule_fired",
+  "summary": "WAR-3.1 PASS - CF-220 group 'cooling' covered=True",
+  "rule_id": "WAR-3.1",
+  "clause": "Warranty policy \u00a73.1 Covered components",
+  "passed": true,
+  "waivable": false,
+  "evidence_id": "EV-013"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 25,
+  "ts": "2026-10-06T23:08:08.112+00:00",
+  "agent": "policy",
+  "type": "rule_fired",
+  "summary": "WAR-2.4 PASS - reported 4 d after failure (limit 30)",
+  "rule_id": "WAR-2.4",
+  "clause": "Warranty policy \u00a72.4 Reporting window",
+  "passed": true,
+  "waivable": false,
+  "evidence_id": "EV-013"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 26,
+  "ts": "2026-10-06T23:08:08.114+00:00",
+  "agent": "policy",
+  "type": "rule_fired",
+  "summary": "WAR-5.2 PASS - job card confirms failed part returned",
+  "rule_id": "WAR-5.2",
+  "clause": "Warranty policy \u00a75.2 Failed part returned",
+  "passed": true,
+  "waivable": false,
+  "evidence_id": "EV-013"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 27,
+  "ts": "2026-10-06T23:08:08.119+00:00",
+  "agent": "policy",
+  "type": "reasoning",
+  "summary": "eligible=True exception=False blocking=[]",
+  "evidence_id": "EV-013"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 28,
+  "ts": "2026-10-06T23:08:08.129+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> investigation: claim not yet cross-checked against records on current facts",
+  "next": "investigation",
+  "goal": "cross-check the claim against records and resolve discrepancies",
+  "rationale": "claim not yet cross-checked against records on current facts",
+  "forced": false,
+  "allowed": [
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "escalate"
+  ],
+  "plan": [
+   "investigation",
+   "duplicate_pattern",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 29,
+  "ts": "2026-10-06T23:08:08.137+00:00",
+  "agent": "investigation",
+  "type": "plan",
+  "summary": "checks for warranty: coverage, labour_vs_standard, amount_vs_records, serial_consistency, service_timeline, prior_repairs",
+  "steps": [
+   "coverage",
+   "labour_vs_standard",
+   "amount_vs_records",
+   "serial_consistency",
+   "service_timeline",
+   "prior_repairs"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 30,
+  "ts": "2026-10-06T23:08:08.140+00:00",
+  "agent": "investigation",
+  "type": "tool_call",
+  "summary": "run_check(check=coverage)",
+  "tool": "run_check",
+  "effect": "read",
+  "args": {
+   "check": "coverage",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-014",
+  "latency_ms": 0.7,
+  "result_preview": "{\"check\": \"coverage\", \"status\": \"pass\", \"detail\": \"in period=True, within hours=True, component covered=True\", \"data\": {\"period\": \"2025-11-15..2027-11-15\", \"failure_date\": \"2026-09-25\", \"hours\": 1650.0, \"hours_cap\": 3..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 31,
+  "ts": "2026-10-06T23:08:08.142+00:00",
+  "agent": "investigation",
+  "type": "tool_call",
+  "summary": "run_check(check=labour_vs_standard)",
+  "tool": "run_check",
+  "effect": "read",
+  "args": {
+   "check": "labour_vs_standard",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-015",
+  "latency_ms": 0.4,
+  "result_preview": "{\"check\": \"labour_vs_standard\", \"status\": \"pass\", \"detail\": \"2 h within 2 h standard\", \"data\": {\"job_code\": \"COOL-FAN-R\", \"claimed_hours\": 2.0, \"standard_hours\": 2}, \"finding\": null}"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 32,
+  "ts": "2026-10-06T23:08:08.144+00:00",
+  "agent": "investigation",
+  "type": "tool_call",
+  "summary": "run_check(check=amount_vs_records)",
+  "tool": "run_check",
+  "effect": "read",
+  "args": {
+   "check": "amount_vs_records",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-016",
+  "latency_ms": 0.5,
+  "result_preview": "{\"check\": \"amount_vs_records\", \"status\": \"pass\", \"detail\": \"invoice, lines and claimed amount agree\", \"data\": {\"claimed\": 9200.0, \"invoice_total\": 9200.0, \"lines\": [{\"description\": \"Cooling fan assembly\", \"code\": \"PAR..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 33,
+  "ts": "2026-10-06T23:08:08.148+00:00",
+  "agent": "investigation",
+  "type": "tool_call",
+  "summary": "run_check(check=serial_consistency)",
+  "tool": "run_check",
+  "effect": "read",
+  "args": {
+   "check": "serial_consistency",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-017",
+  "latency_ms": 0.8,
+  "result_preview": "{\"check\": \"serial_consistency\", \"status\": \"pass\", \"detail\": \"all 3 sources agree on LD-509\", \"data\": {\"claim_form\": \"LD-509\", \"job_card\": \"LD-509\", \"equipment_registry\": \"LD-509\"}, \"finding\": null}"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 34,
+  "ts": "2026-10-06T23:08:08.151+00:00",
+  "agent": "investigation",
+  "type": "tool_call",
+  "summary": "run_check(check=service_timeline)",
+  "tool": "run_check",
+  "effect": "read",
+  "args": {
+   "check": "service_timeline",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-018",
+  "latency_ms": 0.8,
+  "result_preview": "{\"check\": \"service_timeline\", \"status\": \"pass\", \"detail\": \"service record found for 2026-09-26\", \"data\": {\"work_date\": \"2026-09-26\", \"matching_records\": [{\"record_id\": \"SR-LD-509-F3\", \"serial\": \"LD-509\", \"date\": \"2026..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 35,
+  "ts": "2026-10-06T23:08:08.154+00:00",
+  "agent": "investigation",
+  "type": "tool_call",
+  "summary": "run_check(check=prior_repairs)",
+  "tool": "run_check",
+  "effect": "read",
+  "args": {
+   "check": "prior_repairs",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-019",
+  "latency_ms": 0.7,
+  "result_preview": "{\"check\": \"prior_repairs\", \"status\": \"fail\", \"detail\": \"2 earlier COOL-FAN-R repair(s) on LD-509\", \"data\": {\"prior_same_job\": [{\"record_id\": \"SR-LD-509-F1\", \"serial\": \"LD-509\", \"date\": \"2026-02-14\", \"dealer_id\": \"D-02..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 36,
+  "ts": "2026-10-06T23:08:08.179+00:00",
+  "agent": "investigation",
+  "type": "finding",
+  "summary": "[low] 2 earlier COOL-FAN-R repair(s) on this unit; see duplicate/pattern analysis. (resolved)",
+  "finding_type": "repeat_repair",
+  "evidence_ids": [
+   "EV-019"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 37,
+  "ts": "2026-10-06T23:08:08.181+00:00",
+  "agent": "investigation",
+  "type": "reasoning",
+  "summary": "6 checks; 0 open finding(s)",
+  "plan": [
+   "coverage",
+   "labour_vs_standard",
+   "amount_vs_records",
+   "serial_consistency",
+   "service_timeline",
+   "prior_repairs"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 38,
+  "ts": "2026-10-06T23:08:08.190+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> duplicate_pattern: duplicate and recurring-failure check not yet run on current facts",
+  "next": "duplicate_pattern",
+  "goal": "check for duplicate submissions and recurring failures",
+  "rationale": "duplicate and recurring-failure check not yet run on current facts",
+  "forced": false,
+  "allowed": [
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "escalate"
+  ],
+  "plan": [
+   "duplicate_pattern",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 39,
+  "ts": "2026-10-06T23:08:08.198+00:00",
+  "agent": "duplicate_pattern",
+  "type": "plan",
+  "summary": "invoice reuse; unit repeat history; batch failure stats; claimant duplicate history; narrative similarity",
+  "steps": [
+   "invoice reuse",
+   "unit repeat history",
+   "batch failure stats",
+   "claimant duplicate history",
+   "narrative similarity"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 40,
+  "ts": "2026-10-06T23:08:08.201+00:00",
+  "agent": "duplicate_pattern",
+  "type": "tool_call",
+  "summary": "search_claims(invoice_no=D027-INV-5590)",
+  "tool": "search_claims",
+  "effect": "read",
+  "args": {
+   "invoice_no": "D027-INV-5590",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-020",
+  "latency_ms": 0.2,
+  "result_preview": "[]"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 41,
+  "ts": "2026-10-06T23:08:08.203+00:00",
+  "agent": "duplicate_pattern",
+  "type": "tool_call",
+  "summary": "search_claims(serial=LD-509, part_no=CF-220)",
+  "tool": "search_claims",
+  "effect": "read",
+  "args": {
+   "serial": "LD-509",
+   "part_no": "CF-220",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-021",
+  "latency_ms": 0.3,
+  "result_preview": "[{\"claim_id\": \"CLM-H-0481\", \"type\": \"warranty\", \"claimant_id\": \"D-027\", \"serial\": \"LD-509\", \"component\": null, \"part_no\": \"CF-220\", \"batch\": \"FB-2026-03\", \"invoice_no\": \"D027-INV-4987\", \"amount\": 9200.0, \"submitted_on..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 42,
+  "ts": "2026-10-06T23:08:08.205+00:00",
+  "agent": "duplicate_pattern",
+  "type": "tool_call",
+  "summary": "service_history(serial=LD-509, job_code=COOL-FAN-R)",
+  "tool": "service_history",
+  "effect": "read",
+  "args": {
+   "serial": "LD-509",
+   "job_code": "COOL-FAN-R"
+  },
+  "result_ref": "EV-022",
+  "latency_ms": 0.2,
+  "result_preview": "[{\"record_id\": \"SR-LD-509-F1\", \"serial\": \"LD-509\", \"date\": \"2026-02-14\", \"dealer_id\": \"D-027\", \"job_code\": \"COOL-FAN-R\", \"description\": \"Cooling fan replaced\", \"parts_used\": [\"CF-220\"], \"hours_reading\": 940, \"failed_p..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 43,
+  "ts": "2026-10-06T23:08:08.208+00:00",
+  "agent": "duplicate_pattern",
+  "type": "tool_call",
+  "summary": "failure_stats(part_no=CF-220, batch=FB-2026-03)",
+  "tool": "failure_stats",
+  "effect": "read",
+  "args": {
+   "part_no": "CF-220",
+   "batch": "FB-2026-03"
+  },
+  "result_ref": "EV-023",
+  "latency_ms": 0.4,
+  "result_preview": "{\"part_no\": \"CF-220\", \"window_months\": 12, \"claims\": 32, \"units\": [\"EX-2113\", \"EX-2143\", \"EX-2153\", \"EX-2164\", \"EX-2181\", \"EX-2192\", \"EX-2198\", \"EX-2244\", \"EX-2251\", \"EX-2258\", \"EX-2260\", \"EX-2271\", \"EX-2283\", \"LD-509..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 44,
+  "ts": "2026-10-06T23:08:08.210+00:00",
+  "agent": "duplicate_pattern",
+  "type": "tool_call",
+  "summary": "search_claims(claimant_id=D-027, outcome=rejected_duplicate)",
+  "tool": "search_claims",
+  "effect": "read",
+  "args": {
+   "claimant_id": "D-027",
+   "outcome": "rejected_duplicate",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-024",
+  "latency_ms": 0.2,
+  "result_preview": "[{\"claim_id\": \"CLM-3001\", \"type\": \"dealer_reimbursement\", \"claimant_id\": \"D-027\", \"serial\": \"LD-509\", \"component\": null, \"part_no\": null, \"batch\": null, \"invoice_no\": \"DLR-INV-5512\", \"amount\": 18400.0, \"submitted_on\":..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 45,
+  "ts": "2026-10-06T23:08:08.215+00:00",
+  "agent": "duplicate_pattern",
+  "type": "tool_call",
+  "summary": "similar_claims(k=3)",
+  "tool": "similar_claims",
+  "effect": "read",
+  "args": {
+   "k": 3,
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-025",
+  "latency_ms": 2.2,
+  "result_preview": "[{\"claim_id\": \"CLM-H-0390\", \"claimant_id\": \"D-027\", \"serial\": \"LD-509\", \"invoice_no\": \"D027-INV-4410\", \"amount\": 9200.0, \"submitted_on\": \"2026-02-16\", \"outcome\": \"settled\", \"narrative\": \"Cooling fan blade fracture on ..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 46,
+  "ts": "2026-10-06T23:08:08.217+00:00",
+  "agent": "duplicate_pattern",
+  "type": "finding",
+  "summary": "[low] 2 earlier claim(s) for CF-220 on LD-509: ['CLM-H-0481', 'CLM-H-0390']. Each matches its own service record with the failed part returned: valid repeat.",
+  "finding_type": "repeat_claim",
+  "evidence_ids": [
+   "EV-021",
+   "EV-022"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 47,
+  "ts": "2026-10-06T23:08:08.221+00:00",
+  "agent": "duplicate_pattern",
+  "type": "finding",
+  "summary": "[medium] CF-220 batch FB-2026-03 failed on 11 other units across 4 other dealers in 12 months",
+  "finding_type": "batch_failure_pattern",
+  "evidence_ids": [
+   "EV-023"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 48,
+  "ts": "2026-10-06T23:08:08.223+00:00",
+  "agent": "duplicate_pattern",
+  "type": "finding",
+  "summary": "[medium] D-027 has 1 duplicate submission(s) on record: ['CLM-3001']",
+  "finding_type": "claimant_duplicate_history",
+  "evidence_ids": [
+   "EV-024"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 49,
+  "ts": "2026-10-06T23:08:08.225+00:00",
+  "agent": "duplicate_pattern",
+  "type": "reasoning",
+  "summary": "valid repeat of ['CLM-H-0481', 'CLM-H-0390']; patterns: recurring_unit_failure; batch_failure; dealer_duplicate_history"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 50,
+  "ts": "2026-10-06T23:08:08.233+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> adjudication: eligibility, investigation and duplicate checks complete",
+  "next": "adjudication",
+  "goal": "recommend a disposition with an admissible amount and evidence",
+  "rationale": "eligibility, investigation and duplicate checks complete",
+  "forced": false,
+  "allowed": [
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "escalate",
+   "adjudication"
+  ],
+  "plan": [
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 51,
+  "ts": "2026-10-06T23:08:08.242+00:00",
+  "agent": "adjudication",
+  "type": "tool_call",
+  "summary": "get_precedents(claim_type=warranty, finding_types=['batch_failure_pattern', 'claimant_duplicate_history', 'repeat_claim', 'repeat_repair'])",
+  "tool": "get_precedents",
+  "effect": "read",
+  "args": {
+   "claim_type": "warranty",
+   "finding_types": [
+    "batch_failure_pattern",
+    "claimant_duplicate_history",
+    "repeat_claim",
+    "repeat_repair"
+   ]
+  },
+  "result_ref": "EV-026",
+  "latency_ms": 0.3,
+  "result_preview": "[]"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 52,
+  "ts": "2026-10-06T23:08:08.246+00:00",
+  "agent": "adjudication",
+  "type": "tool_call",
+  "summary": "rules_calculate_settlement()",
+  "tool": "rules_calculate_settlement",
+  "effect": "read",
+  "args": {
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": "EV-027",
+  "latency_ms": 1.1,
+  "result_preview": "{\"claimed_amount\": 9200.0, \"admissible_amount\": 9200.0, \"lines\": [{\"item\": \"Cooling fan assembly\", \"claimed\": 6200.0, \"admitted\": 6200.0, \"rule_id\": \"WAR-6.1\", \"note\": \"catalog price 6200.0\"}, {\"item\": \"Labour\", \"clai..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 53,
+  "ts": "2026-10-06T23:08:08.249+00:00",
+  "agent": "adjudication",
+  "type": "recommendation",
+  "summary": "APPROVE 9,200.00, confidence 0.95",
+  "decision": "approve",
+  "amount": 9200.0,
+  "reasons": [
+   {
+    "text": "Eligible under WAR-2.1, WAR-2.2, WAR-3.1, WAR-2.4, WAR-5.2.",
+    "evidence_ids": [
+     "EV-013"
+    ]
+   },
+   {
+    "text": "CF-220 batch FB-2026-03 failed on 11 other units across 4 other dealers in 12 months Resolution: Not a reason to reject; recommend supplier corrective action.",
+    "evidence_ids": [
+     "EV-023"
+    ]
+   },
+   {
+    "text": "D-027 has 1 duplicate submission(s) on record: ['CLM-3001'] Resolution: Does not affect this claim's merits; recommend a submission audit.",
+    "evidence_ids": [
+     "EV-024"
+    ]
+   },
+   {
+    "text": "Repeat failure, not a duplicate: earlier claims ['CLM-H-0481', 'CLM-H-0390'] each have their own service event.",
+    "evidence_ids": [
+     "EV-020",
+     "EV-021",
+     "EV-022"
+    ]
+   }
+  ],
+  "actions": [
+   {
+    "type": "credit_note",
+    "params": {
+     "dealer_id": "D-027",
+     "amount": 9200.0
+    }
+   },
+   {
+    "type": "capa_ticket",
+    "params": {
+     "kind": "supplier_quality",
+     "title": "Recurring failures of CF-220",
+     "body": "CF-220 has failed 3 times on LD-509 in the last 12 months. Raised from claim CLM-3002."
+    }
+   },
+   {
+    "type": "capa_ticket",
+    "params": {
+     "kind": "dealer_audit",
+     "title": "Submission audit for D-027",
+     "body": "D-027 has 1 duplicate submission(s) on record: ['CLM-3001']. Raised from claim CLM-3002."
+    }
+   },
+   {
+    "type": "decision_letter",
+    "params": {
+     "recipient": "D-027"
+    }
+   }
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 54,
+  "ts": "2026-10-06T23:08:08.252+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "UNDER_REVIEW -> RECOMMENDED (approve)",
+  "from_status": "UNDER_REVIEW",
+  "to_status": "RECOMMENDED"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 55,
+  "ts": "2026-10-06T23:08:08.257+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> verifier: every recommendation is verified before approval routing",
+  "next": "verifier",
+  "goal": "verify the recommendation",
+  "rationale": "every recommendation is verified before approval routing",
+  "forced": true,
+  "allowed": [
+   "verifier"
+  ],
+  "plan": [
+   "verifier",
+   "adjudication",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 56,
+  "ts": "2026-10-06T23:08:08.260+00:00",
+  "agent": "verifier",
+  "type": "verification",
+  "summary": "passed",
+  "passed": true,
+  "errors": []
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 57,
+  "ts": "2026-10-06T23:08:08.265+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> route_approval: verified recommendation; route per approval matrix",
+  "next": "route_approval",
+  "goal": "route the verified recommendation to the approvers the matrix requires",
+  "rationale": "verified recommendation; route per approval matrix",
+  "forced": true,
+  "allowed": [
+   "route_approval"
+  ],
+  "plan": [
+   "route_approval",
+   "adjudication",
+   "verifier",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 58,
+  "ts": "2026-10-06T23:08:08.272+00:00",
+  "agent": "system",
+  "type": "approval_request",
+  "summary": "APR-CLM-3002-1: claims_officer -> quality_lead",
+  "approval_id": "APR-CLM-3002-1",
+  "roles": [
+   "claims_officer",
+   "quality_lead"
+  ],
+  "decision": "approve",
+  "amount": 9200.0,
+  "exception": false
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 59,
+  "ts": "2026-10-06T23:08:08.275+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "RECOMMENDED -> PENDING_APPROVAL (awaiting claims_officer)",
+  "from_status": "RECOMMENDED",
+  "to_status": "PENDING_APPROVAL"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 60,
+  "ts": "2026-10-06T23:08:08.287+00:00",
+  "agent": "auto:claims_officer",
+  "type": "approval",
+  "summary": "claims_officer: approved - auto-approved in demo",
+  "role": "claims_officer",
+  "decision": "approved",
+  "amount": null
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 61,
+  "ts": "2026-10-06T23:08:08.306+00:00",
+  "agent": "auto:quality_lead",
+  "type": "approval",
+  "summary": "quality_lead: approved - auto-approved in demo",
+  "role": "quality_lead",
+  "decision": "approved",
+  "amount": null
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 62,
+  "ts": "2026-10-06T23:08:08.311+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "PENDING_APPROVAL -> APPROVED (final approve 9,200.00)",
+  "from_status": "PENDING_APPROVAL",
+  "to_status": "APPROVED"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 63,
+  "ts": "2026-10-06T23:08:08.313+00:00",
+  "agent": "system",
+  "type": "approval",
+  "summary": "approval complete: approve 9,200.00; 4 action(s) authorised",
+  "final": {
+   "decision": "approve",
+   "amount": 9200.0,
+   "approver_reason": ""
+  },
+  "authorised": [
+   "0",
+   "1",
+   "2",
+   "3"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 64,
+  "ts": "2026-10-06T23:08:08.317+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> settlement: approvals complete (approve); execute approved actions",
+  "next": "settlement",
+  "goal": "execute approved actions and send the decision letter",
+  "rationale": "approvals complete (approve); execute approved actions",
+  "forced": true,
+  "allowed": [
+   "settlement"
+  ],
+  "plan": [
+   "settlement",
+   "adjudication",
+   "verifier",
+   "route_approval"
+  ]
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 65,
+  "ts": "2026-10-06T23:08:08.323+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "APPROVED -> SETTLING",
+  "from_status": "APPROVED",
+  "to_status": "SETTLING"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 66,
+  "ts": "2026-10-06T23:08:08.326+00:00",
+  "agent": "settlement",
+  "type": "tool_call",
+  "summary": "issue_credit_note(dealer_id=D-027, amount=9200.0, approval_token=APR-CLM-3002-1.****, idempotency_key=CLM-3002:APR-CLM-3002-1:0:credit_note)",
+  "tool": "issue_credit_note",
+  "effect": "financial",
+  "args": {
+   "dealer_id": "D-027",
+   "amount": 9200.0,
+   "approval_token": "APR-CLM-3002-1.****",
+   "idempotency_key": "CLM-3002:APR-CLM-3002-1:0:credit_note",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": null,
+  "latency_ms": 1.2,
+  "result_preview": "{\"status\": \"executed\", \"ref\": \"CN-CB47E992\", \"action\": \"credit_note\", \"dealer_id\": \"D-027\", \"amount\": 9200.0}"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 67,
+  "ts": "2026-10-06T23:08:08.328+00:00",
+  "agent": "settlement",
+  "type": "action",
+  "summary": "credit_note -> executed CN-CB47E992",
+  "action": "credit_note",
+  "status": "executed",
+  "ref": "CN-CB47E992",
+  "error": null
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 68,
+  "ts": "2026-10-06T23:08:08.332+00:00",
+  "agent": "settlement",
+  "type": "tool_call",
+  "summary": "create_capa_ticket(title=Recurring failures of CF-220, body=CF-220 has failed 3 times on LD-509 in the last 12 months. Raised from claim ..., kind=supplier_quality, approval_token=APR-CLM-3002-1.****, idempotency_key=CLM-3002:APR-CLM-3002-1:1:capa_ticket)",
+  "tool": "create_capa_ticket",
+  "effect": "write_internal",
+  "args": {
+   "title": "Recurring failures of CF-220",
+   "body": "CF-220 has failed 3 times on LD-509 in the last 12 months. Raised from claim ...",
+   "kind": "supplier_quality",
+   "approval_token": "APR-CLM-3002-1.****",
+   "idempotency_key": "CLM-3002:APR-CLM-3002-1:1:capa_ticket",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": null,
+  "latency_ms": 1.3,
+  "result_preview": "{\"status\": \"executed\", \"ref\": \"CAPA-248666BE\", \"action\": \"capa_ticket\", \"title\": \"Recurring failures of CF-220\", \"body\": \"CF-220 has failed 3 times on LD-509 in the last 12 months. Raised from claim CLM-3002.\", \"kind\"..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 69,
+  "ts": "2026-10-06T23:08:08.334+00:00",
+  "agent": "settlement",
+  "type": "action",
+  "summary": "capa_ticket -> executed CAPA-248666BE",
+  "action": "capa_ticket",
+  "status": "executed",
+  "ref": "CAPA-248666BE",
+  "error": null
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 70,
+  "ts": "2026-10-06T23:08:08.337+00:00",
+  "agent": "settlement",
+  "type": "tool_call",
+  "summary": "create_capa_ticket(title=Submission audit for D-027, body=D-027 has 1 duplicate submission(s) on record: ['CLM-3001']. Raised from clai..., kind=dealer_audit, approval_token=APR-CLM-3002-1.****, idempotency_key=CLM-3002:APR-CLM-3002-1:2:capa_ticket)",
+  "tool": "create_capa_ticket",
+  "effect": "write_internal",
+  "args": {
+   "title": "Submission audit for D-027",
+   "body": "D-027 has 1 duplicate submission(s) on record: ['CLM-3001']. Raised from clai...",
+   "kind": "dealer_audit",
+   "approval_token": "APR-CLM-3002-1.****",
+   "idempotency_key": "CLM-3002:APR-CLM-3002-1:2:capa_ticket",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": null,
+  "latency_ms": 1.3,
+  "result_preview": "{\"status\": \"executed\", \"ref\": \"CAPA-BD3946D6\", \"action\": \"capa_ticket\", \"title\": \"Submission audit for D-027\", \"body\": \"D-027 has 1 duplicate submission(s) on record: ['CLM-3001']. Raised from claim CLM-3002.\", \"kind\"..."
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 71,
+  "ts": "2026-10-06T23:08:08.339+00:00",
+  "agent": "settlement",
+  "type": "action",
+  "summary": "capa_ticket -> executed CAPA-BD3946D6",
+  "action": "capa_ticket",
+  "status": "executed",
+  "ref": "CAPA-BD3946D6",
+  "error": null
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 72,
+  "ts": "2026-10-06T23:08:08.347+00:00",
+  "agent": "settlement",
+  "type": "tool_call",
+  "summary": "send_message(recipient=claims@d-027.dealer.example, subject=Decision on claim CLM-3002, body=Dear Deccan Equipment Services, Your claim CLM-3002 has been approved in full..., kind=decision_letter, approval_token=APR-CLM-3002-1.****, idempotency_key=CLM-3002:APR-CLM-3002-1:3:decision_letter)",
+  "tool": "send_message",
+  "effect": "write_external",
+  "args": {
+   "recipient": "claims@d-027.dealer.example",
+   "subject": "Decision on claim CLM-3002",
+   "body": "Dear Deccan Equipment Services, Your claim CLM-3002 has been approved in full...",
+   "kind": "decision_letter",
+   "approval_token": "APR-CLM-3002-1.****",
+   "idempotency_key": "CLM-3002:APR-CLM-3002-1:3:decision_letter",
+   "claim_id": "CLM-3002"
+  },
+  "result_ref": null,
+  "latency_ms": 2.7,
+  "result_preview": "{\"status\": \"executed\", \"ref\": \"MSG-0C1AC48E\", \"action\": \"message:decision_letter\", \"recipient\": \"claims@d-027.dealer.example\", \"subject\": \"Decision on claim CLM-3002\"}"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 73,
+  "ts": "2026-10-06T23:08:08.350+00:00",
+  "agent": "settlement",
+  "type": "action",
+  "summary": "decision_letter -> executed MSG-0C1AC48E",
+  "action": "decision_letter",
+  "status": "executed",
+  "ref": "MSG-0C1AC48E",
+  "error": null
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 74,
+  "ts": "2026-10-06T23:08:08.353+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "SETTLING -> SETTLED",
+  "from_status": "SETTLING",
+  "to_status": "SETTLED"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 75,
+  "ts": "2026-10-06T23:08:08.355+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "SETTLED -> CLOSED",
+  "from_status": "SETTLED",
+  "to_status": "CLOSED"
+ },
+ {
+  "claim_id": "CLM-3002",
+  "seq": 76,
+  "ts": "2026-10-06T23:08:08.359+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> end: case is CLOSED",
+  "next": "end",
+  "goal": "close the case",
+  "rationale": "case is CLOSED",
+  "forced": true,
+  "allowed": [
+   "end"
+  ],
+  "plan": [
+   "end",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ }
+]

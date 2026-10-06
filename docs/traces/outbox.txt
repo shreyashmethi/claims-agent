@@ -1,0 +1,91 @@
+──────────────────────────────────────────────────────── CLM-1001 decision_letter -> claims@d-014.dealer.example ─────────────────────────────────────────────────────────
+Decision on claim CLM-1001
+Dear Sahyadri Earthmovers,
+
+Your claim CLM-1001 has been approved in part.
+Approved amount: INR 20,600.00 (claimed INR 24,200.00).
+Reference: credit note CN-48D21DA5.
+
+Details:
+  - Labour: INR 14,400 claimed, INR 10,800 allowed under policy clause WAR-6.2 (6 h allowed (std 6) x tier B rate 1800).
+
+If you disagree with this decision you may reply within 30 days with additional evidence.
+
+Claims Desk
+──────────────────────────────────────────────────────────── CLM-2001 info_request -> accounts@c-310.example ─────────────────────────────────────────────────────────────
+Additional information needed for claim CLM-2001
+Dear Shakti Infra Projects,
+
+Thank you for submitting claim CLM-2001. To complete our assessment we need the following:
+  - Photograph of the equipment serial plate
+  - Carrier's written acknowledgement of the damage
+  - Original purchase invoice supporting the claimed value
+
+Please reply with these documents within 7 days. If we do not receive them, the claim will be referred to a claims manager for review.
+
+Claims Desk
+─────────────────────────────────────────────────────────── CLM-2001 decision_letter -> accounts@c-310.example ───────────────────────────────────────────────────────────
+Decision on claim CLM-2001
+Dear Shakti Infra Projects,
+
+Your claim CLM-2001 has been approved in part.
+Approved amount: INR 303,500.00 (claimed INR 340,000.00).
+Reference: payment PAY-1883815C.
+
+Details:
+  - Transit damage compensation: INR 340,000 claimed, INR 303,500 allowed under policy clause TRN-4.1 (lower of claimed 340000, dispatch value 303500.0, insured value 
+303500.0).
+  - We corrected the serial on your claim from GB-7781 to GB-7718 based on the documents you supplied.
+
+If you disagree with this decision you may reply within 30 days with additional evidence.
+
+Claims Desk
+──────────────────────────────────────────────────────── CLM-3001 decision_letter -> claims@d-027.dealer.example ─────────────────────────────────────────────────────────
+Decision on claim CLM-3001
+Dear Deccan Equipment Services,
+
+Your claim CLM-3001 has not been approved.
+
+Details:
+  - This invoice has already been reimbursed under an earlier claim (policy clause DLR-3.1).
+
+If you disagree with this decision you may reply within 30 days with additional evidence.
+
+Claims Desk
+──────────────────────────────────────────────────────── CLM-3002 decision_letter -> claims@d-027.dealer.example ─────────────────────────────────────────────────────────
+Decision on claim CLM-3002
+Dear Deccan Equipment Services,
+
+Your claim CLM-3002 has been approved in full.
+Approved amount: INR 9,200.00 (claimed INR 9,200.00).
+Reference: credit note CN-CB47E992.
+
+If you disagree with this decision you may reply within 30 days with additional evidence.
+
+Claims Desk
+──────────────────────────────────────────────────────── CLM-4001 decision_letter -> claims@d-019.dealer.example ─────────────────────────────────────────────────────────
+Decision on claim CLM-4001
+Dear Vidarbha Equipment Co,
+
+Your claim CLM-4001 has been approved in full.
+Approved amount: INR 12,400.00 (claimed INR 12,400.00).
+Reference: replacement order RO-381E6223.
+
+If you disagree with this decision you may reply within 30 days with additional evidence.
+
+Claims Desk
+───────────────────────────────────────────────────────────── CLM-5001 decision_letter -> ananya@oem.example ─────────────────────────────────────────────────────────────
+Decision on claim CLM-5001
+Dear Ananya Deshmukh,
+
+Your claim CLM-5001 has been approved in part.
+Approved amount: INR 32,700.00 (claimed INR 36,600.00).
+Reference: payment PAY-40D6B3FF.
+
+Details:
+  - Hotel: INR 14,400 claimed, INR 12,000 allowed under policy clause EMP-4.2 (cap 6000/night (G2, tier1)).
+  - Meals per diem: INR 12,000 claimed, INR 10,500 allowed under policy clause EMP-4.3 (per diem 3500/day (G2, tier1)).
+
+If you disagree with this decision you may reply within 30 days with additional evidence.
+
+Claims Desk

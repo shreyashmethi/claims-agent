@@ -1,0 +1,939 @@
+[
+ {
+  "claim_id": "CLM-5001",
+  "seq": 1,
+  "ts": "2026-10-06T23:08:08.598+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> intake: unprocessed documents on the claim",
+  "next": "intake",
+  "goal": "extract new documents, classify and link the claim",
+  "rationale": "unprocessed documents on the claim",
+  "forced": true,
+  "allowed": [
+   "intake"
+  ],
+  "plan": [
+   "intake",
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 2,
+  "ts": "2026-10-06T23:08:08.602+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "list_claim_documents()",
+  "tool": "list_claim_documents",
+  "effect": "read",
+  "args": {
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-001",
+  "latency_ms": 0.5,
+  "result_preview": "[{\"doc_id\": \"CLM-5001-D01\", \"filename\": \"expense_report.pdf\", \"round\": 0, \"uploaded_on\": \"2026-10-06T23:08:05+00:00\", \"processed\": false, \"kind\": null}, {\"doc_id\": \"CLM-5001-D02\", \"filename\": \"receipt_air.pdf\", \"round..."
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 3,
+  "ts": "2026-10-06T23:08:08.604+00:00",
+  "agent": "intake",
+  "type": "plan",
+  "summary": "extract 4 new document(s)",
+  "steps": [
+   "expense_report.pdf",
+   "receipt_air.pdf",
+   "receipt_hotel.pdf",
+   "receipt_taxi.pdf"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 4,
+  "ts": "2026-10-06T23:08:08.608+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "read_document(doc_id=CLM-5001-D01)",
+  "tool": "read_document",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-5001-D01",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-002",
+  "latency_ms": 3.5,
+  "result_preview": "{\"doc_id\": \"CLM-5001-D01\", \"filename\": \"expense_report.pdf\", \"round\": 0, \"sha\": \"e7a9b886e9b21bd9\", \"text\": \"Travel Expense Report\\nDOCUMENT: claim_form\\nClaim Type: employee reimbursement\\nClaimant ID: E-1042\\nEmploy..."
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 5,
+  "ts": "2026-10-06T23:08:08.614+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "read_document(doc_id=CLM-5001-D02)",
+  "tool": "read_document",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-5001-D02",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-003",
+  "latency_ms": 1.6,
+  "result_preview": "{\"doc_id\": \"CLM-5001-D02\", \"filename\": \"receipt_air.pdf\", \"round\": 0, \"sha\": \"f08280bcfcaa7b04\", \"text\": \"Receipt\\nDOCUMENT: receipt\\nFor Line: AIRFARE\\nAmount: 8400\\nVendor: IndiSky\\n\", \"parsed\": {\"kind\": \"receipt\", ..."
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 6,
+  "ts": "2026-10-06T23:08:08.621+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "read_document(doc_id=CLM-5001-D03)",
+  "tool": "read_document",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-5001-D03",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-004",
+  "latency_ms": 2.9,
+  "result_preview": "{\"doc_id\": \"CLM-5001-D03\", \"filename\": \"receipt_hotel.pdf\", \"round\": 0, \"sha\": \"9387026ed01cca2f\", \"text\": \"Receipt\\nDOCUMENT: receipt\\nFor Line: HOTEL_NIGHT\\nAmount: 14400\\nVendor: Hotel Charminar\\n\", \"parsed\": {\"kin..."
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 7,
+  "ts": "2026-10-06T23:08:08.628+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "read_document(doc_id=CLM-5001-D04)",
+  "tool": "read_document",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-5001-D04",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-005",
+  "latency_ms": 1.8,
+  "result_preview": "{\"doc_id\": \"CLM-5001-D04\", \"filename\": \"receipt_taxi.pdf\", \"round\": 0, \"sha\": \"5295bd5052e33e97\", \"text\": \"Receipt\\nDOCUMENT: receipt\\nFor Line: TAXI\\nAmount: 1350\\nVendor: CityCab\\n\", \"parsed\": {\"kind\": \"receipt\", \"t..."
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 8,
+  "ts": "2026-10-06T23:08:08.635+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "classify_claim()",
+  "tool": "classify_claim",
+  "effect": "read",
+  "args": {
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-006",
+  "latency_ms": 0.3,
+  "result_preview": "{\"type\": \"employee_reimbursement\", \"confidence\": 0.97, \"declared\": \"employee_reimbursement\", \"signal_votes\": {\"warranty\": 0, \"parts_replacement\": 0, \"transit_damage\": 0, \"dealer_reimbursement\": 0, \"employee_reimbursem..."
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 9,
+  "ts": "2026-10-06T23:08:08.640+00:00",
+  "agent": "intake",
+  "type": "reasoning",
+  "summary": "classified as employee_reimbursement (0.97)",
+  "evidence_id": "EV-006",
+  "rationale": "declared type corroborated by document signals {'warranty': 0, 'parts_replacement': 0, 'transit_damage': 0, 'dealer_reimbursement': 0, 'employee_reimbursement': 3}"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 10,
+  "ts": "2026-10-06T23:08:08.645+00:00",
+  "agent": "intake",
+  "type": "tool_call",
+  "summary": "lookup_party(party_id=E-1042)",
+  "tool": "lookup_party",
+  "effect": "read",
+  "args": {
+   "party_id": "E-1042"
+  },
+  "result_ref": "EV-007",
+  "latency_ms": 0.2,
+  "result_preview": "{\"party_type\": \"employee\", \"employee_id\": \"E-1042\", \"name\": \"Ananya Deshmukh\", \"grade\": \"G2\", \"cost_centre\": \"CC-FIELD-W\", \"manager\": \"Milind Kulkarni\", \"email\": \"ananya@oem.example\"}"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 11,
+  "ts": "2026-10-06T23:08:08.649+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "RECEIVED -> CLASSIFIED (employee_reimbursement)",
+  "from_status": "RECEIVED",
+  "to_status": "CLASSIFIED"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 12,
+  "ts": "2026-10-06T23:08:08.655+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> completeness: documents changed since the last completeness check",
+  "next": "completeness",
+  "goal": "check required documents and fields",
+  "rationale": "documents changed since the last completeness check",
+  "forced": true,
+  "allowed": [
+   "completeness"
+  ],
+  "plan": [
+   "completeness",
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 13,
+  "ts": "2026-10-06T23:08:08.661+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "CLASSIFIED -> UNDER_REVIEW (completeness reviewing)",
+  "from_status": "CLASSIFIED",
+  "to_status": "UNDER_REVIEW"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 14,
+  "ts": "2026-10-06T23:08:08.662+00:00",
+  "agent": "completeness",
+  "type": "tool_call",
+  "summary": "required_docs()",
+  "tool": "required_docs",
+  "effect": "read",
+  "args": {
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-008",
+  "latency_ms": 0.2,
+  "result_preview": "{\"claim_type\": \"employee_reimbursement\", \"required\": [{\"kind\": \"claim_form\", \"label\": \"completed claim form\", \"rule\": \"base\"}, {\"kind\": \"receipt\", \"for_line\": \"AIRFARE\", \"label\": \"receipt for Airfare Pune-Hyderabad re..."
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 15,
+  "ts": "2026-10-06T23:08:08.663+00:00",
+  "agent": "completeness",
+  "type": "tool_call",
+  "summary": "check_doc_quality(doc_id=CLM-5001-D01)",
+  "tool": "check_doc_quality",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-5001-D01",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-009",
+  "latency_ms": 0.1,
+  "result_preview": "{\"doc_id\": \"CLM-5001-D01\", \"kind\": \"claim_form\", \"missing_fields\": [], \"ok\": true, \"line_items\": 5}"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 16,
+  "ts": "2026-10-06T23:08:08.664+00:00",
+  "agent": "completeness",
+  "type": "tool_call",
+  "summary": "check_doc_quality(doc_id=CLM-5001-D02)",
+  "tool": "check_doc_quality",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-5001-D02",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-010",
+  "latency_ms": 0.1,
+  "result_preview": "{\"doc_id\": \"CLM-5001-D02\", \"kind\": \"receipt\", \"missing_fields\": [], \"ok\": true, \"line_items\": 0}"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 17,
+  "ts": "2026-10-06T23:08:08.665+00:00",
+  "agent": "completeness",
+  "type": "tool_call",
+  "summary": "check_doc_quality(doc_id=CLM-5001-D03)",
+  "tool": "check_doc_quality",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-5001-D03",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-011",
+  "latency_ms": 0.1,
+  "result_preview": "{\"doc_id\": \"CLM-5001-D03\", \"kind\": \"receipt\", \"missing_fields\": [], \"ok\": true, \"line_items\": 0}"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 18,
+  "ts": "2026-10-06T23:08:08.666+00:00",
+  "agent": "completeness",
+  "type": "tool_call",
+  "summary": "check_doc_quality(doc_id=CLM-5001-D04)",
+  "tool": "check_doc_quality",
+  "effect": "read",
+  "args": {
+   "doc_id": "CLM-5001-D04",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-012",
+  "latency_ms": 0.1,
+  "result_preview": "{\"doc_id\": \"CLM-5001-D04\", \"kind\": \"receipt\", \"missing_fields\": [], \"ok\": true, \"line_items\": 0}"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 19,
+  "ts": "2026-10-06T23:08:08.667+00:00",
+  "agent": "completeness",
+  "type": "reasoning",
+  "summary": "all required documents present",
+  "evidence_id": "EV-008"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 20,
+  "ts": "2026-10-06T23:08:08.672+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> policy: eligibility not yet evaluated on current facts",
+  "next": "policy",
+  "goal": "evaluate eligibility rules and find applicable clauses",
+  "rationale": "eligibility not yet evaluated on current facts",
+  "forced": false,
+  "allowed": [
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "escalate"
+  ],
+  "plan": [
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 21,
+  "ts": "2026-10-06T23:08:08.676+00:00",
+  "agent": "policy",
+  "type": "tool_call",
+  "summary": "rules_evaluate()",
+  "tool": "rules_evaluate",
+  "effect": "read",
+  "args": {
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-013",
+  "latency_ms": 1.2,
+  "result_preview": "{\"eligible\": true, \"with_exception\": false, \"results\": [{\"rule_id\": \"EMP-2.1\", \"clause\": \"Travel policy \\u00a72.1 Submission window\", \"passed\": true, \"detail\": \"submitted 9 d after trip (limit 30)\", \"waivable\": false,..."
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 22,
+  "ts": "2026-10-06T23:08:08.678+00:00",
+  "agent": "policy",
+  "type": "rule_fired",
+  "summary": "EMP-2.1 PASS - submitted 9 d after trip (limit 30)",
+  "rule_id": "EMP-2.1",
+  "clause": "Travel policy \u00a72.1 Submission window",
+  "passed": true,
+  "waivable": false,
+  "evidence_id": "EV-013"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 23,
+  "ts": "2026-10-06T23:08:08.680+00:00",
+  "agent": "policy",
+  "type": "rule_fired",
+  "summary": "EMP-2.2 PASS - receipts present for all lines over threshold",
+  "rule_id": "EMP-2.2",
+  "clause": "Travel policy \u00a72.2 Receipts",
+  "passed": true,
+  "waivable": false,
+  "evidence_id": "EV-013"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 24,
+  "ts": "2026-10-06T23:08:08.681+00:00",
+  "agent": "policy",
+  "type": "rule_fired",
+  "summary": "EMP-2.3 PASS - business purpose stated",
+  "rule_id": "EMP-2.3",
+  "clause": "Travel policy \u00a72.3 Business purpose",
+  "passed": true,
+  "waivable": false,
+  "evidence_id": "EV-013"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 25,
+  "ts": "2026-10-06T23:08:08.684+00:00",
+  "agent": "policy",
+  "type": "reasoning",
+  "summary": "eligible=True exception=False blocking=[]",
+  "evidence_id": "EV-013"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 26,
+  "ts": "2026-10-06T23:08:08.689+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> investigation: claim not yet cross-checked against records on current facts",
+  "next": "investigation",
+  "goal": "cross-check the claim against records and resolve discrepancies",
+  "rationale": "claim not yet cross-checked against records on current facts",
+  "forced": false,
+  "allowed": [
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "escalate"
+  ],
+  "plan": [
+   "investigation",
+   "duplicate_pattern",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 27,
+  "ts": "2026-10-06T23:08:08.695+00:00",
+  "agent": "investigation",
+  "type": "plan",
+  "summary": "checks for employee_reimbursement: expense_receipts, amount_vs_records",
+  "steps": [
+   "expense_receipts",
+   "amount_vs_records"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 28,
+  "ts": "2026-10-06T23:08:08.697+00:00",
+  "agent": "investigation",
+  "type": "tool_call",
+  "summary": "run_check(check=expense_receipts)",
+  "tool": "run_check",
+  "effect": "read",
+  "args": {
+   "check": "expense_receipts",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-014",
+  "latency_ms": 0.7,
+  "result_preview": "{\"check\": \"expense_receipts\", \"status\": \"pass\", \"detail\": \"receipts match all lines over threshold\", \"data\": {\"receipts\": {\"AIRFARE\": 8400.0, \"HOTEL_NIGHT\": 14400.0, \"TAXI\": 1350.0}, \"missing\": [], \"mismatch\": []}, \"f..."
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 29,
+  "ts": "2026-10-06T23:08:08.699+00:00",
+  "agent": "investigation",
+  "type": "tool_call",
+  "summary": "run_check(check=amount_vs_records)",
+  "tool": "run_check",
+  "effect": "read",
+  "args": {
+   "check": "amount_vs_records",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-015",
+  "latency_ms": 0.4,
+  "result_preview": "{\"check\": \"amount_vs_records\", \"status\": \"pass\", \"detail\": \"line total 36600.0 vs claimed 36600.0\", \"data\": {\"line_total\": 36600.0, \"claimed\": 36600.0}, \"finding\": null}"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 30,
+  "ts": "2026-10-06T23:08:08.700+00:00",
+  "agent": "investigation",
+  "type": "reasoning",
+  "summary": "2 checks; 0 open finding(s)",
+  "plan": [
+   "expense_receipts",
+   "amount_vs_records"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 31,
+  "ts": "2026-10-06T23:08:08.708+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> duplicate_pattern: duplicate and recurring-failure check not yet run on current facts",
+  "next": "duplicate_pattern",
+  "goal": "check for duplicate submissions and recurring failures",
+  "rationale": "duplicate and recurring-failure check not yet run on current facts",
+  "forced": false,
+  "allowed": [
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "escalate"
+  ],
+  "plan": [
+   "duplicate_pattern",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 32,
+  "ts": "2026-10-06T23:08:08.715+00:00",
+  "agent": "duplicate_pattern",
+  "type": "plan",
+  "summary": "claimant duplicate history; narrative similarity",
+  "steps": [
+   "claimant duplicate history",
+   "narrative similarity"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 33,
+  "ts": "2026-10-06T23:08:08.717+00:00",
+  "agent": "duplicate_pattern",
+  "type": "tool_call",
+  "summary": "search_claims(claimant_id=E-1042, outcome=rejected_duplicate)",
+  "tool": "search_claims",
+  "effect": "read",
+  "args": {
+   "claimant_id": "E-1042",
+   "outcome": "rejected_duplicate",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-016",
+  "latency_ms": 0.3,
+  "result_preview": "[]"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 34,
+  "ts": "2026-10-06T23:08:08.721+00:00",
+  "agent": "duplicate_pattern",
+  "type": "tool_call",
+  "summary": "similar_claims(k=3)",
+  "tool": "similar_claims",
+  "effect": "read",
+  "args": {
+   "k": 3,
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-017",
+  "latency_ms": 2.4,
+  "result_preview": "[{\"claim_id\": \"CLM-H-0300\", \"claimant_id\": \"D-050\", \"serial\": \"LD-520\", \"invoice_no\": \"DLR-INV-5340\", \"amount\": 25000.0, \"submitted_on\": \"2026-07-21\", \"outcome\": \"partially_settled\", \"narrative\": \"Field service visit ..."
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 35,
+  "ts": "2026-10-06T23:08:08.722+00:00",
+  "agent": "duplicate_pattern",
+  "type": "reasoning",
+  "summary": "no duplicate found"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 36,
+  "ts": "2026-10-06T23:08:08.730+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> adjudication: eligibility, investigation and duplicate checks complete",
+  "next": "adjudication",
+  "goal": "recommend a disposition with an admissible amount and evidence",
+  "rationale": "eligibility, investigation and duplicate checks complete",
+  "forced": false,
+  "allowed": [
+   "policy",
+   "investigation",
+   "duplicate_pattern",
+   "escalate",
+   "adjudication"
+  ],
+  "plan": [
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 37,
+  "ts": "2026-10-06T23:08:08.737+00:00",
+  "agent": "adjudication",
+  "type": "tool_call",
+  "summary": "get_precedents(claim_type=employee_reimbursement, finding_types=[])",
+  "tool": "get_precedents",
+  "effect": "read",
+  "args": {
+   "claim_type": "employee_reimbursement",
+   "finding_types": []
+  },
+  "result_ref": "EV-018",
+  "latency_ms": 0.4,
+  "result_preview": "[]"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 38,
+  "ts": "2026-10-06T23:08:08.741+00:00",
+  "agent": "adjudication",
+  "type": "tool_call",
+  "summary": "rules_calculate_settlement()",
+  "tool": "rules_calculate_settlement",
+  "effect": "read",
+  "args": {
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": "EV-019",
+  "latency_ms": 0.7,
+  "result_preview": "{\"claimed_amount\": 36600.0, \"admissible_amount\": 32700.0, \"lines\": [{\"item\": \"Airfare Pune-Hyderabad return\", \"claimed\": 8400.0, \"admitted\": 8400.0, \"rule_id\": \"EMP-4.1\", \"note\": \"actual cost with receipt\"}, {\"item\": ..."
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 39,
+  "ts": "2026-10-06T23:08:08.743+00:00",
+  "agent": "adjudication",
+  "type": "recommendation",
+  "summary": "PARTIAL 32,700.00, confidence 0.95",
+  "decision": "partial",
+  "amount": 32700.0,
+  "reasons": [
+   {
+    "text": "Eligible under EMP-2.1, EMP-2.2, EMP-2.3.",
+    "evidence_ids": [
+     "EV-013"
+    ]
+   },
+   {
+    "text": "Hotel: 14,400 claimed, 12,000 admitted (EMP-4.2: cap 6000/night (G2, tier1)).",
+    "evidence_ids": [
+     "EV-019"
+    ]
+   },
+   {
+    "text": "Meals per diem: 12,000 claimed, 10,500 admitted (EMP-4.3: per diem 3500/day (G2, tier1)).",
+    "evidence_ids": [
+     "EV-019"
+    ]
+   }
+  ],
+  "actions": [
+   {
+    "type": "payment",
+    "params": {
+     "payee_id": "E-1042",
+     "amount": 32700.0
+    }
+   },
+   {
+    "type": "decision_letter",
+    "params": {
+     "recipient": "E-1042"
+    }
+   }
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 40,
+  "ts": "2026-10-06T23:08:08.745+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "UNDER_REVIEW -> RECOMMENDED (partial)",
+  "from_status": "UNDER_REVIEW",
+  "to_status": "RECOMMENDED"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 41,
+  "ts": "2026-10-06T23:08:08.748+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> verifier: every recommendation is verified before approval routing",
+  "next": "verifier",
+  "goal": "verify the recommendation",
+  "rationale": "every recommendation is verified before approval routing",
+  "forced": true,
+  "allowed": [
+   "verifier"
+  ],
+  "plan": [
+   "verifier",
+   "adjudication",
+   "route_approval",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 42,
+  "ts": "2026-10-06T23:08:08.752+00:00",
+  "agent": "verifier",
+  "type": "verification",
+  "summary": "passed",
+  "passed": true,
+  "errors": []
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 43,
+  "ts": "2026-10-06T23:08:08.756+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> route_approval: verified recommendation; route per approval matrix",
+  "next": "route_approval",
+  "goal": "route the verified recommendation to the approvers the matrix requires",
+  "rationale": "verified recommendation; route per approval matrix",
+  "forced": true,
+  "allowed": [
+   "route_approval"
+  ],
+  "plan": [
+   "route_approval",
+   "adjudication",
+   "verifier",
+   "settlement"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 44,
+  "ts": "2026-10-06T23:08:08.761+00:00",
+  "agent": "system",
+  "type": "approval_request",
+  "summary": "APR-CLM-5001-1: reporting_manager -> finance_controller",
+  "approval_id": "APR-CLM-5001-1",
+  "roles": [
+   "reporting_manager",
+   "finance_controller"
+  ],
+  "decision": "partial",
+  "amount": 32700.0,
+  "exception": false
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 45,
+  "ts": "2026-10-06T23:08:08.764+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "RECOMMENDED -> PENDING_APPROVAL (awaiting reporting_manager)",
+  "from_status": "RECOMMENDED",
+  "to_status": "PENDING_APPROVAL"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 46,
+  "ts": "2026-10-06T23:08:08.778+00:00",
+  "agent": "auto:reporting_manager",
+  "type": "approval",
+  "summary": "reporting_manager: approved - auto-approved in demo",
+  "role": "reporting_manager",
+  "decision": "approved",
+  "amount": null
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 47,
+  "ts": "2026-10-06T23:08:08.790+00:00",
+  "agent": "auto:finance_controller",
+  "type": "approval",
+  "summary": "finance_controller: approved - auto-approved in demo",
+  "role": "finance_controller",
+  "decision": "approved",
+  "amount": null
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 48,
+  "ts": "2026-10-06T23:08:08.803+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "PENDING_APPROVAL -> PARTIALLY_APPROVED (final partial 32,700.00)",
+  "from_status": "PENDING_APPROVAL",
+  "to_status": "PARTIALLY_APPROVED"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 49,
+  "ts": "2026-10-06T23:08:08.805+00:00",
+  "agent": "system",
+  "type": "approval",
+  "summary": "approval complete: partial 32,700.00; 2 action(s) authorised",
+  "final": {
+   "decision": "partial",
+   "amount": 32700.0,
+   "approver_reason": ""
+  },
+  "authorised": [
+   "0",
+   "1"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 50,
+  "ts": "2026-10-06T23:08:08.816+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> settlement: approvals complete (partial); execute approved actions",
+  "next": "settlement",
+  "goal": "execute approved actions and send the decision letter",
+  "rationale": "approvals complete (partial); execute approved actions",
+  "forced": true,
+  "allowed": [
+   "settlement"
+  ],
+  "plan": [
+   "settlement",
+   "adjudication",
+   "verifier",
+   "route_approval"
+  ]
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 51,
+  "ts": "2026-10-06T23:08:08.822+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "PARTIALLY_APPROVED -> SETTLING",
+  "from_status": "PARTIALLY_APPROVED",
+  "to_status": "SETTLING"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 52,
+  "ts": "2026-10-06T23:08:08.828+00:00",
+  "agent": "settlement",
+  "type": "tool_call",
+  "summary": "issue_payment(payee_id=E-1042, amount=32700.0, approval_token=APR-CLM-5001-1.****, idempotency_key=CLM-5001:APR-CLM-5001-1:0:payment)",
+  "tool": "issue_payment",
+  "effect": "financial",
+  "args": {
+   "payee_id": "E-1042",
+   "amount": 32700.0,
+   "approval_token": "APR-CLM-5001-1.****",
+   "idempotency_key": "CLM-5001:APR-CLM-5001-1:0:payment",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": null,
+  "latency_ms": 3.4,
+  "result_preview": "{\"status\": \"executed\", \"ref\": \"PAY-40D6B3FF\", \"action\": \"payment\", \"payee_id\": \"E-1042\", \"amount\": 32700.0, \"channel\": \"mock-NEFT\"}"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 53,
+  "ts": "2026-10-06T23:08:08.832+00:00",
+  "agent": "settlement",
+  "type": "action",
+  "summary": "payment -> executed PAY-40D6B3FF",
+  "action": "payment",
+  "status": "executed",
+  "ref": "PAY-40D6B3FF",
+  "error": null
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 54,
+  "ts": "2026-10-06T23:08:08.852+00:00",
+  "agent": "settlement",
+  "type": "tool_call",
+  "summary": "send_message(recipient=ananya@oem.example, subject=Decision on claim CLM-5001, body=Dear Ananya Deshmukh, Your claim CLM-5001 has been approved in part. Approved..., kind=decision_letter, approval_token=APR-CLM-5001-1.****, idempotency_key=CLM-5001:APR-CLM-5001-1:1:decision_letter)",
+  "tool": "send_message",
+  "effect": "write_external",
+  "args": {
+   "recipient": "ananya@oem.example",
+   "subject": "Decision on claim CLM-5001",
+   "body": "Dear Ananya Deshmukh, Your claim CLM-5001 has been approved in part. Approved...",
+   "kind": "decision_letter",
+   "approval_token": "APR-CLM-5001-1.****",
+   "idempotency_key": "CLM-5001:APR-CLM-5001-1:1:decision_letter",
+   "claim_id": "CLM-5001"
+  },
+  "result_ref": null,
+  "latency_ms": 7.8,
+  "result_preview": "{\"status\": \"executed\", \"ref\": \"MSG-F1E78E23\", \"action\": \"message:decision_letter\", \"recipient\": \"ananya@oem.example\", \"subject\": \"Decision on claim CLM-5001\"}"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 55,
+  "ts": "2026-10-06T23:08:08.856+00:00",
+  "agent": "settlement",
+  "type": "action",
+  "summary": "decision_letter -> executed MSG-F1E78E23",
+  "action": "decision_letter",
+  "status": "executed",
+  "ref": "MSG-F1E78E23",
+  "error": null
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 56,
+  "ts": "2026-10-06T23:08:08.867+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "SETTLING -> SETTLED",
+  "from_status": "SETTLING",
+  "to_status": "SETTLED"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 57,
+  "ts": "2026-10-06T23:08:08.870+00:00",
+  "agent": "system",
+  "type": "status_change",
+  "summary": "SETTLED -> CLOSED",
+  "from_status": "SETTLED",
+  "to_status": "CLOSED"
+ },
+ {
+  "claim_id": "CLM-5001",
+  "seq": 58,
+  "ts": "2026-10-06T23:08:08.878+00:00",
+  "agent": "case_manager",
+  "type": "delegate",
+  "summary": "-> end: case is CLOSED",
+  "next": "end",
+  "goal": "close the case",
+  "rationale": "case is CLOSED",
+  "forced": true,
+  "allowed": [
+   "end"
+  ],
+  "plan": [
+   "end",
+   "adjudication",
+   "verifier",
+   "route_approval",
+   "settlement"
+  ]
+ }
+]

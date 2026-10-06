@@ -1,0 +1,35 @@
+┏━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━┓
+┃ claim    ┃ type                   ┃ expected        ┃ got             ┃ amount ok ┃ findings ok ┃ turns ┃ tools ┃ sec ┃
+┡━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━┩
+│ CLM-1001 │ warranty               │ partial 20,600  │ partial 20,600  │ yes       │ yes         │ 10    │ 30    │ 0.2 │
+│ CLM-2001 │ transit_damage         │ partial 303,500 │ partial 303,500 │ yes       │ yes         │ 16    │ 52    │ 0.3 │
+│ CLM-3001 │ dealer_reimbursement   │ reject 0        │ reject 0        │ yes       │ yes         │ 8     │ 19    │ 0.1 │
+│ CLM-3002 │ warranty               │ approve 9,200   │ approve 9,200   │ yes       │ yes         │ 10    │ 31    │ 0.2 │
+│ CLM-4001 │ parts_replacement      │ approve 12,400  │ approve 12,400  │ yes       │ yes         │ 10    │ 20    │ 0.1 │
+│ CLM-5001 │ employee_reimbursement │ partial 32,700  │ partial 32,700  │ yes       │ yes         │ 10    │ 21    │ 0.2 │
+│ CLM-G101 │ warranty               │ approve 11,900  │ approve 11,900  │ yes       │ yes         │ 10    │ 28    │ 0.2 │
+│ CLM-G102 │ warranty               │ partial 13,400  │ partial 13,400  │ yes       │ yes         │ 10    │ 28    │ 0.2 │
+│ CLM-G103 │ warranty               │ reject 0        │ reject 0        │ yes       │ yes         │ 10    │ 27    │ 0.2 │
+│ CLM-G104 │ warranty               │ reject 0        │ reject 0        │ yes       │ yes         │ 10    │ 27    │ 0.2 │
+│ CLM-G105 │ transit_damage         │ reject 0        │ reject 0        │ yes       │ yes         │ 10    │ 23    │ 0.1 │
+│ CLM-G106 │ transit_damage         │ approve 44,500  │ approve 44,500  │ yes       │ yes         │ 10    │ 25    │ 0.1 │
+│ CLM-G107 │ parts_replacement      │ approve 14,800  │ approve 14,800  │ yes       │ yes         │ 10    │ 20    │ 0.1 │
+│ CLM-G108 │ parts_replacement      │ reject 0        │ reject 0        │ yes       │ yes         │ 10    │ 19    │ 0.1 │
+│ CLM-G109 │ dealer_reimbursement   │ approve 7,320   │ approve 7,320   │ yes       │ yes         │ 10    │ 24    │ 0.2 │
+│ CLM-G110 │ dealer_reimbursement   │ reject 0        │ reject 0        │ yes       │ yes         │ 8     │ 19    │ 0.1 │
+│ CLM-G111 │ employee_reimbursement │ approve 8,700   │ approve 8,700   │ yes       │ yes         │ 10    │ 19    │ 0.1 │
+│ CLM-G112 │ employee_reimbursement │ escalate 0      │ escalate 0      │ yes       │ yes         │ 5     │ 10    │ 0.1 │
+│ CLM-G121 │ warranty               │ approve 11,900  │ approve 11,900  │ yes       │ yes         │ 10    │ 28    │ 0.1 │
+│ CLM-G122 │ warranty               │ partial 14,300  │ partial 14,300  │ yes       │ yes         │ 10    │ 28    │ 0.2 │
+│ CLM-G123 │ warranty               │ reject 0        │ reject 0        │ yes       │ yes         │ 10    │ 27    │ 0.2 │
+│ CLM-G124 │ warranty               │ reject 0        │ reject 0        │ yes       │ yes         │ 10    │ 28    │ 0.1 │
+│ CLM-G125 │ transit_damage         │ reject 0        │ reject 0        │ yes       │ yes         │ 10    │ 23    │ 0.1 │
+│ CLM-G126 │ transit_damage         │ approve 44,500  │ approve 44,500  │ yes       │ yes         │ 10    │ 25    │ 0.2 │
+│ CLM-G127 │ parts_replacement      │ approve 14,800  │ approve 14,800  │ yes       │ yes         │ 10    │ 20    │ 0.1 │
+│ CLM-G128 │ parts_replacement      │ reject 0        │ reject 0        │ yes       │ yes         │ 10    │ 19    │ 0.2 │
+│ CLM-G129 │ dealer_reimbursement   │ approve 7,320   │ approve 7,320   │ yes       │ yes         │ 10    │ 25    │ 0.2 │
+│ CLM-G130 │ dealer_reimbursement   │ reject 0        │ reject 0        │ yes       │ yes         │ 8     │ 19    │ 0.1 │
+│ CLM-G131 │ employee_reimbursement │ approve 8,700   │ approve 8,700   │ yes       │ yes         │ 10    │ 19    │ 0.2 │
+│ CLM-G132 │ employee_reimbursement │ escalate 0      │ escalate 0      │ yes       │ yes         │ 5     │ 10    │ 0.1 │
+└──────────┴────────────────────────┴─────────────────┴─────────────────┴───────────┴─────────────┴───────┴───────┴─────┘
+decision accuracy 30/30  amount exact 30/30  expected findings 30/30  mean agent turns 9.7  mean tool calls 23.8

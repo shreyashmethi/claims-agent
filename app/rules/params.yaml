@@ -1,0 +1,45 @@
+# Rule parameters for the mock policies. Illustrative values, not real company figures.
+version: "2026.10-r1"
+currency: INR
+
+warranty:
+  labour_rate_by_tier: {A: 1500, B: 1800, C: 2100}
+  report_within_days_of_failure: 30
+  std_hours:
+    HYD-PUMP-R: 6
+    COOL-FAN-R: 2
+    ENG-STARTER-R: 3
+    ELEC-ALT-R: 3
+    TRK-ROLLER-R: 5
+    SENSOR-R: 1
+
+parts:
+  return_window_days: 30
+
+transit:
+  notify_days: 7
+
+dealer:
+  pre_auth_threshold: 50000
+  submit_within_days: 60
+  travel_rate_per_km: 12
+  max_travel_km: 150
+  field_service_std_hours: 4
+
+employee:
+  submit_within_days: 30
+  receipt_threshold: 500
+  mileage_rate: 9
+  per_diem:        {G1: {tier1: 2500, tier2: 1800}, G2: {tier1: 3500, tier2: 2500}, G3: {tier1: 5000, tier2: 3500}}
+  hotel_per_night: {G1: {tier1: 4000, tier2: 3000}, G2: {tier1: 6000, tier2: 4500}, G3: {tier1: 9000, tier2: 6500}}
+
+approval:
+  officer_limit: 25000
+  manager_limit: 200000
+  officer_min_confidence: 0.85
+
+patterns:
+  recurring_unit_failures: 3        # same unit + component within window
+  recurring_window_days: 365
+  batch_min_units: 5                # same part batch failing on N other units ...
+  batch_min_dealers: 3              # ... across M dealers

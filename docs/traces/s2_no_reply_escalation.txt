@@ -1,0 +1,42 @@
+──────────────────────────────────────────────────────────────────────────────── CLM-2001 ────────────────────────────────────────────────────────────────────────────────
+  1 case_manager      ->      -> intake: unprocessed documents on the claim
+  3 intake            plan    extract 4 new document(s)
+  5 intake            GUARD   instruction-like text in claim_form.pdf treated as data and ignored
+ 10 intake            think   classified as transit_damage (0.97)
+ 14 system            status  RECEIVED -> CLASSIFIED (transit_damage)
+ 15 case_manager      ->      -> completeness: documents changed since the last completeness check
+ 16 system            status  CLASSIFIED -> UNDER_REVIEW (completeness reviewing)
+ 22 completeness      think   all required documents present
+ 23 case_manager      ->      -> policy: eligibility not yet evaluated on current facts
+ 25 policy            rule    TRN-2.1 PASS - reported 3 d after delivery (limit 7)
+ 26 policy            rule    TRN-2.2 FAIL - claim serial GB-7781 vs shipped serial GB-7718
+ 28 policy            rule    TRN-2.3 FAIL - POD carries no damage remark
+ 30 policy            think   eligible=False exception=False blocking=['TRN-2.2', 'TRN-2.3']
+ 31 case_manager      ->      -> investigation: claim not yet cross-checked against records on current facts
+ 32 investigation     plan    checks for transit_damage: serial_consistency, pod_remark, amount_vs_records
+ 35 investigation     find    [high] Claim form serial GB-7781 does not match record serial GB-7718. needs: ['Photograph of the equipment serial plate']
+ 37 investigation     find    [high] Proof of delivery carries no damage remark (TRN-2.3). needs: ["Carrier's written acknowledgement of the damage"]
+ 40 investigation     find    [high] Claimed invoice 340,000 is 12.0% above the dispatch invoice value 303,500 in the ERP. needs: ['Original purchase invoice supporting 
+the claimed value']
+ 41 investigation     think   4 checks; 3 open finding(s); still needed: ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of the damage", 
+'Original purchase invoice supporting the claimed value']
+ 42 case_manager      ->      -> request_info: open findings need claimant evidence: ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of 
+the damage", 'Original purchase invoice supporting the claimed value']
+ 44 system            ask     round 1: requested ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of the damage", 'Original purchase 
+invoice supporting the claimed value']
+ 45 system            status  UNDER_REVIEW -> PENDING_INFO (awaiting claimant (round 1))
+ 46 claimant          reply   no response by the deadline
+ 47 system            status  PENDING_INFO -> UNDER_REVIEW (claimant round closed)
+ 48 case_manager      ->      -> request_info: open findings need claimant evidence: ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of 
+the damage", 'Original purchase invoice supporting the claimed value']
+ 50 system            ask     round 2: requested ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of the damage", 'Original purchase 
+invoice supporting the claimed value']
+ 51 system            status  UNDER_REVIEW -> PENDING_INFO (awaiting claimant (round 2))
+ 52 claimant          reply   no response by the deadline
+ 53 system            status  PENDING_INFO -> UNDER_REVIEW (claimant round closed)
+ 54 case_manager      ->      -> escalate: evidence still missing after 2 request(s): ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of 
+the damage", 'Original purchase invoice supporting the claimed value']
+ 55 case_manager      ESC     escalated to claims manager: evidence still missing after 2 request(s): ['Photograph of the equipment serial plate', "Carrier's written 
+acknowledgement of the damage", 'Original purchase invoice supporting the claimed value']
+ 56 system            status  UNDER_REVIEW -> ESCALATED (evidence still missing after 2 request(s): ['Photograph of the equipment serial )
+=> CLM-2001: ESCALATED

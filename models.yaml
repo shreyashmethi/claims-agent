@@ -1,0 +1,31 @@
+# LLM configuration. Override the provider with the LLM_PROVIDER env var.
+#   offline       deterministic planner/heuristics, no API key (CI, demos without a key)
+#   anthropic     needs ANTHROPIC_API_KEY  (pip install langchain-anthropic)
+#   openai        needs OPENAI_API_KEY     (pip install langchain-openai)
+#   google_genai  needs GOOGLE_API_KEY     (pip install langchain-google-genai)
+#   ollama        local server             (pip install langchain-ollama)
+# Roles let a cheaper model extract while a stronger one plans. Model names are examples:
+# set them to models your account can use.
+provider: offline
+
+roles: [supervisor, extractor, investigator, reasoner, writer]
+
+providers:
+  anthropic:
+    default: claude-sonnet-5-5
+    extractor: claude-haiku-4-5-20251001
+    writer: claude-haiku-4-5-20251001
+  openai:
+    default: gpt-4.1
+    extractor: gpt-4.1-mini
+    writer: gpt-4.1-mini
+  google_genai:
+    default: gemini-2.5-pro
+    extractor: gemini-2.5-flash
+  ollama:
+    default: qwen2.5:14b
+    options: {base_url: "http://localhost:11434"}
+
+settings:
+  temperature: 0
+  max_react_steps: 10
