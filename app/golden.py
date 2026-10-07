@@ -240,3 +240,47 @@ def run_eval() -> bool:
     console.print(f"decision accuracy {score['decision']}/{n}  amount exact {score['amount']}/{n}  expected findings "
                   f"{score['findings']}/{n}  mean agent turns {sum(turns) / n:.1f}  mean tool calls {sum(tools) / n:.1f}")
     return score["decision"] == n and score["amount"] == n and score["findings"] == n
+
+
+# ---------------------------------------------------------------------------- on-demand sample claims (console)
+SAMPLES = {
+    "warranty_clean": "Warranty, clean: starter motor within standard labour",
+    "warranty_over_labour": "Warranty, labour above standard hours",
+    "warranty_out_of_coverage": "Warranty, unit past its coverage period",
+    "transit_ok": "Transit damage, noted on delivery",
+    "transit_late": "Transit damage, reported after the 7-day window",
+    "parts_defective": "Parts replacement, defective on arrival",
+    "dealer_field_visit": "Dealer field visit",
+    "dealer_duplicate": "Dealer field visit, invoice already reimbursed",
+    "employee_ok": "Employee travel, all receipts",
+    "employee_missing_receipt": "Employee travel, rail receipt missing",
+}
+
+
+def create_sample(kind: str) -> str:
+    """Generate one fresh claim with documents. IDs use a separate range so they never collide with the seed."""
+    if kind not in SAMPLES:
+        raise KeyError(kind)
+    n = db.one("SELECT COUNT(*) AS n FROM claims WHERE claim_id LIKE 'CLM-N%'")["n"] + 501
+    cid, rng = f"CLM-N{n:03d}", random.Random(n)
+    if kind == "warranty_clean":
+        _warranty(cid, rng, "ST-110", "ENG-STARTER-R", 0, 3)
+    elif kind == "warranty_over_labour":
+        _warranty(cid, rng, "AL-310", "ELEC-ALT-R", 0, 5)
+    elif kind == "warranty_out_of_coverage":
+        _warranty(cid, rng, "TR-505", "TRK-ROLLER-R", 0, 5, sale=date(2024, 7, 1))
+    elif kind == "transit_ok":
+        _transit(cid, rng, date(2026, 9, 30), date(2026, 10, 2), "AL-310", 5, "pallet broken, units dented")
+    elif kind == "transit_late":
+        _transit(cid, rng, date(2026, 9, 10), date(2026, 9, 25), "TR-505", 4, "two cartons crushed")
+    elif kind == "parts_defective":
+        _parts(cid, rng, date(2026, 9, 18), date(2026, 9, 30), "ST-110", 2)
+    elif kind == "dealer_field_visit":
+        _dealer(cid, rng, duplicate=False)
+    elif kind == "dealer_duplicate":
+        _dealer(cid, rng, duplicate=True)
+    elif kind == "employee_ok":
+        _employee(cid, rng, with_receipt=True)
+    else:
+        _employee(cid, rng, with_receipt=False)
+    return cid

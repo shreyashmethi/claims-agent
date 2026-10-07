@@ -2,7 +2,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 1,
-  "ts": "2026-10-06T23:08:08.371+00:00",
+  "ts": "2026-10-07T15:32:54.194+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> intake: unprocessed documents on the claim",
@@ -27,7 +27,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 2,
-  "ts": "2026-10-06T23:08:08.374+00:00",
+  "ts": "2026-10-07T15:32:54.196+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "list_claim_documents()",
@@ -38,12 +38,12 @@
   },
   "result_ref": "EV-001",
   "latency_ms": 0.2,
-  "result_preview": "[{\"doc_id\": \"CLM-4001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"uploaded_on\": \"2026-10-06T23:08:05+00:00\", \"processed\": false, \"kind\": null}, {\"doc_id\": \"CLM-4001-D02\", \"filename\": \"delivery_note.pdf\", \"round\":..."
+  "result_preview": "[{\"doc_id\": \"CLM-4001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"uploaded_on\": \"2026-10-07T15:32:52+00:00\", \"processed\": false, \"kind\": null}, {\"doc_id\": \"CLM-4001-D02\", \"filename\": \"delivery_note.pdf\", \"round\":..."
  },
  {
   "claim_id": "CLM-4001",
   "seq": 3,
-  "ts": "2026-10-06T23:08:08.376+00:00",
+  "ts": "2026-10-07T15:32:54.197+00:00",
   "agent": "intake",
   "type": "plan",
   "summary": "extract 3 new document(s)",
@@ -56,7 +56,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 4,
-  "ts": "2026-10-06T23:08:08.380+00:00",
+  "ts": "2026-10-07T15:32:54.200+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "read_document(doc_id=CLM-4001-D01)",
@@ -67,13 +67,13 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": "EV-002",
-  "latency_ms": 2.5,
-  "result_preview": "{\"doc_id\": \"CLM-4001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"sha\": \"0146696b03a0edce\", \"text\": \"Parts Replacement Claim\\nDOCUMENT: claim_form\\nClaim Type: parts replacement\\nClaimant ID: D-019\\nClaimant Name:..."
+  "latency_ms": 1.8,
+  "result_preview": "{\"doc_id\": \"CLM-4001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"sha\": \"788c76bbc616a98e\", \"text\": \"Parts Replacement Claim\\nDOCUMENT: claim_form\\nClaim Type: parts replacement\\nClaimant ID: D-019\\nClaimant Name:..."
  },
  {
   "claim_id": "CLM-4001",
   "seq": 5,
-  "ts": "2026-10-06T23:08:08.386+00:00",
+  "ts": "2026-10-07T15:32:54.204+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "read_document(doc_id=CLM-4001-D02)",
@@ -84,13 +84,13 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": "EV-003",
-  "latency_ms": 1.8,
-  "result_preview": "{\"doc_id\": \"CLM-4001-D02\", \"filename\": \"delivery_note.pdf\", \"round\": 0, \"sha\": \"06bae01855f5350b\", \"text\": \"Delivery Note DN-9840\\nDOCUMENT: delivery_note\\nDelivery Note No: DN-9840\\nDispatch ID: DSP-9840\\nDelivered O..."
+  "latency_ms": 1.5,
+  "result_preview": "{\"doc_id\": \"CLM-4001-D02\", \"filename\": \"delivery_note.pdf\", \"round\": 0, \"sha\": \"7fd2fae14ab2d823\", \"text\": \"Delivery Note DN-9840\\nDOCUMENT: delivery_note\\nDelivery Note No: DN-9840\\nDispatch ID: DSP-9840\\nDelivered O..."
  },
  {
   "claim_id": "CLM-4001",
   "seq": 6,
-  "ts": "2026-10-06T23:08:08.391+00:00",
+  "ts": "2026-10-07T15:32:54.208+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "read_document(doc_id=CLM-4001-D03)",
@@ -101,13 +101,13 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": "EV-004",
-  "latency_ms": 1.5,
-  "result_preview": "{\"doc_id\": \"CLM-4001-D03\", \"filename\": \"photo_label.pdf\", \"round\": 0, \"sha\": \"01725526173645fe\", \"text\": \"Photograph\\nDOCUMENT: photo\\nPhoto Of: part label\\nReading: SN-57\\n\", \"parsed\": {\"kind\": \"photo\", \"title\": \"Pho..."
+  "latency_ms": 1.1,
+  "result_preview": "{\"doc_id\": \"CLM-4001-D03\", \"filename\": \"photo_label.pdf\", \"round\": 0, \"sha\": \"7abfb14f9ef87b2d\", \"text\": \"Photograph\\nDOCUMENT: photo\\nPhoto Of: part label\\nReading: SN-57\\n\", \"parsed\": {\"kind\": \"photo\", \"title\": \"Pho..."
  },
  {
   "claim_id": "CLM-4001",
   "seq": 7,
-  "ts": "2026-10-06T23:08:08.396+00:00",
+  "ts": "2026-10-07T15:32:54.211+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "classify_claim()",
@@ -123,17 +123,17 @@
  {
   "claim_id": "CLM-4001",
   "seq": 8,
-  "ts": "2026-10-06T23:08:08.399+00:00",
+  "ts": "2026-10-07T15:32:54.214+00:00",
   "agent": "intake",
   "type": "reasoning",
   "summary": "classified as parts_replacement (0.97)",
   "evidence_id": "EV-005",
-  "rationale": "declared type corroborated by document signals {'warranty': 0, 'parts_replacement': 3, 'transit_damage': 0, 'dealer_reimbursement': 0, 'employee_reimbursement': 0}"
+  "rationale": "declared type corroborated by the document mix"
  },
  {
   "claim_id": "CLM-4001",
   "seq": 9,
-  "ts": "2026-10-06T23:08:08.402+00:00",
+  "ts": "2026-10-07T15:32:54.216+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "lookup_party(party_id=D-019)",
@@ -149,7 +149,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 10,
-  "ts": "2026-10-06T23:08:08.405+00:00",
+  "ts": "2026-10-07T15:32:54.218+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "RECEIVED -> CLASSIFIED (parts_replacement)",
@@ -159,7 +159,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 11,
-  "ts": "2026-10-06T23:08:08.408+00:00",
+  "ts": "2026-10-07T15:32:54.220+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> completeness: documents changed since the last completeness check",
@@ -184,7 +184,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 12,
-  "ts": "2026-10-06T23:08:08.411+00:00",
+  "ts": "2026-10-07T15:32:54.223+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "CLASSIFIED -> UNDER_REVIEW (completeness reviewing)",
@@ -194,7 +194,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 13,
-  "ts": "2026-10-06T23:08:08.412+00:00",
+  "ts": "2026-10-07T15:32:54.224+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "required_docs()",
@@ -204,13 +204,13 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": "EV-007",
-  "latency_ms": 0.2,
+  "latency_ms": 0.1,
   "result_preview": "{\"claim_type\": \"parts_replacement\", \"required\": [{\"kind\": \"claim_form\", \"label\": \"completed claim form\", \"rule\": \"base\"}, {\"kind\": \"delivery_note\", \"label\": \"delivery note / proof of delivery\", \"rule\": \"base\"}, {\"kind..."
  },
  {
   "claim_id": "CLM-4001",
   "seq": 14,
-  "ts": "2026-10-06T23:08:08.414+00:00",
+  "ts": "2026-10-07T15:32:54.225+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "check_doc_quality(doc_id=CLM-4001-D01)",
@@ -221,13 +221,13 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": "EV-008",
-  "latency_ms": 0.1,
+  "latency_ms": 0.2,
   "result_preview": "{\"doc_id\": \"CLM-4001-D01\", \"kind\": \"claim_form\", \"missing_fields\": [], \"ok\": true, \"line_items\": 0}"
  },
  {
   "claim_id": "CLM-4001",
   "seq": 15,
-  "ts": "2026-10-06T23:08:08.415+00:00",
+  "ts": "2026-10-07T15:32:54.226+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "check_doc_quality(doc_id=CLM-4001-D02)",
@@ -244,7 +244,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 16,
-  "ts": "2026-10-06T23:08:08.416+00:00",
+  "ts": "2026-10-07T15:32:54.227+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "check_doc_quality(doc_id=CLM-4001-D03)",
@@ -261,7 +261,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 17,
-  "ts": "2026-10-06T23:08:08.418+00:00",
+  "ts": "2026-10-07T15:32:54.228+00:00",
   "agent": "completeness",
   "type": "reasoning",
   "summary": "all required documents present",
@@ -270,7 +270,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 18,
-  "ts": "2026-10-06T23:08:08.427+00:00",
+  "ts": "2026-10-07T15:32:54.235+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> policy: eligibility not yet evaluated on current facts",
@@ -297,7 +297,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 19,
-  "ts": "2026-10-06T23:08:08.432+00:00",
+  "ts": "2026-10-07T15:32:54.238+00:00",
   "agent": "policy",
   "type": "tool_call",
   "summary": "rules_evaluate()",
@@ -307,13 +307,13 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": "EV-011",
-  "latency_ms": 1.3,
+  "latency_ms": 0.8,
   "result_preview": "{\"eligible\": true, \"with_exception\": false, \"results\": [{\"rule_id\": \"PRT-2.1\", \"clause\": \"Parts policy \\u00a72.1 Return window\", \"passed\": true, \"detail\": \"claimed 12 d after dispatch (limit 30)\", \"waivable\": false, \"..."
  },
  {
   "claim_id": "CLM-4001",
   "seq": 20,
-  "ts": "2026-10-06T23:08:08.434+00:00",
+  "ts": "2026-10-07T15:32:54.239+00:00",
   "agent": "policy",
   "type": "rule_fired",
   "summary": "PRT-2.1 PASS - claimed 12 d after dispatch (limit 30)",
@@ -326,7 +326,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 21,
-  "ts": "2026-10-06T23:08:08.435+00:00",
+  "ts": "2026-10-07T15:32:54.240+00:00",
   "agent": "policy",
   "type": "rule_fired",
   "summary": "PRT-3.1 PASS - ordered SN-75, warehouse packed SN-57, dealer received SN-57",
@@ -339,16 +339,16 @@
  {
   "claim_id": "CLM-4001",
   "seq": 22,
-  "ts": "2026-10-06T23:08:08.438+00:00",
+  "ts": "2026-10-07T15:32:54.243+00:00",
   "agent": "policy",
   "type": "reasoning",
-  "summary": "eligible=True exception=False blocking=[]",
+  "summary": "Eligible",
   "evidence_id": "EV-011"
  },
  {
   "claim_id": "CLM-4001",
   "seq": 23,
-  "ts": "2026-10-06T23:08:08.449+00:00",
+  "ts": "2026-10-07T15:32:54.247+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> investigation: claim not yet cross-checked against records on current facts",
@@ -374,7 +374,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 24,
-  "ts": "2026-10-06T23:08:08.457+00:00",
+  "ts": "2026-10-07T15:32:54.251+00:00",
   "agent": "investigation",
   "type": "plan",
   "summary": "checks for parts_replacement: dispatch_match, amount_vs_records",
@@ -386,7 +386,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 25,
-  "ts": "2026-10-06T23:08:08.461+00:00",
+  "ts": "2026-10-07T15:32:54.253+00:00",
   "agent": "investigation",
   "type": "tool_call",
   "summary": "run_check(check=dispatch_match)",
@@ -397,13 +397,13 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": "EV-012",
-  "latency_ms": 0.9,
+  "latency_ms": 0.5,
   "result_preview": "{\"check\": \"dispatch_match\", \"status\": \"pass\", \"detail\": \"warehouse scan, dealer report and photo agree a wrong part was sent\", \"data\": {\"ordered\": \"SN-75\", \"packed\": \"SN-57\", \"received_claimed\": \"SN-57\", \"photo_label\"..."
  },
  {
   "claim_id": "CLM-4001",
   "seq": 26,
-  "ts": "2026-10-06T23:08:08.463+00:00",
+  "ts": "2026-10-07T15:32:54.254+00:00",
   "agent": "investigation",
   "type": "tool_call",
   "summary": "run_check(check=amount_vs_records)",
@@ -414,13 +414,13 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": "EV-013",
-  "latency_ms": 0.5,
+  "latency_ms": 0.2,
   "result_preview": "{\"check\": \"amount_vs_records\", \"status\": \"pass\", \"detail\": \"catalog value 12400.0 vs claimed 12400.0\", \"data\": {\"catalog_value\": 12400.0, \"claimed\": 12400.0}, \"finding\": null}"
  },
  {
   "claim_id": "CLM-4001",
   "seq": 27,
-  "ts": "2026-10-06T23:08:08.465+00:00",
+  "ts": "2026-10-07T15:32:54.254+00:00",
   "agent": "investigation",
   "type": "reasoning",
   "summary": "2 checks; 0 open finding(s)",
@@ -432,7 +432,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 28,
-  "ts": "2026-10-06T23:08:08.473+00:00",
+  "ts": "2026-10-07T15:32:54.258+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> duplicate_pattern: duplicate and recurring-failure check not yet run on current facts",
@@ -457,7 +457,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 29,
-  "ts": "2026-10-06T23:08:08.480+00:00",
+  "ts": "2026-10-07T15:32:54.262+00:00",
   "agent": "duplicate_pattern",
   "type": "plan",
   "summary": "batch failure stats; claimant duplicate history; narrative similarity",
@@ -470,7 +470,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 30,
-  "ts": "2026-10-06T23:08:08.482+00:00",
+  "ts": "2026-10-07T15:32:54.264+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "failure_stats(part_no=SN-75, batch=None)",
@@ -487,7 +487,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 31,
-  "ts": "2026-10-06T23:08:08.484+00:00",
+  "ts": "2026-10-07T15:32:54.265+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "search_claims(claimant_id=D-019, outcome=rejected_duplicate)",
@@ -505,7 +505,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 32,
-  "ts": "2026-10-06T23:08:08.489+00:00",
+  "ts": "2026-10-07T15:32:54.267+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "similar_claims(k=3)",
@@ -516,13 +516,13 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": "EV-016",
-  "latency_ms": 2.3,
+  "latency_ms": 1.0,
   "result_preview": "[]"
  },
  {
   "claim_id": "CLM-4001",
   "seq": 33,
-  "ts": "2026-10-06T23:08:08.491+00:00",
+  "ts": "2026-10-07T15:32:54.267+00:00",
   "agent": "duplicate_pattern",
   "type": "reasoning",
   "summary": "no duplicate found"
@@ -530,7 +530,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 34,
-  "ts": "2026-10-06T23:08:08.498+00:00",
+  "ts": "2026-10-07T15:32:54.271+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> adjudication: eligibility, investigation and duplicate checks complete",
@@ -555,7 +555,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 35,
-  "ts": "2026-10-06T23:08:08.506+00:00",
+  "ts": "2026-10-07T15:32:54.275+00:00",
   "agent": "adjudication",
   "type": "tool_call",
   "summary": "get_precedents(claim_type=parts_replacement, finding_types=[])",
@@ -566,13 +566,13 @@
    "finding_types": []
   },
   "result_ref": "EV-017",
-  "latency_ms": 0.7,
+  "latency_ms": 0.1,
   "result_preview": "[]"
  },
  {
   "claim_id": "CLM-4001",
   "seq": 36,
-  "ts": "2026-10-06T23:08:08.509+00:00",
+  "ts": "2026-10-07T15:32:54.277+00:00",
   "agent": "adjudication",
   "type": "tool_call",
   "summary": "rules_calculate_settlement()",
@@ -582,13 +582,13 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": "EV-018",
-  "latency_ms": 0.7,
+  "latency_ms": 0.6,
   "result_preview": "{\"claimed_amount\": 12400.0, \"admissible_amount\": 12400.0, \"lines\": [{\"item\": \"Replace 4 x SN-75\", \"claimed\": 12400.0, \"admitted\": 12400.0, \"rule_id\": \"PRT-4.1\", \"note\": \"replacement at catalog value; no cash settlemen..."
  },
  {
   "claim_id": "CLM-4001",
   "seq": 37,
-  "ts": "2026-10-06T23:08:08.512+00:00",
+  "ts": "2026-10-07T15:32:54.278+00:00",
   "agent": "adjudication",
   "type": "recommendation",
   "summary": "APPROVE 12,400.00, confidence 0.95",
@@ -623,7 +623,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 38,
-  "ts": "2026-10-06T23:08:08.514+00:00",
+  "ts": "2026-10-07T15:32:54.280+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "UNDER_REVIEW -> RECOMMENDED (approve)",
@@ -633,7 +633,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 39,
-  "ts": "2026-10-06T23:08:08.518+00:00",
+  "ts": "2026-10-07T15:32:54.282+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> verifier: every recommendation is verified before approval routing",
@@ -654,7 +654,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 40,
-  "ts": "2026-10-06T23:08:08.521+00:00",
+  "ts": "2026-10-07T15:32:54.284+00:00",
   "agent": "verifier",
   "type": "verification",
   "summary": "passed",
@@ -664,7 +664,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 41,
-  "ts": "2026-10-06T23:08:08.525+00:00",
+  "ts": "2026-10-07T15:32:54.287+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> route_approval: verified recommendation; route per approval matrix",
@@ -685,7 +685,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 42,
-  "ts": "2026-10-06T23:08:08.529+00:00",
+  "ts": "2026-10-07T15:32:54.289+00:00",
   "agent": "system",
   "type": "approval_request",
   "summary": "APR-CLM-4001-1: claims_officer",
@@ -700,7 +700,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 43,
-  "ts": "2026-10-06T23:08:08.531+00:00",
+  "ts": "2026-10-07T15:32:54.291+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "RECOMMENDED -> PENDING_APPROVAL (awaiting claims_officer)",
@@ -710,7 +710,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 44,
-  "ts": "2026-10-06T23:08:08.542+00:00",
+  "ts": "2026-10-07T15:32:54.299+00:00",
   "agent": "auto:claims_officer",
   "type": "approval",
   "summary": "claims_officer: approved - auto-approved in demo",
@@ -721,7 +721,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 45,
-  "ts": "2026-10-06T23:08:08.545+00:00",
+  "ts": "2026-10-07T15:32:54.302+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "PENDING_APPROVAL -> APPROVED (final approve 12,400.00)",
@@ -731,7 +731,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 46,
-  "ts": "2026-10-06T23:08:08.546+00:00",
+  "ts": "2026-10-07T15:32:54.303+00:00",
   "agent": "system",
   "type": "approval",
   "summary": "approval complete: approve 12,400.00; 2 action(s) authorised",
@@ -748,7 +748,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 47,
-  "ts": "2026-10-06T23:08:08.549+00:00",
+  "ts": "2026-10-07T15:32:54.304+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> settlement: approvals complete (approve); execute approved actions",
@@ -769,7 +769,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 48,
-  "ts": "2026-10-06T23:08:08.555+00:00",
+  "ts": "2026-10-07T15:32:54.307+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "APPROVED -> SETTLING",
@@ -779,7 +779,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 49,
-  "ts": "2026-10-06T23:08:08.563+00:00",
+  "ts": "2026-10-07T15:32:54.310+00:00",
   "agent": "settlement",
   "type": "tool_call",
   "summary": "create_replacement_order(part_no=SN-75, qty=4, ship_to=D-019, value=12400.0, approval_token=APR-CLM-4001-1.****, idempotency_key=CLM-4001:APR-CLM-4001-1:0:replacement_order)",
@@ -795,25 +795,25 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": null,
-  "latency_ms": 1.3,
-  "result_preview": "{\"status\": \"executed\", \"ref\": \"RO-381E6223\", \"action\": \"replacement_order\", \"part_no\": \"SN-75\", \"qty\": 4, \"ship_to\": \"D-019\", \"value\": 12400.0, \"return_authorisation\": \"RMA-4001\"}"
+  "latency_ms": 0.9,
+  "result_preview": "{\"status\": \"executed\", \"ref\": \"RO-16FDDBD6\", \"action\": \"replacement_order\", \"part_no\": \"SN-75\", \"qty\": 4, \"ship_to\": \"D-019\", \"value\": 12400.0, \"return_authorisation\": \"RMA-4001\"}"
  },
  {
   "claim_id": "CLM-4001",
   "seq": 50,
-  "ts": "2026-10-06T23:08:08.565+00:00",
+  "ts": "2026-10-07T15:32:54.310+00:00",
   "agent": "settlement",
   "type": "action",
-  "summary": "replacement_order -> executed RO-381E6223",
+  "summary": "replacement_order -> executed RO-16FDDBD6",
   "action": "replacement_order",
   "status": "executed",
-  "ref": "RO-381E6223",
+  "ref": "RO-16FDDBD6",
   "error": null
  },
  {
   "claim_id": "CLM-4001",
   "seq": 51,
-  "ts": "2026-10-06T23:08:08.573+00:00",
+  "ts": "2026-10-07T15:32:54.314+00:00",
   "agent": "settlement",
   "type": "tool_call",
   "summary": "send_message(recipient=claims@d-019.dealer.example, subject=Decision on claim CLM-4001, body=Dear Vidarbha Equipment Co, Your claim CLM-4001 has been approved in full. Ap..., kind=decision_letter, approval_token=APR-CLM-4001-1.****, idempotency_key=CLM-4001:APR-CLM-4001-1:1:decision_letter)",
@@ -829,25 +829,25 @@
    "claim_id": "CLM-4001"
   },
   "result_ref": null,
-  "latency_ms": 2.0,
-  "result_preview": "{\"status\": \"executed\", \"ref\": \"MSG-5C0DE29A\", \"action\": \"message:decision_letter\", \"recipient\": \"claims@d-019.dealer.example\", \"subject\": \"Decision on claim CLM-4001\"}"
+  "latency_ms": 1.0,
+  "result_preview": "{\"status\": \"executed\", \"ref\": \"MSG-A1B61746\", \"action\": \"message:decision_letter\", \"recipient\": \"claims@d-019.dealer.example\", \"subject\": \"Decision on claim CLM-4001\"}"
  },
  {
   "claim_id": "CLM-4001",
   "seq": 52,
-  "ts": "2026-10-06T23:08:08.576+00:00",
+  "ts": "2026-10-07T15:32:54.315+00:00",
   "agent": "settlement",
   "type": "action",
-  "summary": "decision_letter -> executed MSG-5C0DE29A",
+  "summary": "decision_letter -> executed MSG-A1B61746",
   "action": "decision_letter",
   "status": "executed",
-  "ref": "MSG-5C0DE29A",
+  "ref": "MSG-A1B61746",
   "error": null
  },
  {
   "claim_id": "CLM-4001",
   "seq": 53,
-  "ts": "2026-10-06T23:08:08.579+00:00",
+  "ts": "2026-10-07T15:32:54.317+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "SETTLING -> SETTLED",
@@ -857,7 +857,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 54,
-  "ts": "2026-10-06T23:08:08.581+00:00",
+  "ts": "2026-10-07T15:32:54.318+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "SETTLED -> CLOSED",
@@ -867,7 +867,7 @@
  {
   "claim_id": "CLM-4001",
   "seq": 55,
-  "ts": "2026-10-06T23:08:08.584+00:00",
+  "ts": "2026-10-07T15:32:54.319+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> end: case is CLOSED",

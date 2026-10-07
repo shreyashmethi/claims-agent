@@ -120,3 +120,12 @@ def test_lifecycle_rejects_illegal_transition(fresh):
     from app.graph.lifecycle import IllegalTransition, transition
     with pytest.raises(IllegalTransition):
         transition("CLM-1001", "RECEIVED", "SETTLED")
+
+
+def test_approver_can_pay_on_a_rejection_recommendation(fresh):
+    s = drive("CLM-3001", approvals={"claims_manager": {"decision": "modified", "amount": 5000.0,
+                                                        "reason": "goodwill for the second visit"}})
+    assert s["approval"]["final"] == {"decision": "partial", "amount": 5000.0,
+                                      "approver_reason": "goodwill for the second visit"}
+    pay = [a for a in s["actions"] if a["action"] == "payment"]
+    assert pay and pay[0]["amount"] == 5000.0

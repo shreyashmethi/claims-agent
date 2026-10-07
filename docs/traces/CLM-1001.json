@@ -2,7 +2,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 1,
-  "ts": "2026-10-06T23:08:06.984+00:00",
+  "ts": "2026-10-07T15:32:53.485+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> intake: unprocessed documents on the claim",
@@ -27,7 +27,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 2,
-  "ts": "2026-10-06T23:08:06.992+00:00",
+  "ts": "2026-10-07T15:32:53.489+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "list_claim_documents()",
@@ -37,13 +37,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-001",
-  "latency_ms": 2.6,
-  "result_preview": "[{\"doc_id\": \"CLM-1001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"uploaded_on\": \"2026-10-06T23:08:05+00:00\", \"processed\": false, \"kind\": null}, {\"doc_id\": \"CLM-1001-D02\", \"filename\": \"invoice.pdf\", \"round\": 0, \"u..."
+  "latency_ms": 0.4,
+  "result_preview": "[{\"doc_id\": \"CLM-1001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"uploaded_on\": \"2026-10-07T15:32:52+00:00\", \"processed\": false, \"kind\": null}, {\"doc_id\": \"CLM-1001-D02\", \"filename\": \"invoice.pdf\", \"round\": 0, \"u..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 3,
-  "ts": "2026-10-06T23:08:06.995+00:00",
+  "ts": "2026-10-07T15:32:53.490+00:00",
   "agent": "intake",
   "type": "plan",
   "summary": "extract 4 new document(s)",
@@ -57,7 +57,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 4,
-  "ts": "2026-10-06T23:08:07.002+00:00",
+  "ts": "2026-10-07T15:32:53.494+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "read_document(doc_id=CLM-1001-D01)",
@@ -68,13 +68,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-002",
-  "latency_ms": 5.4,
-  "result_preview": "{\"doc_id\": \"CLM-1001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"sha\": \"7657ebce66709585\", \"text\": \"Warranty Claim Form\\nDOCUMENT: claim_form\\nClaim Type: warranty\\nClaimant ID: D-014\\nClaimant Name: Sahyadri Ear..."
+  "latency_ms": 3.2,
+  "result_preview": "{\"doc_id\": \"CLM-1001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"sha\": \"0187c8c79512ba14\", \"text\": \"Warranty Claim Form\\nDOCUMENT: claim_form\\nClaim Type: warranty\\nClaimant ID: D-014\\nClaimant Name: Sahyadri Ear..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 5,
-  "ts": "2026-10-06T23:08:07.010+00:00",
+  "ts": "2026-10-07T15:32:53.499+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "read_document(doc_id=CLM-1001-D02)",
@@ -85,13 +85,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-003",
-  "latency_ms": 2.7,
-  "result_preview": "{\"doc_id\": \"CLM-1001-D02\", \"filename\": \"invoice.pdf\", \"round\": 0, \"sha\": \"59e64b529efe9e6f\", \"text\": \"Dealer Invoice D014-INV-3381\\nDOCUMENT: invoice\\nInvoice No: D014-INV-3381\\nDate: 2026-09-22\\nDealer: D-014\\nTotal:..."
+  "latency_ms": 1.8,
+  "result_preview": "{\"doc_id\": \"CLM-1001-D02\", \"filename\": \"invoice.pdf\", \"round\": 0, \"sha\": \"860f5dd7a86c884d\", \"text\": \"Dealer Invoice D014-INV-3381\\nDOCUMENT: invoice\\nInvoice No: D014-INV-3381\\nDate: 2026-09-22\\nDealer: D-014\\nTotal:..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 6,
-  "ts": "2026-10-06T23:08:07.016+00:00",
+  "ts": "2026-10-07T15:32:53.503+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "read_document(doc_id=CLM-1001-D03)",
@@ -102,13 +102,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-004",
-  "latency_ms": 2.3,
-  "result_preview": "{\"doc_id\": \"CLM-1001-D03\", \"filename\": \"job_card.pdf\", \"round\": 0, \"sha\": \"1f39a16ea736b9e8\", \"text\": \"Dealer Job Card\\nDOCUMENT: job_card\\nJob Card No: JC-14-2231-0922\\nSerial: EX-2231\\nDate: 2026-09-22\\nJob Code: HY..."
+  "latency_ms": 1.6,
+  "result_preview": "{\"doc_id\": \"CLM-1001-D03\", \"filename\": \"job_card.pdf\", \"round\": 0, \"sha\": \"819b24c788cb3f1f\", \"text\": \"Dealer Job Card\\nDOCUMENT: job_card\\nJob Card No: JC-14-2231-0922\\nSerial: EX-2231\\nDate: 2026-09-22\\nJob Code: HY..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 7,
-  "ts": "2026-10-06T23:08:07.021+00:00",
+  "ts": "2026-10-07T15:32:53.507+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "read_document(doc_id=CLM-1001-D04)",
@@ -119,13 +119,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-005",
-  "latency_ms": 1.5,
-  "result_preview": "{\"doc_id\": \"CLM-1001-D04\", \"filename\": \"photo_pump.pdf\", \"round\": 0, \"sha\": \"88aafff68dcffec1\", \"text\": \"Photograph\\nDOCUMENT: photo\\nPhoto Of: failed pump, leak at shaft seal\\n\", \"parsed\": {\"kind\": \"photo\", \"title\": ..."
+  "latency_ms": 1.3,
+  "result_preview": "{\"doc_id\": \"CLM-1001-D04\", \"filename\": \"photo_pump.pdf\", \"round\": 0, \"sha\": \"5cbfbadd3da74cd6\", \"text\": \"Photograph\\nDOCUMENT: photo\\nPhoto Of: failed pump, leak at shaft seal\\n\", \"parsed\": {\"kind\": \"photo\", \"title\": ..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 8,
-  "ts": "2026-10-06T23:08:07.026+00:00",
+  "ts": "2026-10-07T15:32:53.511+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "classify_claim()",
@@ -135,23 +135,23 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-006",
-  "latency_ms": 0.2,
+  "latency_ms": 0.1,
   "result_preview": "{\"type\": \"warranty\", \"confidence\": 0.97, \"declared\": \"warranty\", \"signal_votes\": {\"warranty\": 3, \"parts_replacement\": 0, \"transit_damage\": 0, \"dealer_reimbursement\": 0, \"employee_reimbursement\": 0}}"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 9,
-  "ts": "2026-10-06T23:08:07.030+00:00",
+  "ts": "2026-10-07T15:32:53.513+00:00",
   "agent": "intake",
   "type": "reasoning",
   "summary": "classified as warranty (0.97)",
   "evidence_id": "EV-006",
-  "rationale": "declared type corroborated by document signals {'warranty': 3, 'parts_replacement': 0, 'transit_damage': 0, 'dealer_reimbursement': 0, 'employee_reimbursement': 0}"
+  "rationale": "declared type corroborated by the document mix"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 10,
-  "ts": "2026-10-06T23:08:07.034+00:00",
+  "ts": "2026-10-07T15:32:53.515+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "lookup_party(party_id=D-014)",
@@ -161,13 +161,13 @@
    "party_id": "D-014"
   },
   "result_ref": "EV-007",
-  "latency_ms": 0.2,
+  "latency_ms": 0.1,
   "result_preview": "{\"party_type\": \"dealer\", \"dealer_id\": \"D-014\", \"name\": \"Sahyadri Earthmovers\", \"region\": \"West\", \"tier\": \"B\", \"authorised_services\": [\"repair\", \"scheduled_service\", \"field_service\"], \"email\": \"claims@d-014.dealer.exam..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 11,
-  "ts": "2026-10-06T23:08:07.036+00:00",
+  "ts": "2026-10-07T15:32:53.516+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "lookup_equipment(serial=EX-2231)",
@@ -177,13 +177,13 @@
    "serial": "EX-2231"
   },
   "result_ref": "EV-008",
-  "latency_ms": 0.2,
+  "latency_ms": 0.1,
   "result_preview": "{\"serial\": \"EX-2231\", \"model\": \"EX-210 Excavator\", \"category\": \"excavator\", \"sale_date\": \"2025-08-01\", \"owner\": \"C-322\", \"dealer_id\": \"D-014\"}"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 12,
-  "ts": "2026-10-06T23:08:07.038+00:00",
+  "ts": "2026-10-07T15:32:53.517+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "search_claims(invoice_no=D014-INV-3381)",
@@ -194,13 +194,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-009",
-  "latency_ms": 0.3,
+  "latency_ms": 0.2,
   "result_preview": "[]"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 13,
-  "ts": "2026-10-06T23:08:07.042+00:00",
+  "ts": "2026-10-07T15:32:53.518+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "RECEIVED -> CLASSIFIED (warranty)",
@@ -210,7 +210,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 14,
-  "ts": "2026-10-06T23:08:07.045+00:00",
+  "ts": "2026-10-07T15:32:53.520+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> completeness: documents changed since the last completeness check",
@@ -235,7 +235,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 15,
-  "ts": "2026-10-06T23:08:07.052+00:00",
+  "ts": "2026-10-07T15:32:53.523+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "CLASSIFIED -> UNDER_REVIEW (completeness reviewing)",
@@ -245,7 +245,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 16,
-  "ts": "2026-10-06T23:08:07.063+00:00",
+  "ts": "2026-10-07T15:32:53.528+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "required_docs()",
@@ -255,13 +255,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-010",
-  "latency_ms": 8.1,
+  "latency_ms": 3.5,
   "result_preview": "{\"claim_type\": \"warranty\", \"required\": [{\"kind\": \"claim_form\", \"label\": \"completed claim form\", \"rule\": \"base\"}, {\"kind\": \"invoice\", \"label\": \"invoice\", \"rule\": \"base\"}, {\"kind\": \"job_card\", \"label\": \"dealer job card\"..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 17,
-  "ts": "2026-10-06T23:08:07.066+00:00",
+  "ts": "2026-10-07T15:32:53.529+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "check_doc_quality(doc_id=CLM-1001-D01)",
@@ -272,13 +272,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-011",
-  "latency_ms": 0.3,
+  "latency_ms": 0.1,
   "result_preview": "{\"doc_id\": \"CLM-1001-D01\", \"kind\": \"claim_form\", \"missing_fields\": [], \"ok\": true, \"line_items\": 0}"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 18,
-  "ts": "2026-10-06T23:08:07.068+00:00",
+  "ts": "2026-10-07T15:32:53.530+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "check_doc_quality(doc_id=CLM-1001-D02)",
@@ -289,13 +289,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-012",
-  "latency_ms": 0.2,
+  "latency_ms": 0.1,
   "result_preview": "{\"doc_id\": \"CLM-1001-D02\", \"kind\": \"invoice\", \"missing_fields\": [], \"ok\": true, \"line_items\": 2}"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 19,
-  "ts": "2026-10-06T23:08:07.071+00:00",
+  "ts": "2026-10-07T15:32:53.531+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "check_doc_quality(doc_id=CLM-1001-D03)",
@@ -306,13 +306,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-013",
-  "latency_ms": 0.2,
+  "latency_ms": 0.1,
   "result_preview": "{\"doc_id\": \"CLM-1001-D03\", \"kind\": \"job_card\", \"missing_fields\": [], \"ok\": true, \"line_items\": 0}"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 20,
-  "ts": "2026-10-06T23:08:07.073+00:00",
+  "ts": "2026-10-07T15:32:53.532+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "check_doc_quality(doc_id=CLM-1001-D04)",
@@ -323,13 +323,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-014",
-  "latency_ms": 0.2,
+  "latency_ms": 0.1,
   "result_preview": "{\"doc_id\": \"CLM-1001-D04\", \"kind\": \"photo\", \"missing_fields\": [], \"ok\": true, \"line_items\": 0}"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 21,
-  "ts": "2026-10-06T23:08:07.075+00:00",
+  "ts": "2026-10-07T15:32:53.533+00:00",
   "agent": "completeness",
   "type": "reasoning",
   "summary": "all required documents present",
@@ -338,7 +338,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 22,
-  "ts": "2026-10-06T23:08:07.082+00:00",
+  "ts": "2026-10-07T15:32:53.537+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> policy: eligibility not yet evaluated on current facts",
@@ -365,7 +365,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 23,
-  "ts": "2026-10-06T23:08:07.088+00:00",
+  "ts": "2026-10-07T15:32:53.540+00:00",
   "agent": "policy",
   "type": "tool_call",
   "summary": "rules_evaluate()",
@@ -375,13 +375,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-015",
-  "latency_ms": 1.8,
+  "latency_ms": 1.1,
   "result_preview": "{\"eligible\": true, \"with_exception\": false, \"results\": [{\"rule_id\": \"WAR-2.1\", \"clause\": \"Warranty policy \\u00a72.1 Coverage period\", \"passed\": true, \"detail\": \"failure 2026-09-21 vs coverage 2025-08-01..2027-08-01\", ..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 24,
-  "ts": "2026-10-06T23:08:07.090+00:00",
+  "ts": "2026-10-07T15:32:53.541+00:00",
   "agent": "policy",
   "type": "rule_fired",
   "summary": "WAR-2.1 PASS - failure 2026-09-21 vs coverage 2025-08-01..2027-08-01",
@@ -394,7 +394,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 25,
-  "ts": "2026-10-06T23:08:07.093+00:00",
+  "ts": "2026-10-07T15:32:53.542+00:00",
   "agent": "policy",
   "type": "rule_fired",
   "summary": "WAR-2.2 PASS - 2100 h vs cap 3000 h",
@@ -407,7 +407,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 26,
-  "ts": "2026-10-06T23:08:07.096+00:00",
+  "ts": "2026-10-07T15:32:53.542+00:00",
   "agent": "policy",
   "type": "rule_fired",
   "summary": "WAR-3.1 PASS - HP-450 group 'hydraulics' covered=True",
@@ -420,7 +420,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 27,
-  "ts": "2026-10-06T23:08:07.099+00:00",
+  "ts": "2026-10-07T15:32:53.543+00:00",
   "agent": "policy",
   "type": "rule_fired",
   "summary": "WAR-2.4 PASS - reported 12 d after failure (limit 30)",
@@ -433,7 +433,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 28,
-  "ts": "2026-10-06T23:08:07.100+00:00",
+  "ts": "2026-10-07T15:32:53.544+00:00",
   "agent": "policy",
   "type": "rule_fired",
   "summary": "WAR-5.2 PASS - job card confirms failed part returned",
@@ -446,16 +446,16 @@
  {
   "claim_id": "CLM-1001",
   "seq": 29,
-  "ts": "2026-10-06T23:08:07.105+00:00",
+  "ts": "2026-10-07T15:32:53.546+00:00",
   "agent": "policy",
   "type": "reasoning",
-  "summary": "eligible=True exception=False blocking=[]",
+  "summary": "Eligible",
   "evidence_id": "EV-015"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 30,
-  "ts": "2026-10-06T23:08:07.112+00:00",
+  "ts": "2026-10-07T15:32:53.550+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> investigation: claim not yet cross-checked against records on current facts",
@@ -481,7 +481,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 31,
-  "ts": "2026-10-06T23:08:07.120+00:00",
+  "ts": "2026-10-07T15:32:53.554+00:00",
   "agent": "investigation",
   "type": "plan",
   "summary": "checks for warranty: coverage, labour_vs_standard, amount_vs_records, serial_consistency, service_timeline, prior_repairs",
@@ -497,7 +497,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 32,
-  "ts": "2026-10-06T23:08:07.123+00:00",
+  "ts": "2026-10-07T15:32:53.556+00:00",
   "agent": "investigation",
   "type": "tool_call",
   "summary": "run_check(check=coverage)",
@@ -508,13 +508,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-016",
-  "latency_ms": 0.9,
+  "latency_ms": 0.4,
   "result_preview": "{\"check\": \"coverage\", \"status\": \"pass\", \"detail\": \"in period=True, within hours=True, component covered=True\", \"data\": {\"period\": \"2025-08-01..2027-08-01\", \"failure_date\": \"2026-09-21\", \"hours\": 2100.0, \"hours_cap\": 3..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 33,
-  "ts": "2026-10-06T23:08:07.125+00:00",
+  "ts": "2026-10-07T15:32:53.557+00:00",
   "agent": "investigation",
   "type": "tool_call",
   "summary": "run_check(check=labour_vs_standard)",
@@ -525,13 +525,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-017",
-  "latency_ms": 0.4,
+  "latency_ms": 0.3,
   "result_preview": "{\"check\": \"labour_vs_standard\", \"status\": \"fail\", \"detail\": \"8 h claimed vs 6 h standard\", \"data\": {\"job_code\": \"HYD-PUMP-R\", \"claimed_hours\": 8.0, \"standard_hours\": 6}, \"finding\": {\"type\": \"labour_over_standard\", \"se..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 34,
-  "ts": "2026-10-06T23:08:07.127+00:00",
+  "ts": "2026-10-07T15:32:53.558+00:00",
   "agent": "investigation",
   "type": "finding",
   "summary": "[medium] Labour 8 h exceeds the 6 h standard for HYD-PUMP-R. (resolved)",
@@ -543,7 +543,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 35,
-  "ts": "2026-10-06T23:08:07.129+00:00",
+  "ts": "2026-10-07T15:32:53.559+00:00",
   "agent": "investigation",
   "type": "tool_call",
   "summary": "run_check(check=amount_vs_records)",
@@ -554,13 +554,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-018",
-  "latency_ms": 0.5,
+  "latency_ms": 0.3,
   "result_preview": "{\"check\": \"amount_vs_records\", \"status\": \"pass\", \"detail\": \"invoice, lines and claimed amount agree\", \"data\": {\"claimed\": 24200.0, \"invoice_total\": 24200.0, \"lines\": [{\"description\": \"Hydraulic pilot pump\", \"code\": \"P..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 36,
-  "ts": "2026-10-06T23:08:07.131+00:00",
+  "ts": "2026-10-07T15:32:53.561+00:00",
   "agent": "investigation",
   "type": "tool_call",
   "summary": "run_check(check=serial_consistency)",
@@ -571,13 +571,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-019",
-  "latency_ms": 0.4,
+  "latency_ms": 0.3,
   "result_preview": "{\"check\": \"serial_consistency\", \"status\": \"pass\", \"detail\": \"all 3 sources agree on EX-2231\", \"data\": {\"claim_form\": \"EX-2231\", \"job_card\": \"EX-2231\", \"equipment_registry\": \"EX-2231\"}, \"finding\": null}"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 37,
-  "ts": "2026-10-06T23:08:07.133+00:00",
+  "ts": "2026-10-07T15:32:53.562+00:00",
   "agent": "investigation",
   "type": "tool_call",
   "summary": "run_check(check=service_timeline)",
@@ -588,13 +588,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-020",
-  "latency_ms": 0.6,
+  "latency_ms": 0.4,
   "result_preview": "{\"check\": \"service_timeline\", \"status\": \"pass\", \"detail\": \"service record found for 2026-09-22\", \"data\": {\"work_date\": \"2026-09-22\", \"matching_records\": [{\"record_id\": \"SR-EX-2231-R1\", \"serial\": \"EX-2231\", \"date\": \"20..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 38,
-  "ts": "2026-10-06T23:08:07.135+00:00",
+  "ts": "2026-10-07T15:32:53.563+00:00",
   "agent": "investigation",
   "type": "tool_call",
   "summary": "run_check(check=prior_repairs)",
@@ -605,13 +605,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-021",
-  "latency_ms": 0.6,
+  "latency_ms": 0.4,
   "result_preview": "{\"check\": \"prior_repairs\", \"status\": \"pass\", \"detail\": \"no earlier repair of this kind\", \"data\": {\"prior_same_job\": []}, \"finding\": null}"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 39,
-  "ts": "2026-10-06T23:08:07.136+00:00",
+  "ts": "2026-10-07T15:32:53.564+00:00",
   "agent": "investigation",
   "type": "reasoning",
   "summary": "6 checks; 0 open finding(s)",
@@ -627,7 +627,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 40,
-  "ts": "2026-10-06T23:08:07.142+00:00",
+  "ts": "2026-10-07T15:32:53.568+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> duplicate_pattern: duplicate and recurring-failure check not yet run on current facts",
@@ -652,7 +652,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 41,
-  "ts": "2026-10-06T23:08:07.150+00:00",
+  "ts": "2026-10-07T15:32:53.572+00:00",
   "agent": "duplicate_pattern",
   "type": "plan",
   "summary": "invoice reuse; unit repeat history; batch failure stats; claimant duplicate history; narrative similarity",
@@ -667,7 +667,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 42,
-  "ts": "2026-10-06T23:08:07.153+00:00",
+  "ts": "2026-10-07T15:32:53.573+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "search_claims(invoice_no=D014-INV-3381)",
@@ -678,13 +678,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-022",
-  "latency_ms": 0.4,
+  "latency_ms": 0.2,
   "result_preview": "[]"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 43,
-  "ts": "2026-10-06T23:08:07.155+00:00",
+  "ts": "2026-10-07T15:32:53.574+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "search_claims(serial=EX-2231, part_no=HP-450)",
@@ -702,7 +702,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 44,
-  "ts": "2026-10-06T23:08:07.157+00:00",
+  "ts": "2026-10-07T15:32:53.575+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "failure_stats(part_no=HP-450, batch=HP-B-2025-07)",
@@ -719,7 +719,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 45,
-  "ts": "2026-10-06T23:08:07.161+00:00",
+  "ts": "2026-10-07T15:32:53.576+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "search_claims(claimant_id=D-014, outcome=rejected_duplicate)",
@@ -731,13 +731,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-025",
-  "latency_ms": 0.3,
+  "latency_ms": 0.1,
   "result_preview": "[]"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 46,
-  "ts": "2026-10-06T23:08:07.165+00:00",
+  "ts": "2026-10-07T15:32:53.579+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "similar_claims(k=3)",
@@ -748,13 +748,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-026",
-  "latency_ms": 2.1,
+  "latency_ms": 1.4,
   "result_preview": "[{\"claim_id\": \"CLM-H-0109\", \"claimant_id\": \"D-008\", \"serial\": \"EX-2240\", \"invoice_no\": \"D008-INV-3334\", \"amount\": 15200.0, \"submitted_on\": \"2026-04-28\", \"outcome\": \"partially_settled\", \"narrative\": \"Hydraulic pilot pu..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 47,
-  "ts": "2026-10-06T23:08:07.167+00:00",
+  "ts": "2026-10-07T15:32:53.579+00:00",
   "agent": "duplicate_pattern",
   "type": "reasoning",
   "summary": "no duplicate found"
@@ -762,7 +762,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 48,
-  "ts": "2026-10-06T23:08:07.175+00:00",
+  "ts": "2026-10-07T15:32:53.583+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> adjudication: eligibility, investigation and duplicate checks complete",
@@ -787,7 +787,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 49,
-  "ts": "2026-10-06T23:08:07.182+00:00",
+  "ts": "2026-10-07T15:32:53.587+00:00",
   "agent": "adjudication",
   "type": "tool_call",
   "summary": "get_precedents(claim_type=warranty, finding_types=['labour_over_standard'])",
@@ -800,13 +800,13 @@
    ]
   },
   "result_ref": "EV-027",
-  "latency_ms": 0.3,
+  "latency_ms": 0.2,
   "result_preview": "[]"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 50,
-  "ts": "2026-10-06T23:08:07.186+00:00",
+  "ts": "2026-10-07T15:32:53.590+00:00",
   "agent": "adjudication",
   "type": "tool_call",
   "summary": "rules_calculate_settlement()",
@@ -816,13 +816,13 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": "EV-028",
-  "latency_ms": 1.7,
+  "latency_ms": 0.6,
   "result_preview": "{\"claimed_amount\": 24200.0, \"admissible_amount\": 20600.0, \"lines\": [{\"item\": \"Hydraulic pilot pump\", \"claimed\": 9800.0, \"admitted\": 9800.0, \"rule_id\": \"WAR-6.1\", \"note\": \"catalog price 9800.0\"}, {\"item\": \"Labour\", \"cl..."
  },
  {
   "claim_id": "CLM-1001",
   "seq": 51,
-  "ts": "2026-10-06T23:08:07.188+00:00",
+  "ts": "2026-10-07T15:32:53.591+00:00",
   "agent": "adjudication",
   "type": "recommendation",
   "summary": "PARTIAL 20,600.00, confidence 0.95",
@@ -867,7 +867,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 52,
-  "ts": "2026-10-06T23:08:07.192+00:00",
+  "ts": "2026-10-07T15:32:53.592+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "UNDER_REVIEW -> RECOMMENDED (partial)",
@@ -877,7 +877,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 53,
-  "ts": "2026-10-06T23:08:07.196+00:00",
+  "ts": "2026-10-07T15:32:53.594+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> verifier: every recommendation is verified before approval routing",
@@ -898,7 +898,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 54,
-  "ts": "2026-10-06T23:08:07.199+00:00",
+  "ts": "2026-10-07T15:32:53.596+00:00",
   "agent": "verifier",
   "type": "verification",
   "summary": "passed",
@@ -908,7 +908,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 55,
-  "ts": "2026-10-06T23:08:07.202+00:00",
+  "ts": "2026-10-07T15:32:53.599+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> route_approval: verified recommendation; route per approval matrix",
@@ -929,7 +929,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 56,
-  "ts": "2026-10-06T23:08:07.207+00:00",
+  "ts": "2026-10-07T15:32:53.602+00:00",
   "agent": "system",
   "type": "approval_request",
   "summary": "APR-CLM-1001-1: claims_officer",
@@ -944,7 +944,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 57,
-  "ts": "2026-10-06T23:08:07.210+00:00",
+  "ts": "2026-10-07T15:32:53.603+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "RECOMMENDED -> PENDING_APPROVAL (awaiting claims_officer)",
@@ -954,7 +954,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 58,
-  "ts": "2026-10-06T23:08:07.224+00:00",
+  "ts": "2026-10-07T15:32:53.612+00:00",
   "agent": "auto:claims_officer",
   "type": "approval",
   "summary": "claims_officer: approved - auto-approved in demo",
@@ -965,7 +965,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 59,
-  "ts": "2026-10-06T23:08:07.229+00:00",
+  "ts": "2026-10-07T15:32:53.616+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "PENDING_APPROVAL -> PARTIALLY_APPROVED (final partial 20,600.00)",
@@ -975,7 +975,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 60,
-  "ts": "2026-10-06T23:08:07.230+00:00",
+  "ts": "2026-10-07T15:32:53.617+00:00",
   "agent": "system",
   "type": "approval",
   "summary": "approval complete: partial 20,600.00; 2 action(s) authorised",
@@ -992,7 +992,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 61,
-  "ts": "2026-10-06T23:08:07.234+00:00",
+  "ts": "2026-10-07T15:32:53.619+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> settlement: approvals complete (partial); execute approved actions",
@@ -1013,7 +1013,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 62,
-  "ts": "2026-10-06T23:08:07.239+00:00",
+  "ts": "2026-10-07T15:32:53.622+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "PARTIALLY_APPROVED -> SETTLING",
@@ -1023,7 +1023,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 63,
-  "ts": "2026-10-06T23:08:07.243+00:00",
+  "ts": "2026-10-07T15:32:53.624+00:00",
   "agent": "settlement",
   "type": "tool_call",
   "summary": "issue_credit_note(dealer_id=D-014, amount=20600.0, approval_token=APR-CLM-1001-1.****, idempotency_key=CLM-1001:APR-CLM-1001-1:0:credit_note)",
@@ -1037,25 +1037,25 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": null,
-  "latency_ms": 1.8,
-  "result_preview": "{\"status\": \"executed\", \"ref\": \"CN-48D21DA5\", \"action\": \"credit_note\", \"dealer_id\": \"D-014\", \"amount\": 20600.0}"
+  "latency_ms": 1.0,
+  "result_preview": "{\"status\": \"executed\", \"ref\": \"CN-E7175C95\", \"action\": \"credit_note\", \"dealer_id\": \"D-014\", \"amount\": 20600.0}"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 64,
-  "ts": "2026-10-06T23:08:07.246+00:00",
+  "ts": "2026-10-07T15:32:53.625+00:00",
   "agent": "settlement",
   "type": "action",
-  "summary": "credit_note -> executed CN-48D21DA5",
+  "summary": "credit_note -> executed CN-E7175C95",
   "action": "credit_note",
   "status": "executed",
-  "ref": "CN-48D21DA5",
+  "ref": "CN-E7175C95",
   "error": null
  },
  {
   "claim_id": "CLM-1001",
   "seq": 65,
-  "ts": "2026-10-06T23:08:07.256+00:00",
+  "ts": "2026-10-07T15:32:53.630+00:00",
   "agent": "settlement",
   "type": "tool_call",
   "summary": "send_message(recipient=claims@d-014.dealer.example, subject=Decision on claim CLM-1001, body=Dear Sahyadri Earthmovers, Your claim CLM-1001 has been approved in part. App..., kind=decision_letter, approval_token=APR-CLM-1001-1.****, idempotency_key=CLM-1001:APR-CLM-1001-1:1:decision_letter)",
@@ -1071,25 +1071,25 @@
    "claim_id": "CLM-1001"
   },
   "result_ref": null,
-  "latency_ms": 3.2,
-  "result_preview": "{\"status\": \"executed\", \"ref\": \"MSG-3CCA3D66\", \"action\": \"message:decision_letter\", \"recipient\": \"claims@d-014.dealer.example\", \"subject\": \"Decision on claim CLM-1001\"}"
+  "latency_ms": 1.6,
+  "result_preview": "{\"status\": \"executed\", \"ref\": \"MSG-CB85DE09\", \"action\": \"message:decision_letter\", \"recipient\": \"claims@d-014.dealer.example\", \"subject\": \"Decision on claim CLM-1001\"}"
  },
  {
   "claim_id": "CLM-1001",
   "seq": 66,
-  "ts": "2026-10-06T23:08:07.258+00:00",
+  "ts": "2026-10-07T15:32:53.631+00:00",
   "agent": "settlement",
   "type": "action",
-  "summary": "decision_letter -> executed MSG-3CCA3D66",
+  "summary": "decision_letter -> executed MSG-CB85DE09",
   "action": "decision_letter",
   "status": "executed",
-  "ref": "MSG-3CCA3D66",
+  "ref": "MSG-CB85DE09",
   "error": null
  },
  {
   "claim_id": "CLM-1001",
   "seq": 67,
-  "ts": "2026-10-06T23:08:07.262+00:00",
+  "ts": "2026-10-07T15:32:53.633+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "SETTLING -> SETTLED",
@@ -1099,7 +1099,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 68,
-  "ts": "2026-10-06T23:08:07.264+00:00",
+  "ts": "2026-10-07T15:32:53.634+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "SETTLED -> CLOSED",
@@ -1109,7 +1109,7 @@
  {
   "claim_id": "CLM-1001",
   "seq": 69,
-  "ts": "2026-10-06T23:08:07.267+00:00",
+  "ts": "2026-10-07T15:32:53.636+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> end: case is CLOSED",

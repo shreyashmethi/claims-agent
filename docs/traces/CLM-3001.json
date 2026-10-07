@@ -2,7 +2,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 1,
-  "ts": "2026-10-06T23:08:07.793+00:00",
+  "ts": "2026-10-07T15:32:53.935+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> intake: unprocessed documents on the claim",
@@ -27,7 +27,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 2,
-  "ts": "2026-10-06T23:08:07.800+00:00",
+  "ts": "2026-10-07T15:32:53.937+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "list_claim_documents()",
@@ -37,13 +37,13 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": "EV-001",
-  "latency_ms": 0.4,
-  "result_preview": "[{\"doc_id\": \"CLM-3001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"uploaded_on\": \"2026-10-06T23:08:05+00:00\", \"processed\": false, \"kind\": null}, {\"doc_id\": \"CLM-3001-D02\", \"filename\": \"invoice.pdf\", \"round\": 0, \"u..."
+  "latency_ms": 0.1,
+  "result_preview": "[{\"doc_id\": \"CLM-3001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"uploaded_on\": \"2026-10-07T15:32:52+00:00\", \"processed\": false, \"kind\": null}, {\"doc_id\": \"CLM-3001-D02\", \"filename\": \"invoice.pdf\", \"round\": 0, \"u..."
  },
  {
   "claim_id": "CLM-3001",
   "seq": 3,
-  "ts": "2026-10-06T23:08:07.802+00:00",
+  "ts": "2026-10-07T15:32:53.938+00:00",
   "agent": "intake",
   "type": "plan",
   "summary": "extract 3 new document(s)",
@@ -56,7 +56,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 4,
-  "ts": "2026-10-06T23:08:07.809+00:00",
+  "ts": "2026-10-07T15:32:53.941+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "read_document(doc_id=CLM-3001-D01)",
@@ -67,13 +67,13 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": "EV-002",
-  "latency_ms": 4.5,
-  "result_preview": "{\"doc_id\": \"CLM-3001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"sha\": \"7a43d86d8af2f830\", \"text\": \"Dealer Reimbursement Claim\\nDOCUMENT: claim_form\\nClaim Type: dealer reimbursement\\nClaimant ID: D-027\\nClaimant..."
+  "latency_ms": 2.2,
+  "result_preview": "{\"doc_id\": \"CLM-3001-D01\", \"filename\": \"claim_form.pdf\", \"round\": 0, \"sha\": \"0eac9770823f0891\", \"text\": \"Dealer Reimbursement Claim\\nDOCUMENT: claim_form\\nClaim Type: dealer reimbursement\\nClaimant ID: D-027\\nClaimant..."
  },
  {
   "claim_id": "CLM-3001",
   "seq": 5,
-  "ts": "2026-10-06T23:08:07.821+00:00",
+  "ts": "2026-10-07T15:32:53.946+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "read_document(doc_id=CLM-3001-D02)",
@@ -84,13 +84,13 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": "EV-003",
-  "latency_ms": 4.6,
-  "result_preview": "{\"doc_id\": \"CLM-3001-D02\", \"filename\": \"invoice.pdf\", \"round\": 0, \"sha\": \"fdc21175d0297967\", \"text\": \"Dealer Invoice DLR-INV-5512\\nDOCUMENT: invoice\\nInvoice No: DLR-INV-5512\\nDate: 2026-09-30\\nDealer: D-027\\nTotal: 1..."
+  "latency_ms": 1.7,
+  "result_preview": "{\"doc_id\": \"CLM-3001-D02\", \"filename\": \"invoice.pdf\", \"round\": 0, \"sha\": \"4c6fcbdff8861124\", \"text\": \"Dealer Invoice DLR-INV-5512\\nDOCUMENT: invoice\\nInvoice No: DLR-INV-5512\\nDate: 2026-09-30\\nDealer: D-027\\nTotal: 1..."
  },
  {
   "claim_id": "CLM-3001",
   "seq": 6,
-  "ts": "2026-10-06T23:08:07.831+00:00",
+  "ts": "2026-10-07T15:32:53.950+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "read_document(doc_id=CLM-3001-D03)",
@@ -101,13 +101,13 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": "EV-004",
-  "latency_ms": 3.7,
-  "result_preview": "{\"doc_id\": \"CLM-3001-D03\", \"filename\": \"service_report.pdf\", \"round\": 0, \"sha\": \"384cd0f02114bb73\", \"text\": \"Field Service Report\\nDOCUMENT: job_card\\nJob Card No: JC-27-509-0930\\nSerial: LD-509\\nDate: 2026-09-30\\nJob..."
+  "latency_ms": 1.4,
+  "result_preview": "{\"doc_id\": \"CLM-3001-D03\", \"filename\": \"service_report.pdf\", \"round\": 0, \"sha\": \"7a49e2007c74156f\", \"text\": \"Field Service Report\\nDOCUMENT: job_card\\nJob Card No: JC-27-509-0930\\nSerial: LD-509\\nDate: 2026-09-30\\nJob..."
  },
  {
   "claim_id": "CLM-3001",
   "seq": 7,
-  "ts": "2026-10-06T23:08:07.840+00:00",
+  "ts": "2026-10-07T15:32:53.954+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "classify_claim()",
@@ -117,23 +117,23 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": "EV-005",
-  "latency_ms": 0.3,
+  "latency_ms": 0.1,
   "result_preview": "{\"type\": \"dealer_reimbursement\", \"confidence\": 0.97, \"declared\": \"dealer_reimbursement\", \"signal_votes\": {\"warranty\": 0, \"parts_replacement\": 0, \"transit_damage\": 0, \"dealer_reimbursement\": 3, \"employee_reimbursement\"..."
  },
  {
   "claim_id": "CLM-3001",
   "seq": 8,
-  "ts": "2026-10-06T23:08:07.845+00:00",
+  "ts": "2026-10-07T15:32:53.957+00:00",
   "agent": "intake",
   "type": "reasoning",
   "summary": "classified as dealer_reimbursement (0.97)",
   "evidence_id": "EV-005",
-  "rationale": "declared type corroborated by document signals {'warranty': 0, 'parts_replacement': 0, 'transit_damage': 0, 'dealer_reimbursement': 3, 'employee_reimbursement': 0}"
+  "rationale": "declared type corroborated by the document mix"
  },
  {
   "claim_id": "CLM-3001",
   "seq": 9,
-  "ts": "2026-10-06T23:08:07.850+00:00",
+  "ts": "2026-10-07T15:32:53.959+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "lookup_party(party_id=D-027)",
@@ -149,7 +149,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 10,
-  "ts": "2026-10-06T23:08:07.852+00:00",
+  "ts": "2026-10-07T15:32:53.960+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "lookup_equipment(serial=LD-509)",
@@ -165,7 +165,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 11,
-  "ts": "2026-10-06T23:08:07.853+00:00",
+  "ts": "2026-10-07T15:32:53.961+00:00",
   "agent": "intake",
   "type": "tool_call",
   "summary": "search_claims(invoice_no=DLR-INV-5512)",
@@ -176,22 +176,22 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": "EV-008",
-  "latency_ms": 0.2,
+  "latency_ms": 0.1,
   "result_preview": "[{\"claim_id\": \"CLM-H-0457\", \"type\": \"dealer_reimbursement\", \"claimant_id\": \"D-027\", \"serial\": \"LD-509\", \"component\": null, \"part_no\": \"HK-60\", \"batch\": null, \"invoice_no\": \"DLR-INV-5512\", \"amount\": 18400.0, \"submitted..."
  },
  {
   "claim_id": "CLM-3001",
   "seq": 12,
-  "ts": "2026-10-06T23:08:07.855+00:00",
+  "ts": "2026-10-07T15:32:53.962+00:00",
   "agent": "intake",
   "type": "reasoning",
-  "summary": "invoice DLR-INV-5512 already appears on ['CLM-H-0457']",
+  "summary": "invoice DLR-INV-5512 already appears on CLM-H-0457",
   "evidence_id": "EV-008"
  },
  {
   "claim_id": "CLM-3001",
   "seq": 13,
-  "ts": "2026-10-06T23:08:07.859+00:00",
+  "ts": "2026-10-07T15:32:53.963+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "RECEIVED -> CLASSIFIED (dealer_reimbursement)",
@@ -201,7 +201,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 14,
-  "ts": "2026-10-06T23:08:07.862+00:00",
+  "ts": "2026-10-07T15:32:53.965+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> completeness: documents changed since the last completeness check",
@@ -226,7 +226,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 15,
-  "ts": "2026-10-06T23:08:07.867+00:00",
+  "ts": "2026-10-07T15:32:53.968+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "CLASSIFIED -> UNDER_REVIEW (completeness reviewing)",
@@ -236,7 +236,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 16,
-  "ts": "2026-10-06T23:08:07.869+00:00",
+  "ts": "2026-10-07T15:32:53.969+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "required_docs()",
@@ -246,13 +246,13 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": "EV-009",
-  "latency_ms": 0.3,
+  "latency_ms": 0.1,
   "result_preview": "{\"claim_type\": \"dealer_reimbursement\", \"required\": [{\"kind\": \"claim_form\", \"label\": \"completed claim form\", \"rule\": \"base\"}, {\"kind\": \"invoice\", \"label\": \"invoice\", \"rule\": \"base\"}, {\"kind\": \"job_card\", \"label\": \"deal..."
  },
  {
   "claim_id": "CLM-3001",
   "seq": 17,
-  "ts": "2026-10-06T23:08:07.872+00:00",
+  "ts": "2026-10-07T15:32:53.970+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "check_doc_quality(doc_id=CLM-3001-D01)",
@@ -263,13 +263,13 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": "EV-010",
-  "latency_ms": 0.3,
+  "latency_ms": 0.1,
   "result_preview": "{\"doc_id\": \"CLM-3001-D01\", \"kind\": \"claim_form\", \"missing_fields\": [], \"ok\": true, \"line_items\": 0}"
  },
  {
   "claim_id": "CLM-3001",
   "seq": 18,
-  "ts": "2026-10-06T23:08:07.874+00:00",
+  "ts": "2026-10-07T15:32:53.971+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "check_doc_quality(doc_id=CLM-3001-D02)",
@@ -286,7 +286,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 19,
-  "ts": "2026-10-06T23:08:07.875+00:00",
+  "ts": "2026-10-07T15:32:53.972+00:00",
   "agent": "completeness",
   "type": "tool_call",
   "summary": "check_doc_quality(doc_id=CLM-3001-D03)",
@@ -297,13 +297,13 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": "EV-012",
-  "latency_ms": 0.2,
+  "latency_ms": 0.1,
   "result_preview": "{\"doc_id\": \"CLM-3001-D03\", \"kind\": \"job_card\", \"missing_fields\": [], \"ok\": true, \"line_items\": 0}"
  },
  {
   "claim_id": "CLM-3001",
   "seq": 20,
-  "ts": "2026-10-06T23:08:07.877+00:00",
+  "ts": "2026-10-07T15:32:53.973+00:00",
   "agent": "completeness",
   "type": "reasoning",
   "summary": "all required documents present",
@@ -312,13 +312,13 @@
  {
   "claim_id": "CLM-3001",
   "seq": 21,
-  "ts": "2026-10-06T23:08:07.883+00:00",
+  "ts": "2026-10-07T15:32:53.976+00:00",
   "agent": "case_manager",
   "type": "delegate",
-  "summary": "-> duplicate_pattern: invoice already appears on ['CLM-H-0457']; check for a duplicate before a full review",
+  "summary": "-> duplicate_pattern: invoice already appears on CLM-H-0457; check for a duplicate before a full review",
   "next": "duplicate_pattern",
   "goal": "check for duplicate submissions and recurring failures",
-  "rationale": "invoice already appears on ['CLM-H-0457']; check for a duplicate before a full review",
+  "rationale": "invoice already appears on CLM-H-0457; check for a duplicate before a full review",
   "forced": false,
   "allowed": [
    "policy",
@@ -339,7 +339,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 22,
-  "ts": "2026-10-06T23:08:07.889+00:00",
+  "ts": "2026-10-07T15:32:53.980+00:00",
   "agent": "duplicate_pattern",
   "type": "plan",
   "summary": "invoice reuse; claimant duplicate history; narrative similarity",
@@ -352,7 +352,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 23,
-  "ts": "2026-10-06T23:08:07.891+00:00",
+  "ts": "2026-10-07T15:32:53.981+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "search_claims(invoice_no=DLR-INV-5512)",
@@ -363,13 +363,13 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": "EV-013",
-  "latency_ms": 0.3,
+  "latency_ms": 0.1,
   "result_preview": "[{\"claim_id\": \"CLM-H-0457\", \"type\": \"dealer_reimbursement\", \"claimant_id\": \"D-027\", \"serial\": \"LD-509\", \"component\": null, \"part_no\": \"HK-60\", \"batch\": null, \"invoice_no\": \"DLR-INV-5512\", \"amount\": 18400.0, \"submitted..."
  },
  {
   "claim_id": "CLM-3001",
   "seq": 24,
-  "ts": "2026-10-06T23:08:07.893+00:00",
+  "ts": "2026-10-07T15:32:53.983+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "get_invoice(invoice_no=DLR-INV-5512)",
@@ -379,13 +379,13 @@
    "invoice_no": "DLR-INV-5512"
   },
   "result_ref": "EV-014",
-  "latency_ms": 0.4,
+  "latency_ms": 0.1,
   "result_preview": "{\"invoice_no\": \"DLR-INV-5512\", \"party_id\": \"D-027\", \"party_type\": \"dealer\", \"date\": \"2026-06-28\", \"total\": 18400.0, \"lines\": [{\"description\": \"Field repair LD-509\", \"amount\": 18400}, {\"reimbursed_on\": \"CLM-H-0457\"}]}"
  },
  {
   "claim_id": "CLM-3001",
   "seq": 25,
-  "ts": "2026-10-06T23:08:07.897+00:00",
+  "ts": "2026-10-07T15:32:53.984+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "service_history(serial=LD-509)",
@@ -395,13 +395,13 @@
    "serial": "LD-509"
   },
   "result_ref": "EV-015",
-  "latency_ms": 0.4,
+  "latency_ms": 0.1,
   "result_preview": "[{\"record_id\": \"SR-LD-509-S1\", \"serial\": \"LD-509\", \"date\": \"2026-01-20\", \"dealer_id\": \"D-027\", \"job_code\": \"SCHED-SVC\", \"description\": \"Scheduled service\", \"parts_used\": [\"FL-100\"], \"hours_reading\": 750, \"failed_part_..."
  },
  {
   "claim_id": "CLM-3001",
   "seq": 26,
-  "ts": "2026-10-06T23:08:07.899+00:00",
+  "ts": "2026-10-07T15:32:53.985+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "search_claims(claimant_id=D-027, outcome=rejected_duplicate)",
@@ -419,7 +419,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 27,
-  "ts": "2026-10-06T23:08:07.902+00:00",
+  "ts": "2026-10-07T15:32:53.987+00:00",
   "agent": "duplicate_pattern",
   "type": "tool_call",
   "summary": "similar_claims(k=3)",
@@ -430,13 +430,13 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": "EV-017",
-  "latency_ms": 1.4,
+  "latency_ms": 1.0,
   "result_preview": "[{\"claim_id\": \"CLM-H-0457\", \"claimant_id\": \"D-027\", \"serial\": \"LD-509\", \"invoice_no\": \"DLR-INV-5512\", \"amount\": 18400.0, \"submitted_on\": \"2026-07-02\", \"outcome\": \"settled\", \"narrative\": \"Field repair hydraulic hose le..."
  },
  {
   "claim_id": "CLM-3001",
   "seq": 28,
-  "ts": "2026-10-06T23:08:07.904+00:00",
+  "ts": "2026-10-07T15:32:53.988+00:00",
   "agent": "duplicate_pattern",
   "type": "finding",
   "summary": "[high] Invoice DLR-INV-5512 was already reimbursed on CLM-H-0457 (2026-07-02, 18,400), same amount; resubmitted with a different date.",
@@ -450,7 +450,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 29,
-  "ts": "2026-10-06T23:08:07.906+00:00",
+  "ts": "2026-10-07T15:32:53.988+00:00",
   "agent": "duplicate_pattern",
   "type": "reasoning",
   "summary": "duplicate of CLM-H-0457"
@@ -458,7 +458,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 30,
-  "ts": "2026-10-06T23:08:07.911+00:00",
+  "ts": "2026-10-07T15:32:53.992+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> adjudication: confirmed duplicate of CLM-H-0457; further investigation cannot change the outcome",
@@ -485,7 +485,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 31,
-  "ts": "2026-10-06T23:08:07.918+00:00",
+  "ts": "2026-10-07T15:32:53.996+00:00",
   "agent": "adjudication",
   "type": "tool_call",
   "summary": "get_precedents(claim_type=dealer_reimbursement, finding_types=['duplicate_submission'])",
@@ -498,13 +498,13 @@
    ]
   },
   "result_ref": "EV-018",
-  "latency_ms": 0.2,
+  "latency_ms": 0.1,
   "result_preview": "[]"
  },
  {
   "claim_id": "CLM-3001",
   "seq": 32,
-  "ts": "2026-10-06T23:08:07.920+00:00",
+  "ts": "2026-10-07T15:32:53.997+00:00",
   "agent": "adjudication",
   "type": "recommendation",
   "summary": "REJECT 0.00, confidence 0.97",
@@ -532,7 +532,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 33,
-  "ts": "2026-10-06T23:08:07.923+00:00",
+  "ts": "2026-10-07T15:32:53.999+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "UNDER_REVIEW -> RECOMMENDED (reject)",
@@ -542,7 +542,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 34,
-  "ts": "2026-10-06T23:08:07.926+00:00",
+  "ts": "2026-10-07T15:32:54.001+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> verifier: every recommendation is verified before approval routing",
@@ -565,7 +565,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 35,
-  "ts": "2026-10-06T23:08:07.931+00:00",
+  "ts": "2026-10-07T15:32:54.002+00:00",
   "agent": "verifier",
   "type": "verification",
   "summary": "passed",
@@ -575,7 +575,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 36,
-  "ts": "2026-10-06T23:08:07.934+00:00",
+  "ts": "2026-10-07T15:32:54.004+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> route_approval: verified recommendation; route per approval matrix",
@@ -598,7 +598,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 37,
-  "ts": "2026-10-06T23:08:07.939+00:00",
+  "ts": "2026-10-07T15:32:54.006+00:00",
   "agent": "system",
   "type": "approval_request",
   "summary": "APR-CLM-3001-1: claims_manager",
@@ -613,7 +613,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 38,
-  "ts": "2026-10-06T23:08:07.944+00:00",
+  "ts": "2026-10-07T15:32:54.008+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "RECOMMENDED -> PENDING_APPROVAL (awaiting claims_manager)",
@@ -623,7 +623,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 39,
-  "ts": "2026-10-06T23:08:07.960+00:00",
+  "ts": "2026-10-07T15:32:54.015+00:00",
   "agent": "auto:claims_manager",
   "type": "approval",
   "summary": "claims_manager: approved - auto-approved in demo",
@@ -634,7 +634,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 40,
-  "ts": "2026-10-06T23:08:07.965+00:00",
+  "ts": "2026-10-07T15:32:54.017+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "PENDING_APPROVAL -> REJECTED (final reject 0.00)",
@@ -644,7 +644,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 41,
-  "ts": "2026-10-06T23:08:07.967+00:00",
+  "ts": "2026-10-07T15:32:54.018+00:00",
   "agent": "system",
   "type": "approval",
   "summary": "approval complete: reject 0.00; 1 action(s) authorised",
@@ -660,7 +660,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 42,
-  "ts": "2026-10-06T23:08:07.971+00:00",
+  "ts": "2026-10-07T15:32:54.019+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> settlement: approvals complete (reject); execute approved actions",
@@ -683,7 +683,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 43,
-  "ts": "2026-10-06T23:08:07.984+00:00",
+  "ts": "2026-10-07T15:32:54.025+00:00",
   "agent": "settlement",
   "type": "tool_call",
   "summary": "send_message(recipient=claims@d-027.dealer.example, subject=Decision on claim CLM-3001, body=Dear Deccan Equipment Services, Your claim CLM-3001 has not been approved. De..., kind=decision_letter, approval_token=APR-CLM-3001-1.****, idempotency_key=CLM-3001:APR-CLM-3001-1:0:decision_letter)",
@@ -699,25 +699,25 @@
    "claim_id": "CLM-3001"
   },
   "result_ref": null,
-  "latency_ms": 2.9,
-  "result_preview": "{\"status\": \"executed\", \"ref\": \"MSG-59D52C3A\", \"action\": \"message:decision_letter\", \"recipient\": \"claims@d-027.dealer.example\", \"subject\": \"Decision on claim CLM-3001\"}"
+  "latency_ms": 1.4,
+  "result_preview": "{\"status\": \"executed\", \"ref\": \"MSG-CEA31D18\", \"action\": \"message:decision_letter\", \"recipient\": \"claims@d-027.dealer.example\", \"subject\": \"Decision on claim CLM-3001\"}"
  },
  {
   "claim_id": "CLM-3001",
   "seq": 44,
-  "ts": "2026-10-06T23:08:07.986+00:00",
+  "ts": "2026-10-07T15:32:54.025+00:00",
   "agent": "settlement",
   "type": "action",
-  "summary": "decision_letter -> executed MSG-59D52C3A",
+  "summary": "decision_letter -> executed MSG-CEA31D18",
   "action": "decision_letter",
   "status": "executed",
-  "ref": "MSG-59D52C3A",
+  "ref": "MSG-CEA31D18",
   "error": null
  },
  {
   "claim_id": "CLM-3001",
   "seq": 45,
-  "ts": "2026-10-06T23:08:07.990+00:00",
+  "ts": "2026-10-07T15:32:54.027+00:00",
   "agent": "system",
   "type": "status_change",
   "summary": "REJECTED -> CLOSED",
@@ -727,7 +727,7 @@
  {
   "claim_id": "CLM-3001",
   "seq": 46,
-  "ts": "2026-10-06T23:08:07.993+00:00",
+  "ts": "2026-10-07T15:32:54.028+00:00",
   "agent": "case_manager",
   "type": "delegate",
   "summary": "-> end: case is CLOSED",

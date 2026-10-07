@@ -2,6 +2,8 @@
 (claimant reply, human approval) that park the case durably until a person acts."""
 from __future__ import annotations
 
+import os
+import time
 from datetime import datetime, timezone
 
 from langgraph.graph import END, START, StateGraph
@@ -18,6 +20,7 @@ from app.rules.engine import required_approvals
 from app.schemas import ApprovalDecision, InfoRequest
 from app.tools.registry import ToolContext
 
+DEMO_STEP_DELAY = int(os.getenv("DEMO_STEP_DELAY_MS", "0")) / 1000
 FINANCIAL = {"payment", "credit_note", "replacement_order", "carrier_recovery"}
 
 
@@ -27,6 +30,8 @@ def _now() -> str:
 
 # ------------------------------------------------------------------------------ supervisor
 def case_manager_node(state: CaseState) -> Command:
+    if DEMO_STEP_DELAY:  # optional pacing so a live console can follow each step
+        time.sleep(DEMO_STEP_DELAY)
     upd = case_manager.run(state)
     nxt = upd["next"]
     return Command(goto=END if nxt == "end" else nxt, update=upd)
@@ -81,7 +86,7 @@ def request_info_node(state: CaseState) -> dict:
     ctx.call("request_information", recipient=party.get("email") or party.get("party_id", "claimant"),
              items=items, message=msg, round=rnd)
     req = InfoRequest(id=f"IR-{cid}-{rnd}", round=rnd, items=items, message=msg).model_dump()
-    trace.emit(cid, "system", "info_request", f"round {rnd}: requested {items}", request_id=req["id"], items=items)
+    trace.emit(cid, "system", "info_request", f"request {rnd} sent to the claimant: {'; '.join(items)}", request_id=req["id"], items=items)
     status = transition(cid, state["status"], "PENDING_INFO", f"awaiting claimant (round {rnd})")
     return {"info_requests": state.get("info_requests", []) + [req], "status": status}
 
@@ -162,7 +167,9 @@ def await_approval_node(state: CaseState) -> Command:
 
 def _finalize(state: CaseState, appr: dict) -> dict:
     cid, rec = state["claim_id"], state["recommendation"]
-    claimed = (state.get("calc") or {}).get("claimed_amount") or rec["amount"]
+    from app.documents import to_number
+    claimed = ((state.get("calc") or {}).get("claimed_amount")
+               or to_number(state["claim"].get("fields", {}).get("claimed_amount")) or rec["amount"])
     decision, amount, note, capa_ok = rec["decision"], rec["amount"], "", True
     for r in appr["records"]:
         if r["role"] == "quality_lead":
@@ -173,6 +180,13 @@ def _finalize(state: CaseState, appr: dict) -> dict:
             decision = "reject" if amount <= 0 else ("approve" if amount >= claimed - 0.01 else "partial")
         elif r["decision"] == "rejected":
             decision, amount, note = "reject", 0.0, r["reason"]
+    if decision in ("approve", "partial") and not any(a["type"] in FINANCIAL for a in rec["actions"]):
+        # Approver overrode a rejection with an amount: add the settlement action the recommendation lacked.
+        from app.agents.adjudication import build_actions
+        from app.schemas import ProposedAction
+        capa = [ProposedAction(**a) for a in rec["actions"] if a["type"] == "capa_ticket"]
+        rec = {**rec, "actions": [x.model_dump() for x in build_actions(state, decision, amount, capa)]}
+        trace.emit(cid, "system", "approval", f"settlement action added for the approver's {decision} of {amount:,.2f}")
     signed = {}
     for i, a in enumerate(rec["actions"]):
         if a["type"] == "capa_ticket" and not capa_ok:
@@ -187,7 +201,7 @@ def _finalize(state: CaseState, appr: dict) -> dict:
     status = transition(cid, state["status"], new_status, f"final {decision} {amount:,.2f}")
     trace.emit(cid, "system", "approval", f"approval complete: {decision} {amount:,.2f}; "
                f"{len(signed)} action(s) authorised", final=appr["final"], authorised=sorted(signed))
-    return {"approval": appr, "status": status}
+    return {"approval": appr, "status": status, "recommendation": rec}
 
 
 # ------------------------------------------------------------------------------ execution and exits

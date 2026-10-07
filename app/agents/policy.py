@@ -42,7 +42,8 @@ def run(state: dict) -> dict:
                         "resolution": "rule passes on re-evaluation"})
     findings = merge_findings(state.get("findings", []), new)
 
-    summary = (f"eligible={elig['eligible']} exception={elig['with_exception']} blocking={elig['blocking']}")
+    summary = ("Eligible with a policy exception" if elig["with_exception"] else "Eligible") if elig["eligible"] \
+        else f"Not eligible on current facts: {', '.join(elig['blocking'])} failed"
 
     def llm():
         model = get_chat_model("writer")

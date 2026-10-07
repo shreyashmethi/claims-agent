@@ -10,7 +10,7 @@ import tempfile
 from pathlib import Path
 
 from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, Query, UploadFile
-from fastapi.responses import StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel
 
 from app import db, runner, trace
@@ -57,6 +57,24 @@ def admin_seed(golden: bool = False):
     return seed(with_golden=golden)
 
 
+@app.get("/admin/samples")
+def sample_kinds():
+    from app.golden import SAMPLES
+    return [{"kind": k, "label": v} for k, v in SAMPLES.items()]
+
+
+@app.post("/admin/samples/{kind}", status_code=201)
+def create_sample(kind: str, background: BackgroundTasks, auto_start: bool = True):
+    from app.golden import create_sample as make
+    try:
+        cid = make(kind)
+    except KeyError:
+        raise HTTPException(404, f"unknown sample {kind}") from None
+    if auto_start:
+        background.add_task(_run_bg, cid)
+    return {"claim_id": cid, "started": auto_start}
+
+
 # ------------------------------------------------------------------------------ claims
 @app.post("/claims", status_code=202)
 async def create_claim(background: BackgroundTasks, claimant_id: str = Form(...), claim_id: str | None = Form(None),
@@ -87,8 +105,33 @@ def process_claim(claim_id: str, background: BackgroundTasks):
 
 @app.get("/claims")
 def list_claims():
-    return db.q("SELECT claim_id, type, claimant_id, amount, submitted_on, status, outcome, settled_amount "
-                "FROM claims WHERE is_historical=0 ORDER BY claim_id")
+    rows = db.q("SELECT c.claim_id, c.type, c.claimant_id, c.amount, c.submitted_on, c.status, c.outcome, "
+                "c.settled_amount, COALESCE(d.name, cu.name, e.name) AS claimant_name, "
+                "(SELECT COUNT(*) FROM trace t WHERE t.claim_id=c.claim_id) AS events "
+                "FROM claims c LEFT JOIN dealers d ON d.dealer_id=c.claimant_id "
+                "LEFT JOIN customers cu ON cu.customer_id=c.claimant_id "
+                "LEFT JOIN employees e ON e.employee_id=c.claimant_id "
+                "WHERE c.is_historical=0 ORDER BY c.claim_id")
+    for r in rows:
+        if r["status"] == "PENDING_APPROVAL":
+            w = runner.pending(r["claim_id"])
+            r["waiting_role"] = w and w.get("role")
+    return rows
+
+
+@app.get("/claims/{claim_id}/documents")
+def list_documents(claim_id: str):
+    _claim_or_404(claim_id)
+    return services.list_claim_documents(claim_id)
+
+
+@app.get("/claims/{claim_id}/documents/{doc_id}")
+def get_document(claim_id: str, doc_id: str):
+    row = db.one("SELECT * FROM documents WHERE claim_id=? AND doc_id=?", (claim_id, doc_id))
+    if not row or not Path(row["path"]).exists():
+        raise HTTPException(404, doc_id)
+    return FileResponse(row["path"], media_type="application/pdf", filename=row["filename"],
+                        content_disposition_type="inline")
 
 
 @app.get("/claims/{claim_id}")
@@ -104,6 +147,13 @@ def get_claim(claim_id: str):
         "approval": {k: v for k, v in (s.get("approval") or {}).items() if k != "tokens"} or None,
         "actions": s.get("actions"), "info_requests": s.get("info_requests"), "escalation": s.get("escalation"),
         "evidence_count": len(s.get("evidence", [])),
+        "submitted_on": c["submitted_on"], "claimant_id": c["claimant_id"], "amount": c["amount"],
+        "settled_amount": c["settled_amount"], "flags": {k: (s.get("flags") or {}).get(k)
+                                                         for k in ("turns", "verify_failures", "sent_back")},
+        "scripted_reply_available": bool(
+            s and (runner.pending(claim_id) or {}).get("type") == "info_request" and db.one(
+                "SELECT 1 FROM info_responses WHERE claim_id=? AND round=?",
+                (claim_id, runner.pending(claim_id)["request"]["round"]))),
     }
 
 

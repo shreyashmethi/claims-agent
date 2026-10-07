@@ -95,8 +95,8 @@ def run(state: dict) -> dict:
             return {"type": out.type.value, "confidence": round(out.confidence if agree else min(out.confidence, 0.6), 2),
                     "rationale": out.rationale + ("" if agree else f" (rule classifier said {rule_cls['type']})")}
 
-        cls = with_fallback(ctx, llm, lambda: {**rule_cls, "rationale": f"declared type corroborated by "
-                                               f"document signals {rule_cls['signal_votes']}"})
+        cls = with_fallback(ctx, llm, lambda: {**rule_cls, "rationale": "declared type corroborated by "
+                                               "the document mix"})
         data["type"], data["type_confidence"] = cls["type"], cls["confidence"]
         trace.emit(cid, "intake", "reasoning", f"classified as {cls['type']} ({cls['confidence']:.2f})",
                    evidence_id=c["evidence_id"], rationale=cls.get("rationale"))
@@ -123,7 +123,7 @@ def run(state: dict) -> dict:
                 data["signals"] = {"prior_invoice_hits": [h["claim_id"] for h in hits["result"]],
                                    "evidence_id": hits["evidence_id"]}
                 trace.emit(cid, "intake", "reasoning",
-                           f"invoice {fields['invoice_no']} already appears on {data['signals']['prior_invoice_hits']}",
+                           f"invoice {fields['invoice_no']} already appears on {', '.join(data['signals']['prior_invoice_hits'])}",
                            evidence_id=hits["evidence_id"])
         db.save_claim_data(cid, data)
     return {"claim": claim_snapshot(cid), "evidence": ctx.evidence, "findings": findings}

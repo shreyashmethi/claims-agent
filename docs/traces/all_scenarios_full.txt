@@ -27,7 +27,7 @@
  26 policy            rule    WAR-3.1 PASS - HP-450 group 'hydraulics' covered=True
  27 policy            rule    WAR-2.4 PASS - reported 12 d after failure (limit 30)
  28 policy            rule    WAR-5.2 PASS - job card confirms failed part returned
- 29 policy            think   eligible=True exception=False blocking=[]
+ 29 policy            think   Eligible
  30 case_manager      ->      -> investigation: claim not yet cross-checked against records on current facts
  31 investigation     plan    checks for warranty: coverage, labour_vs_standard, amount_vs_records, serial_consistency, service_timeline, prior_repairs
  32 investigation     tool    run_check(check=coverage) EV-016
@@ -70,10 +70,10 @@ auto-approver (claims_officer): approved
  62 system            status  PARTIALLY_APPROVED -> SETTLING
  63 settlement        tool    issue_credit_note(dealer_id=D-014, amount=20600.0, approval_token=APR-CLM-1001-1.****, 
 idempotency_key=CLM-1001:APR-CLM-1001-1:0:credit_note)
- 64 settlement        ACT     credit_note -> executed CN-48D21DA5
+ 64 settlement        ACT     credit_note -> executed CN-E7175C95
  65 settlement        tool    send_message(recipient=claims@d-014.dealer.example, subject=Decision on claim CLM-1001, body=Dear Sahyadri Earthmovers, Your claim CLM-1001 
 has been approved in part. App..., kind=decision_letter, approval_token=APR-CLM-1001-1.****, idempotency_key=CLM-1001:APR-CLM-1001-1:1:decision_letter)
- 66 settlement        ACT     decision_letter -> executed MSG-3CCA3D66
+ 66 settlement        ACT     decision_letter -> executed MSG-CB85DE09
  67 system            status  SETTLING -> SETTLED
  68 system            status  SETTLED -> CLOSED
  69 case_manager      ->      -> end: case is CLOSED
@@ -108,27 +108,27 @@ has been approved in part. App..., kind=decision_letter, approval_token=APR-CLM-
  27 policy            tool    search_policy(query=TRN-2.2, k=1) EV-016
  28 policy            rule    TRN-2.3 FAIL - POD carries no damage remark
  29 policy            tool    search_policy(query=TRN-2.3, k=1) EV-017
- 30 policy            think   eligible=False exception=False blocking=['TRN-2.2', 'TRN-2.3']
+ 30 policy            think   Not eligible on current facts: TRN-2.2, TRN-2.3 failed
  31 case_manager      ->      -> investigation: claim not yet cross-checked against records on current facts
  32 investigation     plan    checks for transit_damage: serial_consistency, pod_remark, amount_vs_records
  33 investigation     tool    run_check(check=serial_consistency) EV-018
  34 investigation     tool    shipment_record(shipment_id=SHP-5530) EV-019
- 35 investigation     find    [high] Claim form serial GB-7781 does not match record serial GB-7718. needs: ['Photograph of the equipment serial plate']
+ 35 investigation     find    [high] Claim form serial GB-7781 does not match record serial GB-7718. Needs: Photograph of the equipment serial plate
  36 investigation     tool    run_check(check=pod_remark) EV-020
- 37 investigation     find    [high] Proof of delivery carries no damage remark (TRN-2.3). needs: ["Carrier's written acknowledgement of the damage"]
+ 37 investigation     find    [high] Proof of delivery carries no damage remark (TRN-2.3). Needs: Carrier's written acknowledgement of the damage
  38 investigation     tool    run_check(check=amount_vs_records) EV-021
  39 investigation     tool    shipment_record(shipment_id=SHP-5530) EV-022
- 40 investigation     find    [high] Claimed invoice 340,000 is 12.0% above the dispatch invoice value 303,500 in the ERP. needs: ['Original purchase invoice supporting 
-the claimed value']
- 41 investigation     think   4 checks; 3 open finding(s); still needed: ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of the damage", 
-'Original purchase invoice supporting the claimed value']
- 42 case_manager      ->      -> request_info: open findings need claimant evidence: ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of 
-the damage", 'Original purchase invoice supporting the claimed value']
+ 40 investigation     find    [high] Claimed invoice 340,000 is 12.0% above the dispatch invoice value 303,500 in the ERP. Needs: Original purchase invoice supporting the
+claimed value
+ 41 investigation     think   4 checks; 3 open finding(s); still needed: Photograph of the equipment serial plate; Carrier's written acknowledgement of the damage; 
+Original purchase invoice supporting the claimed value
+ 42 case_manager      ->      -> request_info: open findings need evidence from the claimant: Photograph of the equipment serial plate; Carrier's written acknowledgement 
+of the damage; Original purchase invoice supporting the claimed value
  43 system            tool    request_information(recipient=accounts@c-310.example, items=['Photograph of the equipment serial plate', "Carrier's written acknowledgement 
 of the damage", 'Original purchase invoice supporting the claimed value'], message=Dear Shakti Infra Projects, Thank you for submitting claim CLM-2001. To compl..., 
 round=1)
- 44 system            ask     round 1: requested ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of the damage", 'Original purchase 
-invoice supporting the claimed value']
+ 44 system            ask     request 1 sent to the claimant: Photograph of the equipment serial plate; Carrier's written acknowledgement of the damage; Original purchase
+invoice supporting the claimed value
  45 system            status  UNDER_REVIEW -> PENDING_INFO (awaiting claimant (round 1))
  46 claimant          reply   2 document(s) received: Serial plate photo and carrier acknowledgement attached; invoice to follow
  47 system            status  PENDING_INFO -> UNDER_REVIEW (claimant round closed)
@@ -153,7 +153,7 @@ invoice supporting the claimed value']
  66 policy            tool    search_policy(query=TRN-2.2, k=1) EV-034
  67 policy            rule    TRN-2.3 EXCEPTION? - POD carries no damage remark
  68 policy            tool    search_policy(query=TRN-2.3, k=1) EV-035
- 69 policy            think   eligible=False exception=False blocking=['TRN-2.2']
+ 69 policy            think   Not eligible on current facts: TRN-2.2 failed
  70 case_manager      ->      -> investigation: claim not yet cross-checked against records on current facts
  71 investigation     plan    checks for transit_damage: serial_consistency, pod_remark, amount_vs_records
  72 investigation     tool    run_check(check=serial_consistency) EV-036
@@ -166,15 +166,15 @@ agree; claim form value is a clerical error)
  78 investigation     tool    run_check(check=amount_vs_records) EV-039
  79 investigation     tool    shipment_record(shipment_id=SHP-5530) EV-040
  80 investigation     find    [high] Claimed invoice 340,000 is 12.0% above the dispatch invoice value 303,500 in the ERP. (resolved)
- 81 investigation     think   4 checks; 0 open finding(s); already requested: ["Carrier's written acknowledgement of the damage", 'Original purchase invoice supporting 
-the claimed value', 'Photograph of the equipment serial plate']
+ 81 investigation     think   4 checks; 0 open finding(s); already requested: Carrier's written acknowledgement of the damage; Original purchase invoice supporting the 
+claimed value; Photograph of the equipment serial plate
  82 case_manager      ->      -> policy: eligibility not yet evaluated on current facts
  83 policy            tool    rules_evaluate() EV-041
  84 policy            rule    TRN-2.1 PASS - reported 3 d after delivery (limit 7)
  85 policy            rule    TRN-2.2 PASS - claim serial GB-7718 vs shipped serial GB-7718
  86 policy            rule    TRN-2.3 EXCEPTION? - POD carries no damage remark
  87 policy            tool    search_policy(query=TRN-2.3, k=1) EV-042
- 88 policy            think   eligible=True exception=True blocking=[]
+ 88 policy            think   Eligible with a policy exception
  89 case_manager      ->      -> duplicate_pattern: duplicate and recurring-failure check not yet run on current facts
  90 duplicate_pattern plan    invoice reuse; claimant duplicate history; narrative similarity
  91 duplicate_pattern tool    search_claims(invoice_no=SI-77120) EV-043
@@ -229,13 +229,13 @@ auto-approver (finance_controller): approved
 109 case_manager      ->      -> settlement: approvals complete (partial); execute approved actions
 110 system            status  PARTIALLY_APPROVED -> SETTLING
 111 settlement        tool    issue_payment(payee_id=C-310, amount=303500.0, approval_token=APR-CLM-2001-1.****, idempotency_key=CLM-2001:APR-CLM-2001-1:0:payment)
-112 settlement        ACT     payment -> executed PAY-1883815C
+112 settlement        ACT     payment -> executed PAY-A5ECD0F3
 113 settlement        tool    file_carrier_claim(shipment_id=SHP-5530, carrier=Shree Ganesh Roadlines, amount=303500.0, approval_token=APR-CLM-2001-1.****, 
 idempotency_key=CLM-2001:APR-CLM-2001-1:1:carrier_recovery)
-114 settlement        ACT     carrier_recovery -> executed CRC-9753942A
+114 settlement        ACT     carrier_recovery -> executed CRC-00530A0E
 115 settlement        tool    send_message(recipient=accounts@c-310.example, subject=Decision on claim CLM-2001, body=Dear Shakti Infra Projects, Your claim CLM-2001 has 
 been approved in part. Ap..., kind=decision_letter, approval_token=APR-CLM-2001-1.****, idempotency_key=CLM-2001:APR-CLM-2001-1:2:decision_letter)
-116 settlement        ACT     decision_letter -> executed MSG-0FE4EE24
+116 settlement        ACT     decision_letter -> executed MSG-B2EF3BDC
 117 system            status  SETTLING -> SETTLED
 118 system            status  SETTLED -> CLOSED
 119 case_manager      ->      -> end: case is CLOSED
@@ -252,7 +252,7 @@ been approved in part. Ap..., kind=decision_letter, approval_token=APR-CLM-2001-
   9 intake            tool    lookup_party(party_id=D-027) EV-006
  10 intake            tool    lookup_equipment(serial=LD-509) EV-007
  11 intake            tool    search_claims(invoice_no=DLR-INV-5512) EV-008
- 12 intake            think   invoice DLR-INV-5512 already appears on ['CLM-H-0457']
+ 12 intake            think   invoice DLR-INV-5512 already appears on CLM-H-0457
  13 system            status  RECEIVED -> CLASSIFIED (dealer_reimbursement)
  14 case_manager      ->      -> completeness: documents changed since the last completeness check
  15 system            status  CLASSIFIED -> UNDER_REVIEW (completeness reviewing)
@@ -261,7 +261,7 @@ been approved in part. Ap..., kind=decision_letter, approval_token=APR-CLM-2001-
  18 completeness      tool    check_doc_quality(doc_id=CLM-3001-D02) EV-011
  19 completeness      tool    check_doc_quality(doc_id=CLM-3001-D03) EV-012
  20 completeness      think   all required documents present
- 21 case_manager      ->      -> duplicate_pattern: invoice already appears on ['CLM-H-0457']; check for a duplicate before a full review
+ 21 case_manager      ->      -> duplicate_pattern: invoice already appears on CLM-H-0457; check for a duplicate before a full review
  22 duplicate_pattern plan    invoice reuse; claimant duplicate history; narrative similarity
  23 duplicate_pattern tool    search_claims(invoice_no=DLR-INV-5512) EV-013
  24 duplicate_pattern tool    get_invoice(invoice_no=DLR-INV-5512) EV-014
@@ -290,7 +290,7 @@ auto-approver (claims_manager): approved
  42 case_manager      ->      -> settlement: approvals complete (reject); execute approved actions
  43 settlement        tool    send_message(recipient=claims@d-027.dealer.example, subject=Decision on claim CLM-3001, body=Dear Deccan Equipment Services, Your claim 
 CLM-3001 has not been approved. De..., kind=decision_letter, approval_token=APR-CLM-3001-1.****, idempotency_key=CLM-3001:APR-CLM-3001-1:0:decision_letter)
- 44 settlement        ACT     decision_letter -> executed MSG-59D52C3A
+ 44 settlement        ACT     decision_letter -> executed MSG-CEA31D18
  45 system            status  REJECTED -> CLOSED
  46 case_manager      ->      -> end: case is CLOSED
 => CLM-3001: CLOSED  final reject INR 0.00
@@ -321,7 +321,7 @@ CLM-3001 has not been approved. De..., kind=decision_letter, approval_token=APR-
  24 policy            rule    WAR-3.1 PASS - CF-220 group 'cooling' covered=True
  25 policy            rule    WAR-2.4 PASS - reported 4 d after failure (limit 30)
  26 policy            rule    WAR-5.2 PASS - job card confirms failed part returned
- 27 policy            think   eligible=True exception=False blocking=[]
+ 27 policy            think   Eligible
  28 case_manager      ->      -> investigation: claim not yet cross-checked against records on current facts
  29 investigation     plan    checks for warranty: coverage, labour_vs_standard, amount_vs_records, serial_consistency, service_timeline, prior_repairs
  30 investigation     tool    run_check(check=coverage) EV-014
@@ -340,11 +340,11 @@ CLM-3001 has not been approved. De..., kind=decision_letter, approval_token=APR-
  43 duplicate_pattern tool    failure_stats(part_no=CF-220, batch=FB-2026-03) EV-023
  44 duplicate_pattern tool    search_claims(claimant_id=D-027, outcome=rejected_duplicate) EV-024
  45 duplicate_pattern tool    similar_claims(k=3) EV-025
- 46 duplicate_pattern find    [low] 2 earlier claim(s) for CF-220 on LD-509: ['CLM-H-0481', 'CLM-H-0390']. Each matches its own service record with the failed part 
-returned: valid repeat.
+ 46 duplicate_pattern find    [low] 2 earlier claim(s) for CF-220 on LD-509: CLM-H-0481, CLM-H-0390. Each matches its own service record with the failed part returned: 
+valid repeat.
  47 duplicate_pattern find    [medium] CF-220 batch FB-2026-03 failed on 11 other units across 4 other dealers in 12 months
- 48 duplicate_pattern find    [medium] D-027 has 1 duplicate submission(s) on record: ['CLM-3001']
- 49 duplicate_pattern think   valid repeat of ['CLM-H-0481', 'CLM-H-0390']; patterns: recurring_unit_failure; batch_failure; dealer_duplicate_history
+ 48 duplicate_pattern find    [medium] D-027 has 1 duplicate submission(s) on record: CLM-3001
+ 49 duplicate_pattern think   valid repeat of CLM-H-0481, CLM-H-0390; patterns: recurring unit failure; batch failure; dealer duplicate history
  50 case_manager      ->      -> adjudication: eligibility, investigation and duplicate checks complete
  51 adjudication      tool    get_precedents(claim_type=warranty, finding_types=['batch_failure_pattern', 'claimant_duplicate_history', 'repeat_claim', 'repeat_repair']) 
 EV-026
@@ -361,8 +361,8 @@ CLM-3002  APPROVE  INR 9,200.00  confidence 0.95
   - Eligible under WAR-2.1, WAR-2.2, WAR-3.1, WAR-2.4, WAR-5.2. ['EV-013']
   - CF-220 batch FB-2026-03 failed on 11 other units across 4 other dealers in 12 months Resolution: Not a reason to reject; recommend supplier corrective action. 
 ['EV-023']
-  - D-027 has 1 duplicate submission(s) on record: ['CLM-3001'] Resolution: Does not affect this claim's merits; recommend a submission audit. ['EV-024']
-  - Repeat failure, not a duplicate: earlier claims ['CLM-H-0481', 'CLM-H-0390'] each have their own service event. ['EV-020', 'EV-021', 'EV-022']
+  - D-027 has 1 duplicate submission(s) on record: CLM-3001 Resolution: Does not affect this claim's merits; recommend a submission audit. ['EV-024']
+  - Repeat failure, not a duplicate: earlier claims CLM-H-0481, CLM-H-0390 each have their own service event. ['EV-020', 'EV-021', 'EV-022']
   actions: credit_note, capa_ticket, capa_ticket, decision_letter
 auto-approver (claims_officer): approved
  60 auto:claims_officer HITL    claims_officer: approved - auto-approved in demo
@@ -371,8 +371,8 @@ CLM-3002  APPROVE  INR 9,200.00  confidence 0.95
   - Eligible under WAR-2.1, WAR-2.2, WAR-3.1, WAR-2.4, WAR-5.2. ['EV-013']
   - CF-220 batch FB-2026-03 failed on 11 other units across 4 other dealers in 12 months Resolution: Not a reason to reject; recommend supplier corrective action. 
 ['EV-023']
-  - D-027 has 1 duplicate submission(s) on record: ['CLM-3001'] Resolution: Does not affect this claim's merits; recommend a submission audit. ['EV-024']
-  - Repeat failure, not a duplicate: earlier claims ['CLM-H-0481', 'CLM-H-0390'] each have their own service event. ['EV-020', 'EV-021', 'EV-022']
+  - D-027 has 1 duplicate submission(s) on record: CLM-3001 Resolution: Does not affect this claim's merits; recommend a submission audit. ['EV-024']
+  - Repeat failure, not a duplicate: earlier claims CLM-H-0481, CLM-H-0390 each have their own service event. ['EV-020', 'EV-021', 'EV-022']
   actions: credit_note, capa_ticket, capa_ticket, decision_letter
 auto-approver (quality_lead): approved
  61 auto:quality_lead HITL    quality_lead: approved - auto-approved in demo
@@ -381,16 +381,16 @@ auto-approver (quality_lead): approved
  64 case_manager      ->      -> settlement: approvals complete (approve); execute approved actions
  65 system            status  APPROVED -> SETTLING
  66 settlement        tool    issue_credit_note(dealer_id=D-027, amount=9200.0, approval_token=APR-CLM-3002-1.****, idempotency_key=CLM-3002:APR-CLM-3002-1:0:credit_note)
- 67 settlement        ACT     credit_note -> executed CN-CB47E992
- 68 settlement        tool    create_capa_ticket(title=Recurring failures of CF-220, body=CF-220 has failed 3 times on LD-509 in the last 12 months. Raised from claim 
-..., kind=supplier_quality, approval_token=APR-CLM-3002-1.****, idempotency_key=CLM-3002:APR-CLM-3002-1:1:capa_ticket)
- 69 settlement        ACT     capa_ticket -> executed CAPA-248666BE
- 70 settlement        tool    create_capa_ticket(title=Submission audit for D-027, body=D-027 has 1 duplicate submission(s) on record: ['CLM-3001']. Raised from clai..., 
+ 67 settlement        ACT     credit_note -> executed CN-0A3BFE5C
+ 68 settlement        tool    create_capa_ticket(title=Recurring failures of CF-220, body=CF-220 has failed 3 times on LD-509 in the last 12 months. CF-220 batch 
+FB-20..., kind=supplier_quality, approval_token=APR-CLM-3002-1.****, idempotency_key=CLM-3002:APR-CLM-3002-1:1:capa_ticket)
+ 69 settlement        ACT     capa_ticket -> executed CAPA-7C1DDC50
+ 70 settlement        tool    create_capa_ticket(title=Submission audit for D-027, body=D-027 has 1 duplicate submission(s) on record: CLM-3001. Raised from claim CL..., 
 kind=dealer_audit, approval_token=APR-CLM-3002-1.****, idempotency_key=CLM-3002:APR-CLM-3002-1:2:capa_ticket)
- 71 settlement        ACT     capa_ticket -> executed CAPA-BD3946D6
+ 71 settlement        ACT     capa_ticket -> executed CAPA-053ADD8E
  72 settlement        tool    send_message(recipient=claims@d-027.dealer.example, subject=Decision on claim CLM-3002, body=Dear Deccan Equipment Services, Your claim 
 CLM-3002 has been approved in full..., kind=decision_letter, approval_token=APR-CLM-3002-1.****, idempotency_key=CLM-3002:APR-CLM-3002-1:3:decision_letter)
- 73 settlement        ACT     decision_letter -> executed MSG-0C1AC48E
+ 73 settlement        ACT     decision_letter -> executed MSG-BB7EAD18
  74 system            status  SETTLING -> SETTLED
  75 system            status  SETTLED -> CLOSED
  76 case_manager      ->      -> end: case is CLOSED
@@ -417,7 +417,7 @@ CLM-3002 has been approved in full..., kind=decision_letter, approval_token=APR-
  19 policy            tool    rules_evaluate() EV-011
  20 policy            rule    PRT-2.1 PASS - claimed 12 d after dispatch (limit 30)
  21 policy            rule    PRT-3.1 PASS - ordered SN-75, warehouse packed SN-57, dealer received SN-57
- 22 policy            think   eligible=True exception=False blocking=[]
+ 22 policy            think   Eligible
  23 case_manager      ->      -> investigation: claim not yet cross-checked against records on current facts
  24 investigation     plan    checks for parts_replacement: dispatch_match, amount_vs_records
  25 investigation     tool    run_check(check=dispatch_match) EV-012
@@ -451,10 +451,10 @@ auto-approver (claims_officer): approved
  48 system            status  APPROVED -> SETTLING
  49 settlement        tool    create_replacement_order(part_no=SN-75, qty=4, ship_to=D-019, value=12400.0, approval_token=APR-CLM-4001-1.****, 
 idempotency_key=CLM-4001:APR-CLM-4001-1:0:replacement_order)
- 50 settlement        ACT     replacement_order -> executed RO-381E6223
+ 50 settlement        ACT     replacement_order -> executed RO-16FDDBD6
  51 settlement        tool    send_message(recipient=claims@d-019.dealer.example, subject=Decision on claim CLM-4001, body=Dear Vidarbha Equipment Co, Your claim CLM-4001
 has been approved in full. Ap..., kind=decision_letter, approval_token=APR-CLM-4001-1.****, idempotency_key=CLM-4001:APR-CLM-4001-1:1:decision_letter)
- 52 settlement        ACT     decision_letter -> executed MSG-5C0DE29A
+ 52 settlement        ACT     decision_letter -> executed MSG-A1B61746
  53 system            status  SETTLING -> SETTLED
  54 system            status  SETTLED -> CLOSED
  55 case_manager      ->      -> end: case is CLOSED
@@ -484,7 +484,7 @@ has been approved in full. Ap..., kind=decision_letter, approval_token=APR-CLM-4
  22 policy            rule    EMP-2.1 PASS - submitted 9 d after trip (limit 30)
  23 policy            rule    EMP-2.2 PASS - receipts present for all lines over threshold
  24 policy            rule    EMP-2.3 PASS - business purpose stated
- 25 policy            think   eligible=True exception=False blocking=[]
+ 25 policy            think   Eligible
  26 case_manager      ->      -> investigation: claim not yet cross-checked against records on current facts
  27 investigation     plan    checks for employee_reimbursement: expense_receipts, amount_vs_records
  28 investigation     tool    run_check(check=expense_receipts) EV-014
@@ -526,10 +526,10 @@ auto-approver (finance_controller): approved
  50 case_manager      ->      -> settlement: approvals complete (partial); execute approved actions
  51 system            status  PARTIALLY_APPROVED -> SETTLING
  52 settlement        tool    issue_payment(payee_id=E-1042, amount=32700.0, approval_token=APR-CLM-5001-1.****, idempotency_key=CLM-5001:APR-CLM-5001-1:0:payment)
- 53 settlement        ACT     payment -> executed PAY-40D6B3FF
+ 53 settlement        ACT     payment -> executed PAY-34D90A8D
  54 settlement        tool    send_message(recipient=ananya@oem.example, subject=Decision on claim CLM-5001, body=Dear Ananya Deshmukh, Your claim CLM-5001 has been 
 approved in part. Approved..., kind=decision_letter, approval_token=APR-CLM-5001-1.****, idempotency_key=CLM-5001:APR-CLM-5001-1:1:decision_letter)
- 55 settlement        ACT     decision_letter -> executed MSG-F1E78E23
+ 55 settlement        ACT     decision_letter -> executed MSG-17CE7F64
  56 system            status  SETTLING -> SETTLED
  57 system            status  SETTLED -> CLOSED
  58 case_manager      ->      -> end: case is CLOSED

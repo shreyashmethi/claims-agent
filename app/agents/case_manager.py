@@ -96,10 +96,10 @@ def _decide(state: dict) -> tuple[str, str, list[str], bool]:
         choice, why = "escalate", f"claim type uncertain (confidence {claim.get('type_confidence')})"
     elif not comp.get("complete", True):
         unasked = [n for n in needs if n not in asked]
-        choice, why = (("request_info", f"required documents missing: {unasked or needs}") if can_ask else
+        choice, why = (("request_info", f"required documents missing: {'; '.join(unasked or needs)}") if can_ask else
                        ("escalate", f"documents still missing after {rounds} request(s)"))
     elif claim.get("signals", {}).get("prior_invoice_hits") and not dup_current:
-        choice, why = "duplicate_pattern", (f"invoice already appears on {claim['signals']['prior_invoice_hits']}; "
+        choice, why = "duplicate_pattern", (f"invoice already appears on {', '.join(claim['signals']['prior_invoice_hits'])}; "
                                             "check for a duplicate before a full review")
     elif dup.get("is_duplicate") and dup_current:
         choice, why = "adjudication", (f"confirmed duplicate of {dup['duplicate_of']}; further investigation "
@@ -109,8 +109,8 @@ def _decide(state: dict) -> tuple[str, str, list[str], bool]:
     elif done.get("investigation") != v:
         choice, why = "investigation", "claim not yet cross-checked against records on current facts"
     elif needs:
-        choice, why = (("request_info", f"open findings need claimant evidence: {needs}") if can_ask else
-                       ("escalate", f"evidence still missing after {rounds} request(s): {needs}"))
+        choice, why = (("request_info", f"open findings need evidence from the claimant: {'; '.join(needs)}") if can_ask else
+                       ("escalate", f"evidence still missing after {rounds} request(s): {'; '.join(needs)}"))
     elif not dup_current:
         choice, why = "duplicate_pattern", "duplicate and recurring-failure check not yet run on current facts"
     else:

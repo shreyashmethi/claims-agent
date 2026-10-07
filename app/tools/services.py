@@ -221,7 +221,7 @@ def required_docs(claim_id: str) -> dict:
         form = next((x for x in claim["data"].get("docs", {}).values() if x["kind"] == "claim_form"), None)
         for ln in (form or {}).get("lines", []):
             if ln["code"] not in {"PER_DIEM", "MILEAGE_KM"} and (ln["amount"] or 0) >= p["employee"]["receipt_threshold"]:
-                req.append({"kind": "receipt", "for_line": ln["code"], "label": f"receipt for {ln['description']}",
+                req.append({"kind": "receipt", "for_line": ln["code"], "label": f"Receipt for {ln['description'].lower()}",
                             "rule": "EMP-2.2"})
     return {"claim_type": t, "required": req}
 

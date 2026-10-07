@@ -89,7 +89,7 @@ def _offline(ctx: ToolContext, state: dict) -> DuplicateReport:
             findings.append({
                 "type": "repeat_claim", "severity": "low" if repeat_valid else "high",
                 "evidence_ids": [r["evidence_id"], sh["evidence_id"]],
-                "description": f"{len(prior)} earlier claim(s) for {part} on {serial}: {repeat_claims}. "
+                "description": f"{len(prior)} earlier claim(s) for {part} on {serial}: {', '.join(repeat_claims)}. "
                                + ("Each matches its own service record with the failed part returned: valid repeat."
                                   if repeat_valid else "Earlier claims do not map to distinct service events."),
                 "needs": [] if repeat_valid else ["Service records for each repair"],
@@ -122,7 +122,7 @@ def _offline(ctx: ToolContext, state: dict) -> DuplicateReport:
             hist = hist + [ctx.claim_id]
         if hist and not dup_of:
             patterns.append({"kind": "dealer_duplicate_history", "count": len(hist), "dealers": [claimant],
-                             "description": f"{claimant} has {len(hist)} duplicate submission(s) on record: {hist}"})
+                             "description": f"{claimant} has {len(hist)} duplicate submission(s) on record: {', '.join(hist)}"})
             findings.append({"type": "claimant_duplicate_history", "severity": "medium",
                              "evidence_ids": [r["evidence_id"]], "needs": [], "resolved": True,
                              "description": patterns[-1]["description"],
@@ -135,12 +135,12 @@ def _offline(ctx: ToolContext, state: dict) -> DuplicateReport:
     if near and not dup_of:
         findings.append({"type": "possible_near_duplicate", "severity": "medium", "evidence_ids": [r["evidence_id"]],
                          "needs": [], "resolved": False,
-                         "description": f"Narrative closely matches {[h['claim_id'] for h in near]}."})
+                         "description": f"Narrative closely matches {', '.join(h['claim_id'] for h in near)}."})
 
     rationale = (f"duplicate of {dup_of}" if dup_of else
-                 f"valid repeat of {repeat_claims}" if repeat_valid else "no duplicate found")
+                 f"valid repeat of {', '.join(repeat_claims)}" if repeat_valid else "no duplicate found")
     if patterns:
-        rationale += "; patterns: " + "; ".join(x["kind"] for x in patterns)
+        rationale += "; patterns: " + "; ".join(x["kind"].replace("_", " ") for x in patterns)
     return DuplicateReport(
         assessment=DuplicateAssessment(is_duplicate=bool(dup_of), duplicate_of=dup_of, repeat_claims=repeat_claims,
                                        repeat_valid=repeat_valid, patterns=patterns, rationale=rationale,

@@ -114,11 +114,11 @@ def _offline(ctx: ToolContext, state: dict) -> InvestigationReport:
         findings.append(f)
         trace.emit(ctx.claim_id, "investigation", "finding",
                    f"[{f['severity']}] {f['description']}" + (" (resolved)" if f.get("resolved") else
-                                                              f" needs: {f['needs']}" if f["needs"] else ""),
+                                                              f" Needs: {'; '.join(f['needs'])}" if f["needs"] else ""),
                    finding_type=f["type"], evidence_ids=f["evidence_ids"])
     open_items = [n for x in findings if not x.get("resolved") for n in x.get("needs", [])]
     summary = (f"{len(steps)} checks; {sum(1 for x in findings if not x.get('resolved'))} open finding(s)"
-               + (f"; still needed: {open_items}" if open_items else "") + (f"; already requested: {sorted(asked)}"
+               + (f"; still needed: {'; '.join(open_items)}" if open_items else "") + (f"; already requested: {'; '.join(sorted(asked))}"
                                                                           if asked else ""))
     return InvestigationReport(plan=[s for s in steps if s], findings=[Finding(**x) for x in findings],
                                summary=summary)

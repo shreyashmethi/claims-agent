@@ -7,3 +7,5 @@ data/claims.db*
 data/checkpoints.db*
 data/documents/
 data/inbox/
+frontend/node_modules/
+frontend/dist/

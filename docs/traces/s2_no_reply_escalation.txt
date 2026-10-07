@@ -11,32 +11,32 @@
  25 policy            rule    TRN-2.1 PASS - reported 3 d after delivery (limit 7)
  26 policy            rule    TRN-2.2 FAIL - claim serial GB-7781 vs shipped serial GB-7718
  28 policy            rule    TRN-2.3 FAIL - POD carries no damage remark
- 30 policy            think   eligible=False exception=False blocking=['TRN-2.2', 'TRN-2.3']
+ 30 policy            think   Not eligible on current facts: TRN-2.2, TRN-2.3 failed
  31 case_manager      ->      -> investigation: claim not yet cross-checked against records on current facts
  32 investigation     plan    checks for transit_damage: serial_consistency, pod_remark, amount_vs_records
- 35 investigation     find    [high] Claim form serial GB-7781 does not match record serial GB-7718. needs: ['Photograph of the equipment serial plate']
- 37 investigation     find    [high] Proof of delivery carries no damage remark (TRN-2.3). needs: ["Carrier's written acknowledgement of the damage"]
- 40 investigation     find    [high] Claimed invoice 340,000 is 12.0% above the dispatch invoice value 303,500 in the ERP. needs: ['Original purchase invoice supporting 
-the claimed value']
- 41 investigation     think   4 checks; 3 open finding(s); still needed: ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of the damage", 
-'Original purchase invoice supporting the claimed value']
- 42 case_manager      ->      -> request_info: open findings need claimant evidence: ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of 
-the damage", 'Original purchase invoice supporting the claimed value']
- 44 system            ask     round 1: requested ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of the damage", 'Original purchase 
-invoice supporting the claimed value']
+ 35 investigation     find    [high] Claim form serial GB-7781 does not match record serial GB-7718. Needs: Photograph of the equipment serial plate
+ 37 investigation     find    [high] Proof of delivery carries no damage remark (TRN-2.3). Needs: Carrier's written acknowledgement of the damage
+ 40 investigation     find    [high] Claimed invoice 340,000 is 12.0% above the dispatch invoice value 303,500 in the ERP. Needs: Original purchase invoice supporting the
+claimed value
+ 41 investigation     think   4 checks; 3 open finding(s); still needed: Photograph of the equipment serial plate; Carrier's written acknowledgement of the damage; 
+Original purchase invoice supporting the claimed value
+ 42 case_manager      ->      -> request_info: open findings need evidence from the claimant: Photograph of the equipment serial plate; Carrier's written acknowledgement 
+of the damage; Original purchase invoice supporting the claimed value
+ 44 system            ask     request 1 sent to the claimant: Photograph of the equipment serial plate; Carrier's written acknowledgement of the damage; Original purchase
+invoice supporting the claimed value
  45 system            status  UNDER_REVIEW -> PENDING_INFO (awaiting claimant (round 1))
  46 claimant          reply   no response by the deadline
  47 system            status  PENDING_INFO -> UNDER_REVIEW (claimant round closed)
- 48 case_manager      ->      -> request_info: open findings need claimant evidence: ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of 
-the damage", 'Original purchase invoice supporting the claimed value']
- 50 system            ask     round 2: requested ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of the damage", 'Original purchase 
-invoice supporting the claimed value']
+ 48 case_manager      ->      -> request_info: open findings need evidence from the claimant: Photograph of the equipment serial plate; Carrier's written acknowledgement 
+of the damage; Original purchase invoice supporting the claimed value
+ 50 system            ask     request 2 sent to the claimant: Photograph of the equipment serial plate; Carrier's written acknowledgement of the damage; Original purchase
+invoice supporting the claimed value
  51 system            status  UNDER_REVIEW -> PENDING_INFO (awaiting claimant (round 2))
  52 claimant          reply   no response by the deadline
  53 system            status  PENDING_INFO -> UNDER_REVIEW (claimant round closed)
- 54 case_manager      ->      -> escalate: evidence still missing after 2 request(s): ['Photograph of the equipment serial plate', "Carrier's written acknowledgement of 
-the damage", 'Original purchase invoice supporting the claimed value']
- 55 case_manager      ESC     escalated to claims manager: evidence still missing after 2 request(s): ['Photograph of the equipment serial plate', "Carrier's written 
-acknowledgement of the damage", 'Original purchase invoice supporting the claimed value']
- 56 system            status  UNDER_REVIEW -> ESCALATED (evidence still missing after 2 request(s): ['Photograph of the equipment serial )
+ 54 case_manager      ->      -> escalate: evidence still missing after 2 request(s): Photograph of the equipment serial plate; Carrier's written acknowledgement of the 
+damage; Original purchase invoice supporting the claimed value
+ 55 case_manager      ESC     escalated to claims manager: evidence still missing after 2 request(s): Photograph of the equipment serial plate; Carrier's written 
+acknowledgement of the damage; Original purchase invoice supporting the claimed value
+ 56 system            status  UNDER_REVIEW -> ESCALATED (evidence still missing after 2 request(s): Photograph of the equipment serial pl)
 => CLM-2001: ESCALATED

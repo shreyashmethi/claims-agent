@@ -51,15 +51,17 @@ def build_actions(state: dict, decision: str, amount: float, capa: list[Proposed
 
 
 def _capa_from_patterns(state: dict) -> list[ProposedAction]:
+    """One supplier-quality ticket covering every product pattern, one audit ticket per claimant history."""
     dup = state.get("duplicate") or {}
     c = state["claim"]["fields"]
+    product = [p for p in dup.get("patterns", []) if p["kind"] in ("batch_failure", "recurring_unit_failure")]
     out = []
+    if product:
+        out.append(ProposedAction(type="capa_ticket", params={
+            "kind": "supplier_quality", "title": f"Recurring failures of {c.get('part_no')}",
+            "body": ". ".join(p["description"] for p in product) + f". Raised from claim {state['claim_id']}."}))
     for p in dup.get("patterns", []):
-        if p["kind"] in ("batch_failure", "recurring_unit_failure"):
-            out.append(ProposedAction(type="capa_ticket", params={
-                "kind": "supplier_quality", "title": f"Recurring failures of {c.get('part_no')}",
-                "body": p["description"] + f". Raised from claim {state['claim_id']}."}))
-        elif p["kind"] == "dealer_duplicate_history":
+        if p["kind"] == "dealer_duplicate_history":
             out.append(ProposedAction(type="capa_ticket", params={
                 "kind": "dealer_audit", "title": f"Submission audit for {p['dealers'][0]}",
                 "body": p["description"] + f". Raised from claim {state['claim_id']}."}))
@@ -113,7 +115,7 @@ def _offline(ctx: ToolContext, state: dict) -> Recommendation:
             reasons.append(Reason(text=f"{f['description']} Resolution: {f['resolution']}",
                                   evidence_ids=f["evidence_ids"]))
     if dup.get("repeat_valid"):
-        reasons.append(Reason(text=f"Repeat failure, not a duplicate: earlier claims {dup['repeat_claims']} each "
+        reasons.append(Reason(text=f"Repeat failure, not a duplicate: earlier claims {', '.join(dup['repeat_claims'])} each "
                                    f"have their own service event.", evidence_ids=dup["evidence_ids"][:3]))
     exc = bool(elig.get("with_exception"))
     exc_reason = None

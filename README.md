@@ -9,16 +9,27 @@ LLM agents decide what to look at and what it means. A deterministic rules engin
 result and every rupee. Humans approve every financial commitment, policy exception and rejection.
 
 Design document: *Agentic Claims Processing Manager — Architecture* (the doc this code implements).
-This repository is the backend: agents, orchestration, tools, rules, mock services and data, API, CLI with live
-trace, tests and evaluation. The web UI is out of scope for this build; the API exposes everything a UI needs.
+This repository holds the agents, orchestration, tools, rules, mock services and data, the API, a web console for
+claims officers and approvers, a CLI with a live trace, tests and evaluation.
 
 ## Quick start
 
+Web console (needs Python 3.11+ and Node 18+):
+
 ```bash
 pip install -r requirements-dev.txt
+make console                 # seeds data, builds the console, serves both on http://localhost:8000
+```
+
+Open http://localhost:8000, click **Start all 6 claims**, and work the approvals queue. API docs are at
+`/api/docs`. Or run `docker compose up --build` and open the same address.
+
+Command line:
+
+```bash
 python cli.py seed           # synthetic data, policies, PDFs with planted conflicts
 python cli.py run all        # every scenario, all five claim types, with a live trace
-python -m pytest -q          # 24 tests
+python -m pytest -q          # 25 tests
 python cli.py eval           # 30-claim golden set
 ```
 
@@ -31,7 +42,6 @@ export LLM_PROVIDER=anthropic ANTHROPIC_API_KEY=...   # or openai / google_genai
 python cli.py seed && python cli.py run s2
 ```
 
-Docker: `docker compose up --build`, then open `http://localhost:8000/docs`.
 
 ## What the demo covers
 
@@ -57,6 +67,38 @@ python cli.py status | outbox | actions
 
 Pre-generated output is in `docs/traces/`: full and summary runs, the escalation run, per-claim JSON traces,
 claimant letters, executed actions and the evaluation table.
+
+## Web console
+
+![Approval decision on the conflicting transit claim](docs/screenshots/3_approval_decision.png)
+
+A single-page React + TypeScript app (`frontend/`) served by FastAPI at `/`, with the API under `/api`.
+
+- **Approvals queue.** Every claim waiting for a person, with the recommendation, the amount and the role the
+  matrix is waiting for. Claims not yet started can be started from here, one at a time or all together.
+- **Claim view.** A lifecycle strip shows where the claim stands, including rounds with the claimant and
+  escalation. When a person is needed, an amber band carries the decision:
+  - **Approvers** see the recommendation and its reasons, then approve, change the amount, reject or send back
+    with a question. Names and reasons are recorded, and changes become precedents.
+  - **Claimant replies** (the demo plays the claimant): send the scenario's prepared reply, upload PDFs, or
+    record no response.
+  - The **quality lead** approves or declines corrective-action tickets separately.
+- **How the agents worked this claim.** The trace grouped into delegation steps. Each step shows whether the case
+  manager chose it among allowed options or the process required it, plus the rules that fired, findings,
+  guardrails, status changes and expandable tool calls. While agents are working it updates live.
+- **Side panels.** Decision (calculation table, reasons, approval chain, actions carried out, eligibility rules,
+  duplicate analysis), Findings, Evidence (the hashed ledger; every evidence chip anywhere in the page opens its
+  raw tool result here), Documents (extracted fields, line items, corrections, injection warnings, original PDF)
+  and Messages (what the claimant was sent).
+- **New claim.** Generate a fresh claim with documents for ten situations (clean warranty, labour over standard,
+  out of coverage, late transit notice, duplicate dealer invoice, missing receipt and more), or upload PDFs.
+
+`DEMO_STEP_DELAY_MS` (set to 300 by `make console` and Docker) paces the supervisor so a run can be watched; the
+CLI and tests run at full speed. For frontend development, run the server with `make console` and
+`make web` for Vite on :5173 with hot reload (it proxies `/api`).
+
+More screens are in `docs/screenshots/`: the queue, a claim waiting on the claimant, a closed claim with its
+timeline and decision, the documents panel with the serial correction, and the duplicate rejection.
 
 ## Architecture
 
@@ -159,7 +201,8 @@ dealer-history pattern and triggers a dealer audit ticket.
 
 ## API
 
-`uvicorn app.api.main:app --reload`, docs at `/docs`.
+Standalone: `uvicorn app.api.main:app --reload` (docs at `/docs`). With the console: `app.api.server:server`
+mounts the same API under `/api`.
 
 | Method | Path | Purpose |
 | --- | --- | --- |
@@ -167,11 +210,14 @@ dealer-history pattern and triggers a dealer audit ticket.
 | POST | `/claims/{id}/process` | Start a seeded claim |
 | GET | `/claims`, `/claims/{id}` | List; full case view (plan, findings, eligibility, recommendation, approvals, actions) |
 | GET | `/claims/{id}/evidence[?evidence_id=]` | Evidence ledger |
+| GET | `/claims/{id}/documents[/{doc_id}]` | Document list; original PDF |
 | GET | `/claims/{id}/trace`, `/claims/{id}/trace/stream` | Trace, or live server-sent events |
 | POST | `/claims/{id}/info-response[/upload]` | Claimant reply: scripted, uploaded files, or no response |
 | GET | `/approvals/pending` | Approval queue with recommendation, calculation and findings |
 | POST | `/claims/{id}/approval` | `{role, decision, amount?, reason?, approver}`; role must match the waiting role |
 | GET | `/outbox`, `/actions`, `/escalations` | Letters and requests sent, executed actions, escalations |
+| GET, POST | `/admin/samples[/{kind}]` | List sample situations; generate and start a fresh claim |
+| POST | `/admin/seed` | Reset demo data |
 | GET | `/mock/...` | Mock enterprise services: equipment, parties, warranty, service history, invoices, parts, dispatches, shipments, claims search, failure stats, policy search |
 
 ## LLM configuration
@@ -183,9 +229,10 @@ output uses JSON-schema mode on providers that support it.
 
 ## Tests and evaluation
 
+- 25 tests in total.
 - `tests/test_units.py`: parsing, injection scan, policy retrieval, tokens, approval matrix, verifier.
 - `tests/test_scenarios.py`: every scenario, escalation, approver modify / reject / send back, CAPA decline,
-  token refusal, idempotency, tool permissions, illegal transitions.
+  token refusal, idempotency, tool permissions, illegal transitions, an approver paying on a rejection.
 - `tests/test_llm_path.py`: a scripted chat model drives a full case through every LLM path (supervisor choice,
   structured extraction and classification, ReAct loops, verifier-driven repair), plus the disallowed-choice
   guardrail and provider-failure fallback.
@@ -204,11 +251,13 @@ app/
   tools/       registry.py (permissions, evidence, trace), catalog.py, services.py, checks.py, actions.py, policy_store.py
   rules/       engine.py, facts.py, params.yaml
   llm/         provider.py (provider-agnostic model factory)
-  api/         main.py (FastAPI)
+  api/         main.py (FastAPI), server.py (API under /api + built console at /)
   seed.py      synthetic data and planted scenarios;  golden.py  evaluation set
   runner.py    start / resume / inspect claim graphs;  trace.py  append-only trace
 data/policies/ mock policy documents
 docs/traces/   sample runs, JSON traces, letters, eval table
+frontend/      React + TypeScript console (Vite): App, ClaimView, Timeline, Panels
+docs/screenshots/  console screens
 cli.py         CLI with live trace
 ```
 

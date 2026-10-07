@@ -4,7 +4,7 @@ Dear Sahyadri Earthmovers,
 
 Your claim CLM-1001 has been approved in part.
 Approved amount: INR 20,600.00 (claimed INR 24,200.00).
-Reference: credit note CN-48D21DA5.
+Reference: credit note CN-E7175C95.
 
 Details:
   - Labour: INR 14,400 claimed, INR 10,800 allowed under policy clause WAR-6.2 (6 h allowed (std 6) x tier B rate 1800).
@@ -30,7 +30,7 @@ Dear Shakti Infra Projects,
 
 Your claim CLM-2001 has been approved in part.
 Approved amount: INR 303,500.00 (claimed INR 340,000.00).
-Reference: payment PAY-1883815C.
+Reference: payment PAY-A5ECD0F3.
 
 Details:
   - Transit damage compensation: INR 340,000 claimed, INR 303,500 allowed under policy clause TRN-4.1 (lower of claimed 340000, dispatch value 303500.0, insured value 
@@ -58,7 +58,7 @@ Dear Deccan Equipment Services,
 
 Your claim CLM-3002 has been approved in full.
 Approved amount: INR 9,200.00 (claimed INR 9,200.00).
-Reference: credit note CN-CB47E992.
+Reference: credit note CN-0A3BFE5C.
 
 If you disagree with this decision you may reply within 30 days with additional evidence.
 
@@ -69,7 +69,7 @@ Dear Vidarbha Equipment Co,
 
 Your claim CLM-4001 has been approved in full.
 Approved amount: INR 12,400.00 (claimed INR 12,400.00).
-Reference: replacement order RO-381E6223.
+Reference: replacement order RO-16FDDBD6.
 
 If you disagree with this decision you may reply within 30 days with additional evidence.
 
@@ -80,7 +80,7 @@ Dear Ananya Deshmukh,
 
 Your claim CLM-5001 has been approved in part.
 Approved amount: INR 32,700.00 (claimed INR 36,600.00).
-Reference: payment PAY-40D6B3FF.
+Reference: payment PAY-34D90A8D.
 
 Details:
   - Hotel: INR 14,400 claimed, INR 12,000 allowed under policy clause EMP-4.2 (cap 6000/night (G2, tier1)).

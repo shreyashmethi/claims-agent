@@ -1,19 +1,19 @@
 ┏━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ claim    ┃ action                  ┃ result                ┃
 ┡━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━┩
-│ CLM-1001 │ credit_note             │ CN-48D21DA5 20600.0   │
-│ CLM-1001 │ message:decision_letter │ MSG-3CCA3D66          │
-│ CLM-2001 │ message:info_request    │ MSG-830C69F1          │
-│ CLM-2001 │ payment                 │ PAY-1883815C 303500.0 │
-│ CLM-2001 │ carrier_recovery        │ CRC-9753942A 303500.0 │
-│ CLM-2001 │ message:decision_letter │ MSG-0FE4EE24          │
-│ CLM-3001 │ message:decision_letter │ MSG-59D52C3A          │
-│ CLM-3002 │ credit_note             │ CN-CB47E992 9200.0    │
-│ CLM-3002 │ capa_ticket             │ CAPA-248666BE         │
-│ CLM-3002 │ capa_ticket             │ CAPA-BD3946D6         │
-│ CLM-3002 │ message:decision_letter │ MSG-0C1AC48E          │
-│ CLM-4001 │ replacement_order       │ RO-381E6223           │
-│ CLM-4001 │ message:decision_letter │ MSG-5C0DE29A          │
-│ CLM-5001 │ payment                 │ PAY-40D6B3FF 32700.0  │
-│ CLM-5001 │ message:decision_letter │ MSG-F1E78E23          │
+│ CLM-1001 │ credit_note             │ CN-E7175C95 20600.0   │
+│ CLM-1001 │ message:decision_letter │ MSG-CB85DE09          │
+│ CLM-2001 │ message:info_request    │ MSG-7DBF1C2F          │
+│ CLM-2001 │ payment                 │ PAY-A5ECD0F3 303500.0 │
+│ CLM-2001 │ carrier_recovery        │ CRC-00530A0E 303500.0 │
+│ CLM-2001 │ message:decision_letter │ MSG-B2EF3BDC          │
+│ CLM-3001 │ message:decision_letter │ MSG-CEA31D18          │
+│ CLM-3002 │ credit_note             │ CN-0A3BFE5C 9200.0    │
+│ CLM-3002 │ capa_ticket             │ CAPA-7C1DDC50         │
+│ CLM-3002 │ capa_ticket             │ CAPA-053ADD8E         │
+│ CLM-3002 │ message:decision_letter │ MSG-BB7EAD18          │
+│ CLM-4001 │ replacement_order       │ RO-16FDDBD6           │
+│ CLM-4001 │ message:decision_letter │ MSG-A1B61746          │
+│ CLM-5001 │ payment                 │ PAY-34D90A8D 32700.0  │
+│ CLM-5001 │ message:decision_letter │ MSG-17CE7F64          │
 └──────────┴─────────────────────────┴───────────────────────┘
