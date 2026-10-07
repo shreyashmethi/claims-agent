@@ -12,11 +12,15 @@ import argparse
 import json
 import sys
 
-from rich.console import Console
-from rich.table import Table
+from app.deps import check as _check_deps
 
-from app import db, trace
-from app.mock_claimant import scripted_reply
+_check_deps()
+
+from rich.console import Console  # noqa: E402
+from rich.table import Table  # noqa: E402
+
+from app import db, trace  # noqa: E402
+from app.mock_claimant import scripted_reply  # noqa: E402
 
 console = Console(highlight=False, width=170)
 COLORS = {"case_manager": "bold magenta", "intake": "cyan", "completeness": "cyan", "policy": "yellow",

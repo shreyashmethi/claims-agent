@@ -17,9 +17,13 @@ claims officers and approvers, a CLI with a live trace, tests and evaluation.
 Web console (needs Python 3.11+ and Node 18+):
 
 ```bash
-pip install -r requirements-dev.txt
+make setup                   # creates .venv, installs Python and Node dependencies
 make console                 # seeds data, builds the console, serves both on http://localhost:8000
 ```
+
+Use a fresh virtual environment (what `make setup` does) rather than a conda base environment: the project
+needs recent LangGraph and LangChain releases, and `langgraph-checkpoint-sqlite` is a separate package from
+`langgraph`. `make check` lists anything missing.
 
 Open http://localhost:8000, click **Start all 6 claims**, and work the approvals queue. API docs are at
 `/api/docs`. Or run `docker compose up --build` and open the same address.

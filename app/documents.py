@@ -11,9 +11,12 @@ from __future__ import annotations
 import hashlib
 import re
 import textwrap
+import warnings
 from pathlib import Path
 
-from pypdf import PdfReader
+warnings.filterwarnings("ignore", message=".*ARC4 has been moved.*")
+
+from pypdf import PdfReader  # noqa: E402
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 

@@ -6,11 +6,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from fastapi import FastAPI
-from fastapi.responses import FileResponse, JSONResponse
-from fastapi.staticfiles import StaticFiles
+from app.deps import check as _check_deps
 
-from app.api.main import app as api
+_check_deps()
+
+from fastapi import FastAPI  # noqa: E402
+from fastapi.responses import FileResponse, JSONResponse  # noqa: E402
+from fastapi.staticfiles import StaticFiles  # noqa: E402
+
+from app.api.main import app as api  # noqa: E402
 
 DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 
