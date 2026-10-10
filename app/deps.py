@@ -1,6 +1,7 @@
 """Fail fast with an actionable message when required packages are missing or too old."""
 from __future__ import annotations
 
+import os
 import sys
 from importlib import import_module
 from importlib.metadata import PackageNotFoundError, version
@@ -20,6 +21,13 @@ REQUIRED = [  # (distribution, import name, minimum major.minor)
     ("rich", "rich", (13, 0)),
     ("python-multipart", "multipart", (0, 0)),
 ]
+
+PROVIDERS = {  # LLM_PROVIDER -> (adapter distribution, import name, API key env var)
+    "anthropic": ("langchain-anthropic", "langchain_anthropic", "ANTHROPIC_API_KEY"),
+    "openai": ("langchain-openai", "langchain_openai", "OPENAI_API_KEY"),
+    "google_genai": ("langchain-google-genai", "langchain_google_genai", "GOOGLE_API_KEY"),
+    "ollama": ("langchain-ollama", "langchain_ollama", None),
+}
 
 
 def _ver(dist: str) -> tuple[int, ...] | None:
@@ -42,6 +50,26 @@ def problems() -> list[str]:
             continue
         if v is not None and v < minimum:
             out.append(f"{dist} {'.'.join(map(str, v))} is older than {'.'.join(map(str, minimum))}")
+    return out or _provider_problems()
+
+
+def _provider_problems() -> list[str]:
+    """The configured LLM provider needs its adapter and key, or every agent silently falls back to offline."""
+    from app.llm.provider import provider_name
+    provider = provider_name()
+    if provider == "offline":
+        return []
+    if provider not in PROVIDERS:
+        return [f"LLM_PROVIDER={provider} is not supported; use offline, " + ", ".join(PROVIDERS)]
+    dist, mod, key = PROVIDERS[provider]
+    out = []
+    try:
+        import_module(mod)
+    except ImportError:
+        out.append(f"{dist} is not installed (needed for LLM_PROVIDER={provider}); "
+                   "pip install -r requirements-llm.txt, or set LLM_PROVIDER=offline")
+    if key and not os.getenv(key):
+        out.append(f"{key} is not set (needed for LLM_PROVIDER={provider})")
     return out
 
 
@@ -51,7 +79,7 @@ def check(exit_on_error: bool = True) -> bool:
         print("Missing or outdated dependencies:\n  - " + "\n  - ".join(found), file=sys.stderr)
         print("\nInstall them into a virtual environment from the project folder:\n"
               "  python3 -m venv .venv && source .venv/bin/activate\n"
-              "  pip install -r requirements-dev.txt\n"
+              "  pip install -r requirements-dev.txt  (plus requirements-llm.txt for an LLM provider)\n"
               "or run: make setup", file=sys.stderr)
         if exit_on_error:
             sys.exit(1)

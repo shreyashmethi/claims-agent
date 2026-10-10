@@ -27,9 +27,12 @@ def llm_enabled() -> bool:
 
 
 @lru_cache
-def _build(provider: str, model: str, temperature: float, options: tuple) -> Any:
+def _build(provider: str, model: str, temperature: float | None, options: tuple) -> Any:
     from langchain.chat_models import init_chat_model
-    return init_chat_model(model, model_provider=provider, temperature=temperature, **dict(options))
+    kwargs = dict(options)
+    if temperature is not None:  # None: leave it to the provider (some models reject non-default values)
+        kwargs["temperature"] = temperature
+    return init_chat_model(model, model_provider=provider, **kwargs)
 
 
 def get_chat_model(role: str) -> Any | None:
@@ -44,7 +47,8 @@ def get_chat_model(role: str) -> Any | None:
     pcfg = cfg["providers"][provider]
     model = os.getenv(f"LLM_MODEL_{role.upper()}") or pcfg.get(role) or os.getenv("LLM_MODEL") or pcfg["default"]
     options = tuple(sorted((pcfg.get("options") or {}).items()))
-    return _build(provider, model, cfg.get("settings", {}).get("temperature", 0), options)
+    temperature = pcfg["temperature"] if "temperature" in pcfg else cfg.get("settings", {}).get("temperature", 0)
+    return _build(provider, model, temperature, options)
 
 
 def max_react_steps() -> int:

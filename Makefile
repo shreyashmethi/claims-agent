@@ -5,7 +5,7 @@ PY ?= $(shell [ -x .venv/bin/python ] && echo .venv/bin/python || echo python3)
 setup:              ## create .venv and install everything (Python and Node)
 	python3 -m venv .venv
 	.venv/bin/pip install -q --upgrade pip
-	.venv/bin/pip install -r requirements-dev.txt
+	.venv/bin/pip install -r requirements-dev.txt -r requirements-llm.txt
 	cd frontend && npm install --no-audit --no-fund
 	@echo "Done. Run: make console"
 
@@ -13,7 +13,7 @@ check:
 	@$(PY) -m app.deps
 
 install:
-	$(PY) -m pip install -r requirements-dev.txt
+	$(PY) -m pip install -r requirements-dev.txt -r requirements-llm.txt
 
 seed: check
 	$(PY) cli.py seed

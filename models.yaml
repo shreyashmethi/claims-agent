@@ -12,6 +12,7 @@ roles: [supervisor, extractor, investigator, reasoner, writer]
 
 providers:
   anthropic:
+    temperature: null   # current Claude models accept only the default temperature
     default: claude-sonnet-5-5
     extractor: claude-haiku-4-5-20251001
     writer: claude-haiku-4-5-20251001
@@ -27,5 +28,5 @@ providers:
     options: {base_url: "http://localhost:11434"}
 
 settings:
-  temperature: 0
+  temperature: 0        # a provider can override it; null means the provider's default
   max_react_steps: 10
